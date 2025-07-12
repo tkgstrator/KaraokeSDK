@@ -42,7 +42,7 @@ jobs:
           swiftformat . --lint
   test:
     name: Test
-    runs-on: macos-latest
+    runs-on: macos-15
     if: github.event.action != 'closed' || github.event.pull_request.merged != true
     steps:
       - name: Checkout
