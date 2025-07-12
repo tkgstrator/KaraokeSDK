@@ -1,0 +1,125 @@
+{
+    "result": {
+        "statusCode": "0000",
+        "message": "成功"
+    },
+    "data": {
+        "pageCount": 1,
+        "hasPreview": "0",
+        "overFlag": "0",
+        "pageNo": 1,
+        "hasNext": "0",
+        "keyword": "KOTOKO",
+        "totalCount": 18
+    },
+    "list": [
+        {
+            "artistCode": 83886,
+            "artist": "TOKOTOKO(西沢さんP)feat.GUMI",
+            "artistYomi": "とことこにしざわさんぴーふぃーちゃりんぐぐみ",
+            "holdMusicCount": 20
+        },
+        {
+            "artistCode": 20958,
+            "artist": "KOTOKO",
+            "artistYomi": "ことこ",
+            "holdMusicCount": 124
+        },
+        {
+            "artistCode": 95209,
+            "artist": "TOKOTOKO(西沢さんP)",
+            "artistYomi": "とことこにしざわさんぴー",
+            "holdMusicCount": 16
+        },
+        {
+            "artistCode": 139517,
+            "artist": "TOKOTOKO(西沢さんP)feat.音街ウナ",
+            "artistYomi": "とことこにしざわさんぴーふぃーちゃりんぐおとまちうな",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 117773,
+            "artist": "KOTOKO×ALTIMA",
+            "artistYomi": "ことこあるてぃま",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 99664,
+            "artist": "TOKOTOKO(西沢さんP)feat.MAYU",
+            "artistYomi": "とことこにしざわさんぴーふぃーちゃりんぐまゆ",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 114258,
+            "artist": "TOKOTOKO(西沢さんP)feat.初音ミク",
+            "artistYomi": "とことこにしざわさんぴーふぃーちゃりんぐはつねみく",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 90594,
+            "artist": "TOKOTOKO(西沢さんP)feat.鏡音リン",
+            "artistYomi": "とことこにしざわさんぴーふぃーちゃりんぐかがみねりん",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 70970,
+            "artist": "kotoko",
+            "artistYomi": "ことこ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 30154,
+            "artist": "KOTOKO&佐藤裕美",
+            "artistYomi": "ことこあんどさとうひろみ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 167697,
+            "artist": "東方LostWord feat.KOTOKO × ZYTOKINE",
+            "artistYomi": "とうほうろすとわーどふぃーちゃりんぐことこつぁいとかいん",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 34817,
+            "artist": "KOTOKO to 詩月カオリ",
+            "artistYomi": "ことことうたつきかおり",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 48377,
+            "artist": "KOTOKO TO AKI",
+            "artistYomi": "ことことあき",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 103130,
+            "artist": "TOKOTOKO(西沢さんP)feat.IA",
+            "artistYomi": "とことこにしざわさんぴーふぃーちゃりんぐいあ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 83887,
+            "artist": "TOKOTOKO",
+            "artistYomi": "とことこ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 88940,
+            "artist": "Lia/多田葵/川田まみ/島みやえい子/KOTOKO/詩月カオリ/茶太/Rita/LiSA",
+            "artistYomi": "りあただあおいかわたまみしまみやえいこことこうたつきかおりちゃたりたりさ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 97895,
+            "artist": "KOTOKO&佐藤ひろ美",
+            "artistYomi": "ことこあんどさとうひろみ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 123508,
+            "artist": "KOTOKO×LUNA",
+            "artistYomi": "ことこるな",
+            "holdMusicCount": 1
+        }
+    ]
+}

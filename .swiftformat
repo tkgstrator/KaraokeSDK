@@ -1,0 +1,10 @@
+--swiftversion 6.1.2
+
+--disable andOperator
+--disable enumNamespaces
+--disable numberFormatting
+--disable trailingCommas
+
+--ifdef noindent
+--indentcase true
+--stripunusedargs closure-only

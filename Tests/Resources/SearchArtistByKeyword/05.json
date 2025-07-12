@@ -1,0 +1,617 @@
+{
+    "result": {
+        "statusCode": "0000",
+        "message": "成功"
+    },
+    "data": {
+        "pageCount": 8,
+        "hasPreview": "0",
+        "overFlag": "0",
+        "pageNo": 1,
+        "hasNext": "1",
+        "keyword": "天",
+        "totalCount": 703
+    },
+    "list": [
+        {
+            "artistCode": 9677,
+            "artist": "天童よしみ",
+            "artistYomi": "てんどうよしみ",
+            "holdMusicCount": 320
+        },
+        {
+            "artistCode": 9671,
+            "artist": "天地真理",
+            "artistYomi": "あまちまり",
+            "holdMusicCount": 25
+        },
+        {
+            "artistCode": 88797,
+            "artist": "天月-あまつき-",
+            "artistYomi": "あまつき",
+            "holdMusicCount": 85
+        },
+        {
+            "artistCode": 90682,
+            "artist": "天野月(天野月子)",
+            "artistYomi": "あまのつきあまのつきこ",
+            "holdMusicCount": 52
+        },
+        {
+            "artistCode": 96997,
+            "artist": "天野春子(小泉今日子)",
+            "artistYomi": "あまのはるここいずみきょうこ",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 102438,
+            "artist": "藤宮香織(雨宮天)",
+            "artistYomi": "ふじみやかおりあまみやそら",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 9673,
+            "artist": "天津羽衣",
+            "artistYomi": "あまつはごろも",
+            "holdMusicCount": 7
+        },
+        {
+            "artistCode": 66000,
+            "artist": "摩天楼オペラ",
+            "artistYomi": "まてんろうおぺら",
+            "holdMusicCount": 86
+        },
+        {
+            "artistCode": 129557,
+            "artist": "-真天地開闢集団-ジグザグ",
+            "artistYomi": "しんてんちかいびゃくしゅうだんじぐざぐ",
+            "holdMusicCount": 47
+        },
+        {
+            "artistCode": 147061,
+            "artist": "[Crazy:B]天城燐音(CV.阿座上洋平)、HiMERU(CV.笠間淳)、桜河こはく(CV.海渡翼)、椎名ニキ(CV.山口智広)",
+            "artistYomi": "くれいじーびーあまぎりんねあざかみようへいひめるかさまじゅんおうかわこはくかいとたすくしいなにきやまぐちともひろ",
+            "holdMusicCount": 13
+        },
+        {
+            "artistCode": 128060,
+            "artist": "[fine]天祥院英智(CV.緑川光)、日々樹渉(CV.江口拓也)、姫宮桃李(CV.村瀬歩)、伏見弓弦(CV.橋本晃太朗)",
+            "artistYomi": "ふぃーねてんしょういんえいちみどりかわひかるひびきわたるえぐちたくやひめみやとうりむらせあゆむふしみゆづるはしもとこうたろう",
+            "holdMusicCount": 16
+        },
+        {
+            "artistCode": 180833,
+            "artist": "[Ra*bits]仁兎なずな(CV.米内佑希)、天満光(CV.小林大紀)、真白友也(CV.比留間俊哉)、紫之創(CV.高坂知也)",
+            "artistYomi": "らびっつにとなずなよないゆうきてんまみつるこばやしだいきましろともやひるましゅんやしのはじめこうさかともや",
+            "holdMusicCount": 15
+        },
+        {
+            "artistCode": 108333,
+            "artist": "DRAMATIC STARS[天道輝(CV.仲村宗悟),桜庭薫(CV.内田雄馬),柏木翼(CV.八代拓)]",
+            "artistYomi": "どらまちっくすたーずてんどうてるなかむらしゅうごさくらばかおるうちだゆうまかしわぎつばさやしろたく",
+            "holdMusicCount": 15
+        },
+        {
+            "artistCode": 120891,
+            "artist": "宮越華(戸松遥)・村主さゆり(日笠陽子)・鎌倉志保(雨宮天)",
+            "artistYomi": "みやこしはなとまつはるかむらぬしさゆりひかさようこかまくらしほあまみやそら",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 147060,
+            "artist": "[ALKALOID]天城一彩(CV.梶原岳人)、白鳥藍良(CV.天崎滉平)、礼瀬マヨイ(CV.重松千晴)、風早巽(CV.中澤まさとも)",
+            "artistYomi": "あるかろいどあまぎひいろかじわらがくとしらとりあいらあまさきこうへいあやせまよいしげまつちはるかぜはやたつみなかざわまさとも",
+            "holdMusicCount": 12
+        },
+        {
+            "artistCode": 104040,
+            "artist": "雨宮天",
+            "artistYomi": "あまみやそら",
+            "holdMusicCount": 52
+        },
+        {
+            "artistCode": 133664,
+            "artist": "ヒプノシスマイク[Fling Posse・麻天狼]",
+            "artistYomi": "ひぷのしすまいくふりんぐぽっせまてんろう",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 169165,
+            "artist": "ブランデー戦記",
+            "artistYomi": "ぶらんでーせんき",
+            "holdMusicCount": 18
+        },
+        {
+            "artistCode": 114485,
+            "artist": "アクア(CV:雨宮天)、めぐみん(CV:高橋李依)、ダクネス(CV:茅野愛衣)",
+            "artistYomi": "あくああまみやそらめぐみんたかはしりえだくねすかやのあい",
+            "holdMusicCount": 6
+        },
+        {
+            "artistCode": 109634,
+            "artist": "Jupiter[天ヶ瀬冬馬(CV.寺島拓篤),御手洗翔太(CV.松岡禎丞),伊集院北斗(CV.神原大地)]",
+            "artistYomi": "じゅぴたーあまがせとうまてらしまたくまみたらいしょうたまつおかよしつぐいじゅういんほくとかんばらだいち",
+            "holdMusicCount": 17
+        },
+        {
+            "artistCode": 9669,
+            "artist": "天知茂",
+            "artistYomi": "あまちしげる",
+            "holdMusicCount": 9
+        },
+        {
+            "artistCode": 134925,
+            "artist": "てれび戦士",
+            "artistYomi": "てれびせんし",
+            "holdMusicCount": 5
+        },
+        {
+            "artistCode": 21322,
+            "artist": "怒髪天",
+            "artistYomi": "どはつてん",
+            "holdMusicCount": 60
+        },
+        {
+            "artistCode": 168401,
+            "artist": "天月/まふまふ/un:c/Gero/少年T/そらる/超学生/となりの坂田。/luz",
+            "artistYomi": "あまつきまふまふあんくげろしょうねんてぃーそらるちょうがくせいとなりのさかたるす",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 86523,
+            "artist": "ツヴァイウィング(風鳴翼(CV:水樹奈々)/天羽奏(CV:高山みなみ))",
+            "artistYomi": "つばいうぃんぐかざなりつばさみずきななあもうかなでたかやまみなみ",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 121653,
+            "artist": "HE★VENS(鳳瑛一・皇綺羅・帝ナギ・鳳瑛二・桐生院ヴァン・日向大和・天草シオン/cv.緑川光・小野大輔・代永翼・内田雄馬・高橋英則・木村良平・山下大輝)",
+            "artistYomi": "へぶんずおおとりえいいちすめらぎきらみかどなぎおおとりえいじきりゅういんばんひゅうがやまとあまくさしおんみどりかわひかるおのだいすけよながつばさうちだゆうまたかはしひでのりきむらりょうへいやましただいき",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 91906,
+            "artist": "てれび戦士2009",
+            "artistYomi": "てれびせんしにせんきゅう",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 139710,
+            "artist": "天音さとみ(天音里望)",
+            "artistYomi": "あまねさとみあまねさとみ",
+            "holdMusicCount": 10
+        },
+        {
+            "artistCode": 184045,
+            "artist": "オグリキャップ(CV.高柳知葉)・エルコンドルパサー(CV.高橋ミナミ)・ナリタブライアン(CV.衣川里佳)・シンボリルドルフ(CV.田所あずさ)・シーキングザパール(CV.福原綾香)・スマートファルコン(CV.大和田仁美)・ミスターシービー(CV.天海由梨奈)…",
+            "artistYomi": "おぐりきゃっぷたかやなぎともよえるこんどるぱさーたかはしみなみなりたぶらいあんきぬがわりかしんぼりるどるふたどころあずさしーきんぐざぱーるふくはらあやかすまーとふぁるこんおおわだひとみみすたーしーびーあまみゆりな",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 134319,
+            "artist": "ヒプノシスマイク[麻天狼]",
+            "artistYomi": "ひぷのしすまいくまてんろう",
+            "holdMusicCount": 9
+        },
+        {
+            "artistCode": 179271,
+            "artist": "天乃リリサ(CV:前田佳織里)・橘美花莉(CV:鬼頭明里)",
+            "artistYomi": "あまのりりさまえだかおりたちばなみかりきとうあかり",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 58391,
+            "artist": "天海春香(中村繪里子)",
+            "artistYomi": "あまみはるかなかむらえりこ",
+            "holdMusicCount": 17
+        },
+        {
+            "artistCode": 163238,
+            "artist": "TINGS:青天国春(CV.鈴代紗弓)、玉城杏夏(CV.蟹沢萌子)、聖舞理王(CV.夏吉ゆうこ)、祇園寺雪音(CV.長谷川里桃)、伊藤紅葉(CV.中川梨花)",
+            "artistYomi": "てぃんぐすなばためはるすずしろさゆみたまききょうかかにさわもえこせいぶりおなつよしゆうこぎおんじゆきねはせがわりもいとうもみじなかがわりか",
+            "holdMusicCount": 8
+        },
+        {
+            "artistCode": 156598,
+            "artist": "天音かなた",
+            "artistYomi": "あまねかなた",
+            "holdMusicCount": 14
+        },
+        {
+            "artistCode": 48633,
+            "artist": "水瀬伊織・天海春香・高槻やよい(釘宮理恵・中村繪里子・仁後真耶子)",
+            "artistYomi": "みなせいおりあまみはるかたかつきやよいくぎみやりえなかむらえりこにごまやこ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 112846,
+            "artist": "team鳳[星谷悠太(CV.花江夏樹)那雪 透(CV.小野賢章)月皇海斗(CV.ランズベリー・アーサー)天花寺 翔(CV.細谷佳正)空閑 愁(CV.前野智昭)]",
+            "artistYomi": "ちーむおおとりほしたにゆうたはなえなつきなゆきとおるおのけんしょうつきがみかいとらんずべりーあーさーてんげんじかけるほそやよしまさくがしゅうまえのともあき",
+            "holdMusicCount": 11
+        },
+        {
+            "artistCode": 111338,
+            "artist": "ミーア(雨宮天)、パピ(小澤亜李)、セントレア(相川奈都姫)、スー(野村真悠華)、メロ(山崎はるか)、ラクネラ(中村桜)",
+            "artistYomi": "みーああまみやそらぱぴおざわありせんとれああいかわなつきすーのむらまゆかめろやまざきはるからくねらなかむらさくら",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 117078,
+            "artist": "Cafe Parade[神谷幸広(CV.狩野翔),東雲荘一郎(CV.天崎滉平),アスラン=ベルゼビュートII世(CV.古川慎),卯月巻緒(CV.児玉卓也),水嶋咲(CV.小林大紀)]",
+            "artistYomi": "かふぇぱれーどかみやゆきひろかりのしょうしののめそういちろうあまさきこうへいあすらんべるぜびゅーとにせいふるかわまことうづきまきおこだまたくやみずしまさきこばやしだいき",
+            "holdMusicCount": 14
+        },
+        {
+            "artistCode": 103343,
+            "artist": "天野涼",
+            "artistYomi": "あまのりょう",
+            "holdMusicCount": 10
+        },
+        {
+            "artistCode": 120066,
+            "artist": "愛島セシル(cv.鳥海浩輔)、天草シオン(cv.山下大輝)",
+            "artistYomi": "あいじませしるとりうみこうすけあまくさしおんやましただいき",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 85458,
+            "artist": "天海春香(中村繪里子)、星井美希(長谷川明子)、如月千早(今井麻美)、高槻やよい(仁後真耶子)、萩原雪歩(浅倉杏美)、菊地真(平田宏美)、双海真美(下田麻美)、四条貴音(原由実)、我那覇響(沼倉愛美)",
+            "artistYomi": "あまみはるかなかむらえりこほしいみきはせがわあきこきさらぎちはやいまいあさみたかつきやよいにごまやこはぎわらゆきほあさくらあずみきくちまことひらたひろみふたみまみしもだあさみしじょうたかねはらゆみがなはひびきぬまくらまなみ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 94560,
+            "artist": "怒髪天 feat.キヨサク(MONGOL800)",
+            "artistYomi": "どはつてんふぃーちゃりんぐきよさくもんごるはっぴゃく",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 53160,
+            "artist": "大美ゆき・天童ゆき",
+            "artistYomi": "おおみゆきてんどうゆき",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 162488,
+            "artist": "カリスマ[天堂天彦(CV.橋詰知久)]",
+            "artistYomi": "かりすまてんどうあまひこはしづめともひさ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 182782,
+            "artist": "天月/狂蘭メロコ/八雲べに/ライト",
+            "artistYomi": "あまつききょうらんめろこやくもべにらいと",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 151415,
+            "artist": "[√AtoZ]羽風薫(CV.細貝圭)、守沢千秋(CV.帆世雄一)、椎名ニキ(CV.山口智広)、逆先夏目(CV.野島健児)、天満光(CV.小林大紀)",
+            "artistYomi": "るーとえーとぅずぃーはかぜかおるほそがいけいもりさわちあきほせゆういちしいなにきやまぐちともひろさかさきなつめのじまけんじてんまみつるこばやしだいき",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 69562,
+            "artist": "四天宝寺",
+            "artistYomi": "してんほうじ",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 115651,
+            "artist": "天上天下【竜胆椿(CV:小野友樹)朴木十夜(CV:峰岸佳)斑尾巽(CV:斉藤壮馬)杜若葵(CV:木村良平)】",
+            "artistYomi": "てんじょうてんげりんどうつばきおのゆうきほおのきとおやみねぎしけいまだらおたつみさいとうそうまかきつばたあおいきむらりょうへい",
+            "holdMusicCount": 8
+        },
+        {
+            "artistCode": 81505,
+            "artist": "天下取り隊",
+            "artistYomi": "てんかとりたい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 122812,
+            "artist": "A3ders![佐久間咲也、皇 天馬、摂津万里、月岡 紬(CV:酒井広大、江口拓也、沢城千春、田丸篤志)]",
+            "artistYomi": "えーすりーだーずさくまさくやすめらぎてんませっつばんりつきおかつむぎさかいこうだいえぐちたくやさわしろちはるたまるあつし",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 146974,
+            "artist": "TenTwenty",
+            "artistYomi": "てんとぅえんてぃ",
+            "holdMusicCount": 17
+        },
+        {
+            "artistCode": 35612,
+            "artist": "橘朔也(天野浩成)",
+            "artistYomi": "たちばなさくやあまのひろなり",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 149602,
+            "artist": "MILGRAM エス(CV:天海由梨奈)",
+            "artistYomi": "みるぐらむえすあまみゆりな",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 182739,
+            "artist": "[TearS]瀬名泉(CV.伊藤マサミ)、漣ジュン(CV.内田雄馬)、天城一彩(CV.梶原岳人)",
+            "artistYomi": "てぃあーずせないずみいとうまさみさざなみじゅんうちだゆうまあまぎひいろかじわらがくと",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 101659,
+            "artist": "天羽ジュネ(CV.宍戸留美)、りんね(CV.佐倉綾音)",
+            "artistYomi": "あもうじゅねししどるみりんねさくらあやね",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 97889,
+            "artist": "北沢志保(雨宮天)",
+            "artistYomi": "きたざわしほあまみやそら",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 90303,
+            "artist": "平積傑作(谷本賢一郎)、野辺留文句治(中尾隆聖)、野辺留しおり(折笠富美子)、五四九ゴージ/五四九ダツジ(天野ひろゆき)、リリック(浦嶋りんこ)",
+            "artistYomi": "ひらづみけっさくたにもとけんいちろうのべるもくじなかおりゅうせいのべるしおりおりかさふみこごしっくごーじごしっくだつじあまのひろゆきりりっくうらしまりんこ",
+            "holdMusicCount": 15
+        },
+        {
+            "artistCode": 46104,
+            "artist": "天海春香・萩原雪歩・秋月律子(中村繪里子・落合祐里香・若林直美)",
+            "artistYomi": "あまみはるかはぎわらゆきほあきづきりつこなかむらえりこおちあいゆりかわかばやしなおみ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 97120,
+            "artist": "如月千早(今井麻美)、北沢志保(雨宮天)、田中琴葉(種田梨沙)、所恵美(藤井ゆきよ)",
+            "artistYomi": "きさらぎちはやいまいあさみきたざわしほあまみやそらたなかことはたねだりさところめぐみふじいゆきよ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 41637,
+            "artist": "テンチュエ(天雀)",
+            "artistYomi": "てんちゅえ",
+            "holdMusicCount": 5
+        },
+        {
+            "artistCode": 121176,
+            "artist": "天道輝(CV.仲村宗悟)",
+            "artistYomi": "てんどうてるなかむらしゅうご",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 183132,
+            "artist": "ミスターシービー(CV.天海由梨奈)",
+            "artistYomi": "みすたーしーびーあまみゆりな",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 85418,
+            "artist": "Jupiter(天ヶ瀬冬馬、御手洗翔太、伊集院北斗)",
+            "artistYomi": "じゅぴたーあまがせとうまみたらいしょうたいじゅういんほくと",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 101657,
+            "artist": "天羽ジュネ(CV.宍戸留美)",
+            "artistYomi": "あもうじゅねししどるみ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 4508,
+            "artist": "アクション仮面 with 祐天寺少年少女合唱団",
+            "artistYomi": "あくしょんかめんうぃずゆうてんじしょうねんしょうじょがっしょうだん",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 101115,
+            "artist": "立花響(CV:悠木碧)、風鳴翼(CV:水樹奈々)、雪音クリス(CV:高垣彩陽)、マリア・カデンツァヴナ・イヴ(CV:日笠陽子)、月読調(CV:南條愛乃)、暁切歌(CV:茅野愛衣)、天羽奏(CV:高山みなみ)",
+            "artistYomi": "たちばなひびきゆうきあおいかざなりつばさみずきななゆきねくりすたかがきあやひまりあかでんつぁぶないぶひかさようこつくよみしらべなんじょうよしのあかつききりかかやのあいあもうかなでたかやまみなみ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 105085,
+            "artist": "クレシェンドブルー(最上静香(CV.田所あずさ),北上麗花(CV.平山笑美),北沢志保(CV.雨宮天),野々原茜(CV.小笠原早紀),箱崎星梨花(CV.麻倉もも))",
+            "artistYomi": "くれしぇんどぶるーもがみしずかたどころあずさきたかみれいかひらやまえみきたざわしほあまみやそらののはらあかねおがさわらさきはこざきせりかあさくらもも",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 37177,
+            "artist": "天城実",
+            "artistYomi": "あまぎみのる",
+            "holdMusicCount": 6
+        },
+        {
+            "artistCode": 118558,
+            "artist": "DRAMATIC STARS&High×Joker(天道輝(CV.仲村宗悟)/桜庭薫(CV.内田雄馬)/柏木翼(CV.八代拓)&伊瀬谷四季(CV.野上翔)/秋山隼人(CV.千葉翔也)/若里春名(CV.白井悠介)/冬美旬(CV.永塚拓馬)/榊夏来(CV.渡辺紘))",
+            "artistYomi": "どらまちっくすたーずあんどはいじょーかーてんどうてるなかむらしゅうごさくらばかおるうちだゆうまかしわぎつばさやしろたくあんどいせやしきのがみしょうあきやまはやとちばしょうやわかざとはるなしらいゆうすけふゆみじゅんながつかたくまさかきなつきわたなべひろし",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 78313,
+            "artist": "Team.ねこかん[猫]featuring.天乙准花",
+            "artistYomi": "ちーむねこかんふぃーちゃりんぐあまおとじゅんか",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 117130,
+            "artist": "大島勝(元・旭天鵬)&島津悦子",
+            "artistYomi": "おおしままさるもときょくてんほうあんどしまづえつこ",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 84557,
+            "artist": "天正遣欧少年使節",
+            "artistYomi": "てんしょうけんおうしょうねんしせつ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 83223,
+            "artist": "MARs 春音あいら・天宮りずむ・高峰みおん(CV.阿澄佳奈・原紗友里・片岡あづさ)",
+            "artistYomi": "まーずはるねあいらあまみやりずむたかみねみおんあすみかなはらさゆりかたおかあづさ",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 95574,
+            "artist": "天空橋朋花(小岩井ことり)",
+            "artistYomi": "てんくうばしともかこいわいことり",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 120067,
+            "artist": "天草シオン(cv.山下大輝)",
+            "artistYomi": "あまくさしおんやましただいき",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 115347,
+            "artist": "木花天乃",
+            "artistYomi": "このはなあまの",
+            "holdMusicCount": 8
+        },
+        {
+            "artistCode": 128783,
+            "artist": "鳳瑛一(cv.緑川光)、皇綺羅(cv.小野大輔)、帝ナギ(cv.代永翼)、鳳瑛二(cv.内田雄馬)、桐生院ヴァン(cv.高橋英則)、日向大和(cv.木村良平)、天草シオン(cv.山下大輝)",
+            "artistYomi": "おおとりえいいちみどりかわひかるすめらぎきらおのだいすけみかどなぎよながつばさおおとりえいじうちだゆうまきりゅういんばんたかはしひでのりひゅうがやまときむらりょうへいあまくさしおんやましただいき",
+            "holdMusicCount": 11
+        },
+        {
+            "artistCode": 167805,
+            "artist": "[Flambe！]天城燐音(CV.阿座上洋平)、真白友也(CV.比留間俊哉)、明星スバル(CV.柿原徹也)、伏見弓弦(CV.橋本晃太朗)、七種茨(CV.逢坂良太)",
+            "artistYomi": "ふらんべあまぎりんねあざかみようへいましろともやひるましゅんやあけほしすばるかきはらてつやふしみゆづるはしもとこうたろうさえぐさいばらおおさかりょうた",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 146639,
+            "artist": "天宮さくら(佐倉綾音)、東雲初穂(内田真礼)、望月あざみ(山村響)、アナスタシア・パルマ(福原綾香)、クラリス(早見沙織)",
+            "artistYomi": "あまみやさくらさくらあやねしののめはつほうちだまあやもちづきあざみやまむらひびくあなすたしあぱるまふくはらあやかくらりすはやみさおり",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 165204,
+            "artist": "Ranunculus (天ヶ瀬むゆ, 先斗寧, 海妹四葉)",
+            "artistYomi": "らなんきゅらすあまがせむゆぽんとねいうみせよつは",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 39920,
+            "artist": "天草二郎",
+            "artistYomi": "あまくさじろう",
+            "holdMusicCount": 9
+        },
+        {
+            "artistCode": 111329,
+            "artist": "天才凡人",
+            "artistYomi": "てんさいぼんじん",
+            "holdMusicCount": 11
+        },
+        {
+            "artistCode": 105896,
+            "artist": "天野あけみ",
+            "artistYomi": "あまのあけみ",
+            "holdMusicCount": 7
+        },
+        {
+            "artistCode": 18120,
+            "artist": "普天間かおり",
+            "artistYomi": "ふてんまかおり",
+            "holdMusicCount": 13
+        },
+        {
+            "artistCode": 66144,
+            "artist": "天の妃少女合唱団【かなこ(CV:真田アサミ)/鞠也(CV:小林ゆう)/茉莉花(CV:井上麻里奈)】",
+            "artistYomi": "あめのきさきしょうじょがっしょうだんかなこさなだあさみまりやこばやしゆうまつりかいのうえまりな",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 93001,
+            "artist": "イナズマイレブンGOオールスターズ 松風天馬(CV:寺崎裕香)&剣城京介(CV:大原崇)&神童拓人(CV:斎賀みつき)&西園信助(CV:戸松遥)&霧野蘭丸(CV:小林ゆう)",
+            "artistYomi": "いなずまいれぶんごーおーるすたーずまつかぜてんまてらさきゆかあんどつるぎきょうすけおおはらたかしあんどしんどうたくとさいがみつきあんどにしぞのしんすけとまつはるかあんどきりのらんまるこばやしゆう",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 91900,
+            "artist": "てれび戦士2008",
+            "artistYomi": "てれびせんしにせんはち",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 168711,
+            "artist": "七瀬陸(CV.小野賢章),九条天(CV.斉藤壮馬)",
+            "artistYomi": "ななせりくおのけんしょうくじょうてんさいとうそうま",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 181758,
+            "artist": "平賀晴、竹下天馬、尾上右近、松田元太",
+            "artistYomi": "ひらがはるたけしたてんまおのえうこんまつだげんた",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 102860,
+            "artist": "天海春香(中村繪里子)、星井美希(長谷川明子)、如月千早(今井麻美)",
+            "artistYomi": "あまみはるかなかむらえりこほしいみきはせがわあきこきさらぎちはやいまいあさみ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 87791,
+            "artist": "天羽奏(CV:高山みなみ)",
+            "artistYomi": "あもうかなでたかやまみなみ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 118024,
+            "artist": "POP'N STAR【華房心(CV:村瀬歩)神楽坂ルナ(CV:天崎滉平)及川桃助(CV:山本和臣)】",
+            "artistYomi": "ぽっぷんすたーはなぶさこころむらせあゆむかぐらざかるなあまさきこうへいおいかわももすけやまもとかずとみ",
+            "holdMusicCount": 6
+        },
+        {
+            "artistCode": 137044,
+            "artist": "ヒプノシスマイク[MAD TRIGGER CREW・麻天狼]",
+            "artistYomi": "ひぷのしすまいくまっどとりがーくるーまてんろう",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 6691,
+            "artist": "五木ひろし&天童よしみ",
+            "artistYomi": "いつきひろしあんどてんどうよしみ",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 109166,
+            "artist": "ソルラルBOB(CV:村川梨衣、大原さやか、松井恵理子、巽悠衣子、相坂優歌、内田真礼、生天目仁美、小澤亜李、渕上舞、戸田めぐみ、佐々木未来、本多真梨子、花守ゆみり)",
+            "artistYomi": "そるらるぼぶむらかわりえおおはらさやかまついえりこたつみゆいこあいさかゆうかうちだまあやなばためひとみおざわありふちがみまいとだめぐみささきみこいほんだまりこはなもりゆみり",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 119494,
+            "artist": "天海春香(中村繪里子)、菊地真(平田宏美)、双海亜美(下田麻美)、双海真美(下田麻美)、水瀬伊織(釘宮理恵)",
+            "artistYomi": "あまみはるかなかむらえりこきくちまことひらたひろみふたみあみしもだあさみふたみまみしもだあさみみなせいおりくぎみやりえ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 119504,
+            "artist": "七尾百合子(CV.伊藤美来)、天空橋朋花(CV.小岩井ことり)、箱崎星梨花(CV.麻倉もも)、松田亜利沙(CV.村川梨衣)、ロコ(CV.中村温姫)",
+            "artistYomi": "ななおゆりこいとうみくてんくうばしともかこいわいことりはこざきせりかあさくらももまつだありさむらかわりえろこなかむらあつき",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 136698,
+            "artist": "天王寺璃奈(田中ちえ美)",
+            "artistYomi": "てんのうじりなたなかちえみ",
+            "holdMusicCount": 6
+        },
+        {
+            "artistCode": 59764,
+            "artist": "天海春香(中村繪里子)・如月千早(今井麻美)・秋月律子(若林直美)",
+            "artistYomi": "あまみはるかなかむらえりこきさらぎちはやいまいあさみあきづきりつこわかばやしなおみ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 160486,
+            "artist": "[Ring.A.Bell]高峯翠(CV.渡辺拓海)、衣更真緒(CV.梶裕貴)、月永レオ(CV.浅沼晋太郎)、蓮巳敬人(CV.梅原裕一郎)、天祥院英智(CV.緑川光)",
+            "artistYomi": "りんぐあべるたかみねみどりわたなべたくみいさらまおかじゆうきつきながれおあさぬましんたろうはすみけいとうめはらゆういちろうてんしょういんえいちみどりかわひかる",
+            "holdMusicCount": 1
+        }
+    ]
+}
