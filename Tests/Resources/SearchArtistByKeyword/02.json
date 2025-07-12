@@ -1,0 +1,617 @@
+{
+    "result": {
+        "statusCode": "0000",
+        "message": "成功"
+    },
+    "data": {
+        "pageCount": 2,
+        "hasPreview": "0",
+        "overFlag": "0",
+        "pageNo": 1,
+        "hasNext": "1",
+        "keyword": "Ray",
+        "totalCount": 109
+    },
+    "list": [
+        {
+            "artistCode": 1423,
+            "artist": "GLAY",
+            "artistYomi": "ぐれい",
+            "holdMusicCount": 434
+        },
+        {
+            "artistCode": 147873,
+            "artist": "Stray Kids",
+            "artistYomi": "すとれいきっず",
+            "holdMusicCount": 59
+        },
+        {
+            "artistCode": 1219,
+            "artist": "FAYRAY",
+            "artistYomi": "ふぇいれい",
+            "holdMusicCount": 52
+        },
+        {
+            "artistCode": 87307,
+            "artist": "MEJIBRAY",
+            "artistYomi": "めじぶれい",
+            "holdMusicCount": 63
+        },
+        {
+            "artistCode": 99132,
+            "artist": "RAY",
+            "artistYomi": "れい",
+            "holdMusicCount": 17
+        },
+        {
+            "artistCode": 133065,
+            "artist": "Stray Kids [ストレイ キッズ]",
+            "artistYomi": "すとれいきっず",
+            "holdMusicCount": 51
+        },
+        {
+            "artistCode": 85902,
+            "artist": "Ray",
+            "artistYomi": "れい",
+            "holdMusicCount": 22
+        },
+        {
+            "artistCode": 3302,
+            "artist": "Ray Charles",
+            "artistYomi": "れいちゃーるず",
+            "holdMusicCount": 27
+        },
+        {
+            "artistCode": 78817,
+            "artist": "エンレイ(en-Ray)",
+            "artistYomi": "えんれい",
+            "holdMusicCount": 9
+        },
+        {
+            "artistCode": 201,
+            "artist": "Anne Murray",
+            "artistYomi": "あんまれー",
+            "holdMusicCount": 7
+        },
+        {
+            "artistCode": 36484,
+            "artist": "D'espairsRay",
+            "artistYomi": "でぃすぱーずれい",
+            "holdMusicCount": 47
+        },
+        {
+            "artistCode": 19076,
+            "artist": "RAY-GUNS",
+            "artistYomi": "れいがんず",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 98493,
+            "artist": "Diarays feat.初音ミク",
+            "artistYomi": "でぃあれいずふぃーちゃりんぐはつねみく",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 97447,
+            "artist": "Crayon Pop [クレヨン ポップ]",
+            "artistYomi": "くれよんぽっぷ",
+            "holdMusicCount": 5
+        },
+        {
+            "artistCode": 49704,
+            "artist": "The Fray",
+            "artistYomi": "ざふれい",
+            "holdMusicCount": 7
+        },
+        {
+            "artistCode": 37159,
+            "artist": "Marina del ray",
+            "artistYomi": "まりなでるれい",
+            "holdMusicCount": 5
+        },
+        {
+            "artistCode": 157980,
+            "artist": "Yami_Q_ray",
+            "artistYomi": "やみきゅーれ",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 3304,
+            "artist": "Ray Parker Jr.",
+            "artistYomi": "れいぱーかーじゅにあ",
+            "holdMusicCount": 6
+        },
+        {
+            "artistCode": 3305,
+            "artist": "Ray Price",
+            "artistYomi": "れいぷらいす",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 3744,
+            "artist": "Stray Cats",
+            "artistYomi": "すとれいきゃっつ",
+            "holdMusicCount": 6
+        },
+        {
+            "artistCode": 33462,
+            "artist": "Gamma Ray",
+            "artistYomi": "がんまれい",
+            "holdMusicCount": 12
+        },
+        {
+            "artistCode": 75740,
+            "artist": "Rayflower",
+            "artistYomi": "れいふらわー",
+            "holdMusicCount": 8
+        },
+        {
+            "artistCode": 123975,
+            "artist": "DADARAY",
+            "artistYomi": "だだれい",
+            "holdMusicCount": 25
+        },
+        {
+            "artistCode": 111994,
+            "artist": "CRAYON POP",
+            "artistYomi": "くれよんぽっぷ",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 147677,
+            "artist": "Conan Gray",
+            "artistYomi": "こなんぐれい",
+            "holdMusicCount": 9
+        },
+        {
+            "artistCode": 182052,
+            "artist": "kurayamisaka",
+            "artistYomi": "くらやみざか",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 97588,
+            "artist": "Diarays feat.IA",
+            "artistYomi": "でぃあれいずふぃーちゃりんぐいあ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 1990,
+            "artist": "Johnnie Ray",
+            "artistYomi": "じょにーれい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 59247,
+            "artist": "Ray Conniff",
+            "artistYomi": "れいこにふ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 106143,
+            "artist": "生乃麻紀 with Marina del ray",
+            "artistYomi": "いくのまきうぃずまりなでるれい",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 3531,
+            "artist": "Say a Little Prayer",
+            "artistYomi": "せいありとるぷれいやー",
+            "holdMusicCount": 9
+        },
+        {
+            "artistCode": 173367,
+            "artist": "Stray Kidsメドレー",
+            "artistYomi": "すとれいきっずめどれー",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 117269,
+            "artist": "Diarays feat.初音ミク・鏡音リン・鏡音レン・IA・MAYU",
+            "artistYomi": "でぃあれいずふぃーちゃりんぐはつねみくかがみねりんかがみねれんいあまゆ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 454,
+            "artist": "Billy Ray Cyrus",
+            "artistYomi": "びりーれいさいらす",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 100617,
+            "artist": "Diarays feat.MAYU",
+            "artistYomi": "でぃあれいずふぃーちゃりんぐまゆ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 24542,
+            "artist": "Ray Parker Jr. & Raydio",
+            "artistYomi": "れいぱーかーじゅにああんどれいでぃお",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 75108,
+            "artist": "Miley Cyrus and Billy Ray Cyrus",
+            "artistYomi": "まいりーさいらすあんどびりーれいさいらす",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 11744,
+            "artist": "Sugar Ray",
+            "artistYomi": "しゅがーれい",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 152531,
+            "artist": "Jim Brickman with Collin Raye and Susan Ashton",
+            "artistYomi": "じむぶりっくまんうぃずこりんれいあんどすーざんあしゅとん",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 28345,
+            "artist": "Macy Gray",
+            "artistYomi": "めいしーぐれい",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 3307,
+            "artist": "Raymond Laochenco",
+            "artistYomi": "れいもんどらうちぇんこ",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 181967,
+            "artist": "PRAYERs",
+            "artistYomi": "ぷれいやーず",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 96076,
+            "artist": "ALI PROJECT/ChouCho/Gero/GRANRODEO/i☆Ris/May'n/nano.RIPE/OLDCODEX/Ray/ZAQ/Zwei/アフィリア・サーガ/いとうかなこ/上坂すみれ/小倉唯/喜多村英梨/串田アキラ/栗林みな実/黒崎真音/小松未可子/サイキックラバー/鈴木このみ/鈴村健一/竹達彩奈/田村ゆかり/茅原実里/",
+            "artistYomi": "ありぷろじぇくとちょうちょげろぐらんろでおあいりすめいんなのらいぷおるどこでっくすれいざっくづばいあふぃりあさーがいとうかなこうえさかすみれおぐらゆいきたむらえりくしだあきらくりばやしみなみくろさきまおんこまつみかこさいきっくらばーすずきこのみ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 137559,
+            "artist": "Udit Narayan & Alka Yagnik [ウディト ナーラーヤヌ アンド アルカー ヤーグニク]",
+            "artistYomi": "うでぃとなーらーやぬあんどあるかーやーぐにく",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 138160,
+            "artist": "Raymond Lefevre",
+            "artistYomi": "れいもんるふぇーぶる",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 63789,
+            "artist": "Stevie Ray Vaughan And Double Trouble",
+            "artistYomi": "すてぃーびーれいぼーんあんどだぶるとらぶる",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 96599,
+            "artist": "イオシス/frayja(Innocent Key)",
+            "artistYomi": "いおしすふれいやいのせんときー",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 141407,
+            "artist": "Kavita Krishnamurthy, Alka Yagnik, Amit Kumar, Udit Narayan & Sonu Nigam [カヴィータ クリシュナームールティ アルカー ヤーグニク アミト クマール ウディト ナーラーヤヌ アンド ソーヌー ニガム]",
+            "artistYomi": "かびーたくりしゅなーむーるてぃあるかーやーぐにくあみとくまーるうでぃとなーらーやぬあんどそーぬーにがむ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 161950,
+            "artist": "Bray me",
+            "artistYomi": "ぶれいみー",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 33089,
+            "artist": "X-RAY",
+            "artistYomi": "えっくすれい",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 117476,
+            "artist": "RAYS",
+            "artistYomi": "れいず",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 125919,
+            "artist": "Ray Hirabayashi",
+            "artistYomi": "れいひらばやし",
+            "holdMusicCount": 6
+        },
+        {
+            "artistCode": 185551,
+            "artist": "美麗-Bi-ray-",
+            "artistYomi": "びれい",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 202,
+            "artist": "Anne Murray With Dave Loggins",
+            "artistYomi": "あんまれーうぃずでいぶろぎんす",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 73397,
+            "artist": "CRAY-G",
+            "artistYomi": "くれいじー",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 171479,
+            "artist": "BABY-CRAYON～1361～",
+            "artistYomi": "べいびーくれよん",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 133889,
+            "artist": "Lata Mangeshkar & Udit Narayan [ラター マンゲシュカル アンド ウディト ナーラーヤヌ]",
+            "artistYomi": "らたーまんげしゅかるあんどうでぃとなーらーやぬ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 162197,
+            "artist": "RAYMEI",
+            "artistYomi": "れいめい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 3297,
+            "artist": "Rannie Raymundo",
+            "artistYomi": "らにーれいむんど",
+            "holdMusicCount": 3
+        },
+        {
+            "artistCode": 90934,
+            "artist": "JILLED RAY",
+            "artistYomi": "じるどれい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 39975,
+            "artist": "Fayrayメドレー",
+            "artistYomi": "ふぇいれいめどれー",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 103238,
+            "artist": "Diarays feat.鏡音リン、鏡音レン",
+            "artistYomi": "でぃあれいずふぃーちゃりんぐかがみねりんかがみねれん",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 61261,
+            "artist": "Ray J",
+            "artistYomi": "れいじぇい",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 61159,
+            "artist": "David Gray",
+            "artistYomi": "でびっどぐれい",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 141411,
+            "artist": "Sadhana Sargam, Sujata Bhattacharya, Udit Narayan, Sonu Nigam & Shankar Mahadevan [サーダナー サルガム スジャータ バッターチャールヤ ウディト ナーラーヤヌ ソーヌー ニガム アンド シャンカル マハーデーヴァン]",
+            "artistYomi": "さーだなーさるがむすじゃーたばったーちゃーるやうでぃとなーらーやぬそーぬーにがむあんどしゃんかるまはーでーばん",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 93905,
+            "artist": "Ray Yamada",
+            "artistYomi": "れいやまだ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 32962,
+            "artist": "Praying Mantis",
+            "artistYomi": "ぷれいんぐまんてぃす",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 108234,
+            "artist": "Raychell feat.RICKEY&RABBIE",
+            "artistYomi": "れいちぇるふぃーちゃりんぐりっきーあんどらびー",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 141426,
+            "artist": "Shreya Ghoshal, Vishal Dadlani, Shekhar Ravjiani & Udit Narayan [シュレイヤー ゴーシャール ヴィシャール ダッドラーニー シェーカル ラヴジアーニー アンド ウディト ナーラーヤヌ]",
+            "artistYomi": "しゅれいやーごーしゃーるびしゃーるだっどらーにーしぇーかるらぶじあーにーあんどうでぃとなーらーやぬ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 43089,
+            "artist": "Ray-an Fuentes & Tillie Moreno [レイアン フェンテス アンド ティリー モレノ]",
+            "artistYomi": "れいあんふぇんてすあんどてぃりーも",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 132928,
+            "artist": "RayGlanZ",
+            "artistYomi": "れいぐらんつ",
+            "holdMusicCount": 4
+        },
+        {
+            "artistCode": 87885,
+            "artist": "mu-ray",
+            "artistYomi": "むらい",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 109831,
+            "artist": "SHADY, RAY, DIZZLE, J-REXXX, Masazaburro, THUNDER & CHALISSS CREW",
+            "artistYomi": "しぇいでぃれいでぃずるじぇいれっくすまさざぶろうとんだーあんどちゃりすくるー",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 133892,
+            "artist": "Shaan, Udit Narayan, Shreya Ghoshal, Sunidhi Chauhan & Rahul Saxena [シャーン、ウディト ナーラーヤヌ、シュレイヤー ゴーシャール、スニディ チョーハーン アンド ラーフル サクセナ]",
+            "artistYomi": "しゃーんうでぃとなーらーやぬしゅれいやーごーしゃーるすにでぃちょーはーんあんどらーふるさくせな",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 32148,
+            "artist": "Ray Kennedy",
+            "artistYomi": "れいけねでぃ",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 141416,
+            "artist": "Udit Narayan & Shah Rukh Khan [ウディト ナーラーヤヌ アンド シャー ルク カーン]",
+            "artistYomi": "うでぃとなーらーやぬあんどしゃーるくかーん",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 175429,
+            "artist": "ST//RAYRIDE",
+            "artistYomi": "すとれいすとらいど",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 164782,
+            "artist": "Isyana Sarasvati feat. Rayi Putra",
+            "artistYomi": "いしゃなさーらすばてぃーふぃーちゃりんぐらいぷとら",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 182516,
+            "artist": "SARAY",
+            "artistYomi": "さらい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 4056,
+            "artist": "The Rays",
+            "artistYomi": "れいず",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 141414,
+            "artist": "Udit Narayan [ウディト ナーラーヤヌ]",
+            "artistYomi": "うでぃとなーらーやぬ",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 787,
+            "artist": "Collin Raye",
+            "artistYomi": "こりんれい",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 54127,
+            "artist": "D'espairsRayメドレー",
+            "artistYomi": "でぃすぱーずれいめどれー",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 70581,
+            "artist": "miray",
+            "artistYomi": "みれい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 152164,
+            "artist": "Ray",
+            "artistYomi": "れい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 180905,
+            "artist": "DI-RAY",
+            "artistYomi": "でぃれい",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 129574,
+            "artist": "Diarays",
+            "artistYomi": "でぃあれいず",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 67596,
+            "artist": "MISSPRAY",
+            "artistYomi": "みすぷれい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 98797,
+            "artist": "Raychell",
+            "artistYomi": "れいちぇる",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 3306,
+            "artist": "Ray Stevens",
+            "artistYomi": "れいすてぃーぶんす",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 120909,
+            "artist": "Ray Charles featuring Norah Jones",
+            "artistYomi": "れいちゃーるずふぃーちゃりんぐのらじょーんず",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 31728,
+            "artist": "Raydio",
+            "artistYomi": "れいでぃお",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 129041,
+            "artist": "GRAY [グレイ]",
+            "artistYomi": "ぐれい",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 171059,
+            "artist": "UnpRayable",
+            "artistYomi": "あんぷれいあぶる",
+            "holdMusicCount": 2
+        },
+        {
+            "artistCode": 34471,
+            "artist": "Ray [レイ]",
+            "artistYomi": "れい",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 30681,
+            "artist": "Ray, Goodman & Brown",
+            "artistYomi": "れいぐっどまんあんどぶらうん",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 59849,
+            "artist": "miray×HOTTIE CAT",
+            "artistYomi": "みれいほってぃーきゃっと",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 62171,
+            "artist": "Paul Anka with Ray Ellis and His Orchestra",
+            "artistYomi": "ぽーるあんかうぃずれいえりすあんどひずおーけすとら",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 144845,
+            "artist": "Alka Yagnik, Sunidhi Chauhan, Udit Narayan, Sudesh Bhosle, Aadesh Shrivastava & Amitabh Bachchan [アルカー ヤーグニク スニディ チョーハーン ウディト ナーラーヤヌ スデーシュ ボースレー アーデーシュ シュリーヴァースタヴ アンド アミターブ バッチャン]",
+            "artistYomi": "あるかーやーぐにくすにでぃちょーはーんうでぃとなーらーやぬすでーしゅぼーすれーあーでーしゅしゅりーばーすたぶあんどあみたーぶばっちゃん",
+            "holdMusicCount": 1
+        },
+        {
+            "artistCode": 159317,
+            "artist": "真之介&DI-RAY",
+            "artistYomi": "しんのすけあんどでぃれい",
+            "holdMusicCount": 1
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+{
+    "result": {
+        "statusCode": "0000",
+        "message": "成功"
+    },
+    "data": {
+        "artistCode": 106233,
+        "artist": "内田彩",
+        "requestNo": "3408-87",
+        "title": "にぎやかな心たち",
+        "titleYomi_Kana": "ニギヤカナココロタチ",
+        "firstLine": "なんか 何で?と 声にはだせないのに"
+    },
+    "list": [
+        {
+            "kModelMusicInfoList": [
+                {
+                    "kidsFlag": "0",
+                    "damTomoPublicVocalFlag": "0",
+                    "damTomoPublicMovieFlag": "0",
+                    "damTomoPublicRecordingFlag": "0",
+                    "karaokeDamFlag": "1",
+                    "playbackTime": 231,
+                    "eachModelMusicInfoList": [
+                        {
+                            "karaokeModelNum": "56",
+                            "karaokeModelName": "LIVE DAM Ai",
+                            "releaseDate": "2024-12-19",
+                            "shift": "0",
+                            "mainMovieId": "0",
+                            "mainMovieName": "対応していない",
+                            "subMovieId": "0",
+                            "subMovieName": "対応していない",
+                            "honninFlag": "0",
+                            "animeFlag": "0",
+                            "liveFlag": "0",
+                            "mamaotoFlag": "0",
+                            "namaotoFlag": "0",
+                            "duetFlag": "0",
+                            "guideVocalFlag": "0",
+                            "prookeFlag": "0",
+                            "scoreFlag": "1",
+                            "duetDxFlag": "0",
+                            "damTomoMovieFlag": "1",
+                            "damTomoRecordingFlag": "1",
+                            "myListFlag": "1"
+                        },
+                        {
+                            "karaokeModelNum": "53",
+                            "karaokeModelName": "LIVE DAM STADIUM",
+                            "releaseDate": "2024-12-19",
+                            "shift": "0",
+                            "mainMovieId": "0",
+                            "mainMovieName": "対応していない",
+                            "subMovieId": "0",
+                            "subMovieName": "対応していない",
+                            "honninFlag": "0",
+                            "animeFlag": "0",
+                            "liveFlag": "0",
+                            "mamaotoFlag": "0",
+                            "namaotoFlag": "0",
+                            "duetFlag": "0",
+                            "guideVocalFlag": "0",
+                            "prookeFlag": "0",
+                            "scoreFlag": "1",
+                            "duetDxFlag": "0",
+                            "damTomoMovieFlag": "1",
+                            "damTomoRecordingFlag": "1",
+                            "myListFlag": "1"
+                        },
+                        {
+                            "karaokeModelNum": "59",
+                            "karaokeModelName": "LIVE DAM WAO!",
+                            "releaseDate": "2024-12-19",
+                            "shift": "0",
+                            "mainMovieId": "0",
+                            "mainMovieName": "対応していない",
+                            "subMovieId": "0",
+                            "subMovieName": "対応していない",
+                            "honninFlag": "0",
+                            "animeFlag": "0",
+                            "liveFlag": "0",
+                            "mamaotoFlag": "0",
+                            "namaotoFlag": "0",
+                            "duetFlag": "0",
+                            "guideVocalFlag": "0",
+                            "prookeFlag": "0",
+                            "scoreFlag": "1",
+                            "duetDxFlag": "0",
+                            "damTomoMovieFlag": "1",
+                            "damTomoRecordingFlag": "1",
+                            "myListFlag": "1"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+name: Continuous Integration
+on:
+  push:
+jobs:
+  commitlint:
+    name: CommitLint
+    if: github.event.action != 'closed' || github.event.pull_request.merged != true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+      - name: Install commitlint
+        run: |
+          bun install conventional-changelog-conventionalcommits
+          bun install commitlint@latest
+      - name: Validate current commit (last commit) with commitlint
+        if: github.event_name == 'push'
+        run: bunx commitlint --last --verbose
+      - name: Validate PR commits with commitlint
+        if: github.event_name == 'pull_request'
+        run: bunx commitlint --from ${{ github.event.pull_request.head.sha }}~${{ github.event.pull_request.commits }} --to ${{ github.event.pull_request.head.sha }} --verbose
+  check:
+    name: Code Check
+    runs-on: macos-latest
+    if: github.event.action != 'closed' || github.event.pull_request.merged != true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          brew install swiftlint swiftformat
+      - name: Run SwiftLint
+        run: |
+          swiftlint
+      - name: Run SwiftFormat in lint mode
+        run: |
+          swiftformat . --lint
+  test:
+    name: Test
+    runs-on: macos-latest
+    if: github.event.action != 'closed' || github.event.pull_request.merged != true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Select Xcode Version
+        run: sudo xcode-select -s '/Applications/Xcode_16.4'
+      - name: Build the Swift package
+        run: |
+          swift build --build-tests
+      - name: Run tests
+        run: |
+          swift test
