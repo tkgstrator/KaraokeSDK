@@ -17,8 +17,19 @@ public final class SearchMusicByKeywordQuery: RequestType {
 
     public let path: String = "dkwebsys/search-api/SearchMusicByKeywordApi"
     public let method: HTTPMethod = .post
-    public let headers: HTTPHeaders? = nil
-    public let parameters: Parameters? = nil
+    public let parameters: Parameters?
+    
+    public init(keyword: String) {
+        self.parameters = [
+            "keyword": keyword,
+            "dispCount": 100,
+            "modelPatternCode": 0,
+            "modelTypeCode": 3,
+            "sort": 2,
+            "serialNo": "AT00001",
+            "pageNo": 1,
+        ]
+    }
 }
 
 public enum SearchMusicByKeyword {

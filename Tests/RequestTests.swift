@@ -36,23 +36,41 @@ final class RequestTests: XCTestCase {
     }
 
     func testSearchMusicByKeyword() async throws {
-        let urls: [URL] = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: "Resources/SearchMusicByKeyword") ?? []
-        for url in urls {
-            try decoder.decode(SearchMusicByKeywordQuery.ResponseType.self, from: .init(contentsOf: url))
+        let keywords: [String] = [
+            "月",
+            "空",
+            "天",
+            "雨",
+            "星"
+        ]
+        for keyword in keywords {
+            try await DKKaraoke.default.request(SearchMusicByKeywordQuery(keyword: keyword))
         }
     }
 
     func testSearchArtistByKeyword() async throws {
-        let urls: [URL] = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: "Resources/SearchArtistByKeyword") ?? []
-        for url in urls {
-            try decoder.decode(SearchArtistByKeywordQuery.ResponseType.self, from: .init(contentsOf: url))
+        let keywords: [String] = [
+            "月",
+            "空",
+            "天",
+            "雨",
+            "星"
+        ]
+        for keyword in keywords {
+            try await DKKaraoke.default.request(SearchArtistByKeywordQuery(keyword: keyword))
         }
     }
 
     func testSearchVariousByKeyword() async throws {
-        let urls: [URL] = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: "Resources/SearchVariousByKeyword") ?? []
-        for url in urls {
-            try decoder.decode(SearchVariousByKeywordQuery.ResponseType.self, from: .init(contentsOf: url))
+        let keywords: [String] = [
+            "月",
+            "空",
+            "天",
+            "雨",
+            "星"
+        ]
+        for keyword in keywords {
+            try await DKKaraoke.default.request(SearchVariousByKeywordQuery(keyword: keyword))
         }
     }
 }
