@@ -3,6 +3,7 @@ excluded:
   - Package.pins
   - Package.resolved
   - build
+  - .build
   - packages
 analyzer_rules:
   - capture_variable

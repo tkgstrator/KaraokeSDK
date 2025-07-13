@@ -10,7 +10,9 @@
     "ghcr.io/devcontainers/features/common-utils:2": {
       "configureZshAsDefaultShell": true
     },
+    "ghcr.io/swift-server-community/swift-devcontainer-features/jemalloc:1": {},
     "ghcr.io/swift-server-community/swift-devcontainer-features/SwiftFormat:0": {},
+    "ghcr.io/LosFarmosCTL/swift-devcontainer-features/swiftlint:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/git:1": {
       "version": "2.49.0"
