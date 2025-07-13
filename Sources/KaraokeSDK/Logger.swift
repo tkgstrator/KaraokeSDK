@@ -12,12 +12,12 @@ public enum Logger: Sendable {
     private static let logger: SwiftyBeaver.Type = SwiftyBeaver.self
     private static let console: ConsoleDestination = .init(format: "$DHH:mm:ss$d $L: $M")
     private static let file: FileDestination = .init(format: "$DHH:mm:ss$d $L: $M")
-    
+
     public static func configure() {
         logger.addDestination(console)
         logger.addDestination(file)
     }
-    
+
     public static func info(_ message: Any, context: Any? = nil) {
         logger.info(message, context: context)
     }
