@@ -21,7 +21,7 @@ public final class SearchArtistByKeywordQuery: RequestType {
 }
 
 public enum SearchArtistByKeyword {
-    public struct Data: Decodable {
+    public struct Data: Decodable, Sendable {
         let pageCount: Int
         @LossyBoolValue
         private(set) var hasPreview: Bool
@@ -34,7 +34,7 @@ public enum SearchArtistByKeyword {
         let totalCount: Int
     }
 
-    public struct ListItem: Decodable {
+    public struct ListItem: Decodable, Sendable {
         let artistCode: Int
         let artist: String
         let artistYomi: String

@@ -9,7 +9,7 @@ import Alamofire
 import Foundation
 
 public protocol RequestType: URLRequestConvertible {
-    associatedtype ResponseType: Decodable
+    associatedtype ResponseType: Decodable, Sendable
 
     var baseURL: URL { get }
     var path: String { get }
@@ -34,13 +34,26 @@ public extension RequestType {
                 URLEncoding.default
         }
     }
+    
+    var parameters: Parameters? {
+        nil
+    }
+    
+    var headers: HTTPHeaders? {
+        [
+            "User-Agent": "DenmokuMini/4.12.0 (jp.co.dkkaraoke.DENMOKULite01; build:49; iOS 17.6.0) Alamofire/5.9.1",
+            "dmk-access-key": "3ZpXW3K8anQvonUX7IMj",
+        ]
+    }
 
     func asURLRequest() throws -> URLRequest {
         let url: URL = baseURL.appendingPathComponent(path)
-        let request: URLRequest = try .init(url: url, method: method, headers: nil)
-
+        let request: URLRequest = try .init(url: url, method: method, headers: headers)
         if let parameters {
-            return try encoding.encode(request, with: parameters)
+            return try encoding.encode(request, with: parameters.merging([
+                "authKey": "2/Qb9R@8s*",
+                "compId": "1",
+            ], uniquingKeysWith: { $1 }))
         }
         return request
     }
