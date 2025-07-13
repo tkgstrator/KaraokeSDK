@@ -6,7 +6,7 @@
 //
 
 @propertyWrapper
-public struct LossyDefaultFalse: Decodable {
+public struct LossyDefaultFalse: Decodable, Sendable {
     public var wrappedValue: Bool
 
     public init(wrappedValue: Bool) {

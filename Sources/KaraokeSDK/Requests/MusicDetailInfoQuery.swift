@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+@preconcurrency
 import BetterCodable
 import Foundation
 
@@ -16,12 +17,17 @@ public final class MusicDetailInfoQuery: RequestType {
 
     public let path: String = "dkwebsys/search-api/GetMusicDetailInfoApi"
     public let method: HTTPMethod = .post
-    public let headers: HTTPHeaders? = nil
-    public let parameters: Parameters? = nil
+    public let parameters: Parameters?
+    
+    public init(requestNo: String) {
+        self.parameters = [
+            "requestNo": requestNo,
+        ]
+    }
 }
 
 public enum MusicDetailInfo {
-    public struct Data: Decodable {
+    public struct Data: Decodable, Sendable {
         let artistCode: Int
         let artist: String
         let requestNo: String
@@ -39,11 +45,11 @@ public enum MusicDetailInfo {
         }
     }
 
-    public struct ListItem: Decodable {
+    public struct ListItem: Decodable, Sendable {
         let kModelMusicInfoList: [KModelMusicInfoListItem]
     }
 
-    public struct KModelMusicInfoListItem: Decodable {
+    public struct KModelMusicInfoListItem: Decodable, Sendable {
         @LossyBoolValue
         private(set) var kidsFlag: Bool
         @LossyDefaultFalse
@@ -52,7 +58,7 @@ public enum MusicDetailInfo {
         let eachModelMusicInfoList: [EachModelMusicInfoListItem]
     }
 
-    public struct EachModelMusicInfoListItem: Decodable {
+    public struct EachModelMusicInfoListItem: Decodable, Sendable {
         @LosslessValue
         private(set) var karaokeModelNum: Int
         let karaokeModelName: String

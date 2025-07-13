@@ -6,6 +6,7 @@
 //
 
 import Alamofire
+@preconcurrency
 import BetterCodable
 import Foundation
 
@@ -21,7 +22,7 @@ public final class SearchMusicByKeywordQuery: RequestType {
 }
 
 public enum SearchMusicByKeyword {
-    public struct Data: Decodable {
+    public struct Data: Decodable, Sendable {
         let pageCount: Int
         @LossyBoolValue
         private(set) var hasPreview: Bool
@@ -34,7 +35,7 @@ public enum SearchMusicByKeyword {
         let totalCount: Int
     }
 
-    public struct ListItem: Decodable {
+    public struct ListItem: Decodable, Sendable {
         let requestNo: String
         let title: String
         let titleYomi: String

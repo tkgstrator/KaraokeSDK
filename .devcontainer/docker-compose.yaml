@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        SWIFT_VERSION: '5.10'
+        SWIFT_VERSION: 6.1.0
     volumes:
       - swiftpm:/home/vscode/app/.swiftpm
       - ../:/home/vscode/app:cached

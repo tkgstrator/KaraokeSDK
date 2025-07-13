@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "KaraokeSDK",
+    platforms: [.iOS(.v13), .macOS(.v10_15), .tvOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
@@ -15,12 +16,18 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.10.0")),
         .package(url: "https://github.com/marksands/BetterCodable.git", .upToNextMajor(from: "0.4.0")),
+        .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", .upToNextMajor(from: "2.0.0")),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "KaraokeSDK", dependencies: [.product(name: "Alamofire", package: "Alamofire"), .product(name: "BetterCodable", package: "BetterCodable")]
+            name: "KaraokeSDK",
+            dependencies: [
+                .product(name: "Alamofire", package: "Alamofire"),
+                .product(name: "BetterCodable", package: "BetterCodable"),
+                .product(name: "SwiftyBeaver", package: "SwiftyBeaver"),
+            ]
         ),
         .testTarget(
             name: "KaraokeSDKTests",
