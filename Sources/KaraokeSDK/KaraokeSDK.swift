@@ -1,5 +1,5 @@
 //
-//  DKKaraoke.swift
+//  KaraokeSDK.swift
 //  KaraokeSDK
 //
 //  Created by devonly on 2025/07/13.
@@ -13,7 +13,7 @@ public final class DKKaraoke: Sendable {
     private let session: Session = .default
     private let decoder: JSONDecoder = .init()
     private let encoder: JSONEncoder = .init()
-    
+
     private init() {
         Logger.configure()
         session.sessionConfiguration.timeoutIntervalForRequest = 10
@@ -21,7 +21,7 @@ public final class DKKaraoke: Sendable {
 //        decoder.keyDecodingStrategy = .convertFromSnakeCase
 //        encoder.keyEncodingStrategy = .convertToSnakeCase
     }
-    
+
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         let result = await session.request(convertible)
             .cURLDescription(calling: { request in
@@ -30,11 +30,11 @@ public final class DKKaraoke: Sendable {
             .serializingData()
             .result
         switch result {
-        case .success(let response):
-            return try decoder.decode(T.ResponseType.self, from: response)
-        case .failure(let error):
-            Logger.error(error)
-            throw error
+            case let .success(response):
+                return try decoder.decode(T.ResponseType.self, from: response)
+            case let .failure(error):
+                Logger.error(error)
+                throw error
         }
     }
 }

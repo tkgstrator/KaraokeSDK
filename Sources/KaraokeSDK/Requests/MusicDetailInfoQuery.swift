@@ -18,9 +18,9 @@ public final class MusicDetailInfoQuery: RequestType {
     public let path: String = "dkwebsys/search-api/GetMusicDetailInfoApi"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
-    
+
     public init(requestNo: String) {
-        self.parameters = [
+        parameters = [
             "requestNo": requestNo,
         ]
     }
