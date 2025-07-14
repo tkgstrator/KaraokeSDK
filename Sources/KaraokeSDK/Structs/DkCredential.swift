@@ -11,7 +11,7 @@ import Foundation
 public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendable {
     // 筐体と連携しようとしたら存在するプロパティ
     // 連携はログインされていなくても実行可能
-    public var qrCode: QRCode
+    public var qrCode: String
     // ログインを試みたなら入力されているプロパティ
     public var loginId: String
     public var password: String
