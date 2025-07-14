@@ -16,7 +16,9 @@ public class DKCredential: AuthenticationCredential, Codable, @unchecked Sendabl
     public var loginId: String
     public var password: String
     // ある種固定値でも良いプロパティ
-    public let authKey: String
+    public let deviceId: String
+    public let compId: Int
+    public let compAuthKey: String
     public let dmkAccessKey: String
     // ログイン成功したならあるプロパティ
     public var authToken: String
@@ -33,25 +35,42 @@ public class DKCredential: AuthenticationCredential, Codable, @unchecked Sendabl
         self.qrCode = ""
         self.loginId = ""
         self.password = ""
-        self.authKey = "2/Qb9R@8s*"
+        self.deviceId = DKCredential.deviceId
+        self.compId = 1
+        self.compAuthKey = "2/Qb9R@8s*"
         self.dmkAccessKey = "3ZpXW3K8anQvonUX7IMj"
         self.authToken = ""
         self.cdmNo = ""
         self.damtomoId = ""
-        self.expiresIn = .init()
+        self.expiresIn = .init(timeIntervalSinceNow: 60 * 60 * 6)
     }
     
-    func update(_ response: LoginByDamtomoMemberIdResponse) {
+    @discardableResult
+    func update(_ response: LoginByDamtomoMemberIdResponse) -> DKCredential {
         self.authToken = response.data.authToken
         self.damtomoId = response.data.damtomoId
+        return self
     }
     
-    func update(_ request: LoginByDamtomoMemberIdRequest) {
+    @discardableResult
+    func update(_ request: LoginByDamtomoMemberIdRequest) -> DKCredential {
         self.loginId = request.loginId
         self.password = request.password
+        return self
     }
     
-    func update(_ request: DkDamConnectServletRequest) {
+    @discardableResult
+    func update(_ request: DkDamConnectServletRequest) -> DKCredential {
         self.qrCode = request.qrCode
+        return self
+    }
+    
+    public static var deviceId: String {
+#if os(iOS)
+        let uuid = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+#elseif os(macOS)
+        let uuid = UUID().uuidString
+#endif
+        return uuid.data(using: .utf8)!.base64EncodedString()
     }
 }
