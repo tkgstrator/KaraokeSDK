@@ -13,13 +13,13 @@ public typealias SearchArtistByKeywordResponse = ResultType<SearchArtistByKeywor
 
 public final class SearchArtistByKeywordQuery: RequestType {
     public typealias ResponseType = SearchArtistByKeywordResponse
-    
+
     public let path: String = "dkwebsys/search-api/SearchArtistByKeywordApi"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
-    
+
     public init(keyword: String) {
-        self.parameters = [
+        parameters = [
             "keyword": keyword,
             "dispCount": 100,
             "modelPatternCode": 0,
@@ -33,22 +33,22 @@ public final class SearchArtistByKeywordQuery: RequestType {
 
 public enum SearchArtistByKeyword {
     public struct Data: Decodable, Sendable {
-        let pageCount: Int
+        public let pageCount: Int
         @LossyBoolValue
-        private(set) var hasPreview: Bool
+        public private(set) var hasPreview: Bool
         @LossyBoolValue
-        private(set) var overFlag: Bool
-        let pageNo: Int
+        public private(set) var overFlag: Bool
+        public let pageNo: Int
         @LossyBoolValue
-        private(set) var hasNext: Bool
-        let keyword: String
-        let totalCount: Int
+        public private(set) var hasNext: Bool
+        public let keyword: String
+        public let totalCount: Int
     }
 
     public struct ListItem: Decodable, Sendable {
-        let artistCode: Int
-        let artist: String
-        let artistYomi: String
-        let holdMusicCount: Int
+        public let artistCode: Int
+        public let artist: String
+        public let artistYomi: String
+        public let holdMusicCount: Int
     }
 }

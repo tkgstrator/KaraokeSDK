@@ -7,6 +7,6 @@
 
 import BetterCodable
 
-struct DefaultInt: DefaultCodableStrategy {
-    static var defaultValue: Int { 0 }
+public struct DefaultInt: DefaultCodableStrategy {
+    public static var defaultValue: Int { 0 }
 }

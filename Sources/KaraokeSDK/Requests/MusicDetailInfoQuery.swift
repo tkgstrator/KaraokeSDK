@@ -28,12 +28,12 @@ public final class MusicDetailInfoQuery: RequestType {
 
 public enum MusicDetailInfo {
     public struct Data: Decodable, Sendable {
-        let artistCode: Int
-        let artist: String
-        let requestNo: String
-        let title: String
-        let titleYomiKana: String
-        let firstLine: String
+        public let artistCode: Int
+        public let artist: String
+        public let requestNo: String
+        public let title: String
+        public let titleYomiKana: String
+        public let firstLine: String
 
         public enum CodingKeys: String, CodingKey {
             case artistCode
@@ -46,57 +46,57 @@ public enum MusicDetailInfo {
     }
 
     public struct ListItem: Decodable, Sendable {
-        let kModelMusicInfoList: [KModelMusicInfoListItem]
+        public let kModelMusicInfoList: [KModelMusicInfoListItem]
     }
 
     public struct KModelMusicInfoListItem: Decodable, Sendable {
         @LossyBoolValue
-        private(set) var kidsFlag: Bool
+        public private(set) var kidsFlag: Bool
         @LossyDefaultFalse
-        private(set) var karaokeDamFlag: Bool
-        let playbackTime: Int
-        let eachModelMusicInfoList: [EachModelMusicInfoListItem]
+        public private(set) var karaokeDamFlag: Bool
+        public let playbackTime: Int
+        public let eachModelMusicInfoList: [EachModelMusicInfoListItem]
     }
 
     public struct EachModelMusicInfoListItem: Decodable, Sendable {
         @LosslessValue
-        private(set) var karaokeModelNum: Int
-        let karaokeModelName: String
+        public private(set) var karaokeModelNum: Int
+        public let karaokeModelName: String
         @DateValue<YearMonthDayStrategy>
-        private(set) var releaseDate: Date
+        public private(set) var releaseDate: Date
         @LosslessValue
-        private(set) var shift: Int
+        public private(set) var shift: Int
         @LosslessValue
-        private(set) var mainMovieId: Int
-        let mainMovieName: String
+        public private(set) var mainMovieId: Int
+        public let mainMovieName: String
         @LosslessValue
-        private(set) var subMovieId: Int
-        let subMovieName: String
+        public private(set) var subMovieId: Int
+        public let subMovieName: String
         @LossyBoolValue
-        private(set) var honninFlag: Bool
+        public private(set) var honninFlag: Bool
         @LossyBoolValue
-        private(set) var animeFlag: Bool
+        public private(set) var animeFlag: Bool
         @LossyBoolValue
-        private(set) var liveFlag: Bool
+        public private(set) var liveFlag: Bool
         @LossyBoolValue
-        private(set) var mamaotoFlag: Bool
+        public private(set) var mamaotoFlag: Bool
         @LossyBoolValue
-        private(set) var namaotoFlag: Bool
+        public private(set) var namaotoFlag: Bool
         @LossyBoolValue
-        private(set) var duetFlag: Bool
+        public private(set) var duetFlag: Bool
         @LossyBoolValue
-        private(set) var guideVocalFlag: Bool
+        public private(set) var guideVocalFlag: Bool
         @LossyBoolValue
-        private(set) var prookeFlag: Bool
+        public private(set) var prookeFlag: Bool
         @LossyBoolValue
-        private(set) var scoreFlag: Bool
+        public private(set) var scoreFlag: Bool
         @LossyBoolValue
-        private(set) var duetDxFlag: Bool
+        public private(set) var duetDxFlag: Bool
         @LossyBoolValue
-        private(set) var damTomoMovieFlag: Bool
+        public private(set) var damTomoMovieFlag: Bool
         @LossyBoolValue
-        private(set) var damTomoRecordingFlag: Bool
+        public private(set) var damTomoRecordingFlag: Bool
         @LossyBoolValue
-        private(set) var myListFlag: Bool
+        public private(set) var myListFlag: Bool
     }
 }

@@ -17,9 +17,9 @@ public final class SearchVariousByKeywordQuery: RequestType {
     public let path: String = "dkwebsys/search-api/SearchVariousByKeywordApi"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
-    
+
     public init(keyword: String) {
-        self.parameters = [
+        parameters = [
             "keyword": keyword,
             "dispCount": 100,
             "modelPatternCode": 0,
@@ -33,68 +33,68 @@ public final class SearchVariousByKeywordQuery: RequestType {
 
 public enum SearchVariousByKeyword {
     public struct Data: Decodable {
-        let pageCount: Int
+        public let pageCount: Int
         @LossyBoolValue
-        private(set) var hasPreview: Bool
+        public private(set) var hasPreview: Bool
         @LossyBoolValue
-        private(set) var overFlag: Bool
-        let pageNo: Int
+        public private(set) var overFlag: Bool
+        public let pageNo: Int
         @LossyBoolValue
-        private(set) var hasNext: Bool
-        let keyword: String
-        let totalCount: Int
+        public private(set) var hasNext: Bool
+        public let keyword: String
+        public let totalCount: Int
     }
 
     public struct ListItem: Decodable {
-        let requestNo: String
-        let title: String
-        let titleYomi: String
-        let artistCode: Int
-        let artist: String
-        let artistYomi: String
+        public let requestNo: String
+        public let title: String
+        public let titleYomi: String
+        public let artistCode: Int
+        public let artist: String
+        public let artistYomi: String
         @DateValue<YearMonthDayStrategy>
-        private(set) var releaseDate: Date
+        public private(set) var releaseDate: Date
         @LossyBoolValue
-        private(set) var newReleaseFlag: Bool
+        public private(set) var newReleaseFlag: Bool
         @LossyBoolValue
-        private(set) var futureReleaseFlag: Bool
+        public private(set) var futureReleaseFlag: Bool
         @LossyBoolValue
-        private(set) var newArrivalsFlag: Bool
+        public private(set) var newArrivalsFlag: Bool
         @LossyBoolValue
-        private(set) var honninFlag: Bool
+        public private(set) var honninFlag: Bool
         @LossyBoolValue
-        private(set) var animeFlag: Bool
+        public private(set) var animeFlag: Bool
         @LossyBoolValue
-        private(set) var liveFlag: Bool
+        public private(set) var liveFlag: Bool
         @LossyBoolValue
-        private(set) var kidsFlag: Bool
+        public private(set) var kidsFlag: Bool
         @LossyBoolValue
-        private(set) var duetFlag: Bool
+        public private(set) var duetFlag: Bool
         @LossyBoolValue
-        private(set) var mamaotoFlag: Bool
+        public private(set) var mamaotoFlag: Bool
         @LossyBoolValue
-        private(set) var namaotoFlag: Bool
+        public private(set) var namaotoFlag: Bool
         @LossyBoolValue
-        private(set) var guideVocalFlag: Bool
+        public private(set) var guideVocalFlag: Bool
         @LossyBoolValue
-        private(set) var prookeFlag: Bool
+        public private(set) var prookeFlag: Bool
         @LossyBoolValue
-        private(set) var damTomoMovieFlag: Bool
+        public private(set) var damTomoMovieFlag: Bool
         @LossyBoolValue
-        private(set) var damTomoRecordingFlag: Bool
+        public private(set) var damTomoRecordingFlag: Bool
         @LossyDefaultFalse
-        private(set) var damTomoPublicVocalFlag: Bool
+        public private(set) var damTomoPublicVocalFlag: Bool
         @LossyDefaultFalse
-        private(set) var damTomoPublicMovieFlag: Bool
+        public private(set) var damTomoPublicMovieFlag: Bool
         @LossyDefaultFalse
-        private(set) var damTomoPublicRecordingFlag: Bool
+        public private(set) var damTomoPublicRecordingFlag: Bool
         @LossyBoolValue
-        private(set) var scoreFlag: Bool
+        public private(set) var scoreFlag: Bool
         @LossyBoolValue
-        private(set) var myListFlag: Bool
+        public private(set) var myListFlag: Bool
         @DefaultCodable<DefaultInt>
-        private(set) var shift: Int
+        public private(set) var shift: Int
         @DefaultCodable<DefaultInt>
-        private(set) var playbackTime: Int
+        public private(set) var playbackTime: Int
     }
 }

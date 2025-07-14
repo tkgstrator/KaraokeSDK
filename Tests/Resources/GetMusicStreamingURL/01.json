@@ -1,0 +1,17 @@
+{
+    "data": {
+        "karaokeContentsId": "6026065"
+    },
+    "list": [
+        {
+            "contentsId": "6027440",
+            "duet": "normal",
+            "highBitrateUrl": "https://cds1-clubdam.k56.ipcasting.jp/e56ba0fbffc2a9e45636026f0bac0e5aa9521316da5cf2ca1f7c11f04a721cd221a842261c50a0effc4e56781d249b63b906398a0f487a5c70547715d26f9fb6/3378-76sk_1.mp4.m3u8",
+            "lowBitrateUrl": "https://cds1-clubdam.k56.ipcasting.jp/e56ba0fbffc2a9e45636026f0bac0e5aa9521316da5cf2ca1f7c11f04a721cd2b4c91dfb1549ca749fd33646283e0486cae0219de8fc80deeb944d21ffe0c975/3378-76sk_0.mp4.m3u8"
+        }
+    ],
+    "message": "",
+    "status": "OK",
+    "statusCode": "0000",
+    "type": "2.2"
+}
