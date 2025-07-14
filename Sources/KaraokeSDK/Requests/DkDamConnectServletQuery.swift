@@ -16,30 +16,16 @@ public final class DkDamConnectServletQuery: RequestType {
     public let path: String = "dkdenmoku/DkDamConnectServlet"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
-
+    
     public init(params: DkDamConnectServletRequest) {
         parameters = [
             "QRcode": params.qrCode,
-            "deviceId": params.deviceId,
-            "cdmNo": params.cdmNo,
         ]
     }
 }
 
 public struct DkDamConnectServletRequest {
-    let qrCode: String
-    let deviceId: String
-    let cdmNo: String
-
-    init(qrCode: String) {
-        self.init(qrCode: qrCode, deviceId: "", cdmNo: "")
-    }
-
-    init(qrCode: String, deviceId: String, cdmNo: String) {
-        self.qrCode = qrCode
-        self.deviceId = deviceId
-        self.cdmNo = cdmNo
-    }
+    public let qrCode: String
 }
 
 public struct DkDamConnectServletResponse: Decodable, Sendable {

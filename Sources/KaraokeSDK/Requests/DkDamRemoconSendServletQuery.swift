@@ -19,30 +19,13 @@ public final class DkDamRemoconSendServletQuery: RequestType {
 
     public init(params: DkDamRemoconSendServletRequest) {
         parameters = [
-            "QRcode": params.qrCode,
-            "deviceId": params.deviceId,
-            "cdmNo": params.cdmNo,
             "remoconCode": params.remoconCode.rawValue,
         ]
     }
 }
 
 public struct DkDamRemoconSendServletRequest {
-    let qrCode: String
-    let deviceId: String
-    let cdmNo: String
     let remoconCode: DkDamRemoconCode
-
-    init(qrCode: String, remoconCode: DkDamRemoconCode) {
-        self.init(qrCode: qrCode, deviceId: "", cdmNo: "", remoconCode: remoconCode)
-    }
-
-    init(qrCode: String, deviceId: String, cdmNo: String, remoconCode: DkDamRemoconCode) {
-        self.qrCode = qrCode
-        self.deviceId = deviceId
-        self.cdmNo = cdmNo
-        self.remoconCode = remoconCode
-    }
 }
 
 public struct DkDamRemoconSendServletResponse: Decodable, Sendable {

@@ -86,24 +86,20 @@ final class RequestTests: XCTestCase {
 
     func testDkDamConnectServletWithDeviceId() async throws {
         let qrCode = "0a3203395c38db33ac41015407306b30"
-        let deviceId = "m+bhn1hQRklITEzm1I2+fdtNlIKXQORxP9P3CmiqN7o="
-        let cdmNo = "0060000003019182"
-        let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode, deviceId: deviceId, cdmNo: cdmNo)))
+        let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode)))
         XCTAssertEqual(result.qrCode, qrCode)
-        XCTAssertEqual(result.deviceId, deviceId)
-        XCTAssertEqual(result.cdmNo, cdmNo)
     }
 
     func testDkDamSeparateServlet() async throws {
         let qrCode = "0a3203395c38db33ac41015407306b30"
-        let result = try await DKKaraoke.default.request(DkDamSeparateServletQuery(params: .init(qrCode: qrCode)))
+        let result = try await DKKaraoke.default.request(DkDamSeparateServletQuery(params: .init()))
         XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamRemoconSendServlet() async throws {
         let qrCode = "0a3203395c38db33ac41015407306b30"
         for remoconCode in DkDamRemoconCode.allCases {
-            let result = try await DKKaraoke.default.request(DkDamRemoconSendServletQuery(params: .init(qrCode: qrCode, remoconCode: remoconCode)))
+            let result = try await DKKaraoke.default.request(DkDamRemoconSendServletQuery(params: .init(remoconCode: remoconCode)))
             XCTAssertEqual(result.qrCode, qrCode)
         }
     }
@@ -123,7 +119,7 @@ final class RequestTests: XCTestCase {
             "3408-89",
         ]
         for requestNo in requestNoList {
-            let result = try await DKKaraoke.default.request(DkDamSendServletQuery(params: .init(qrCode: qrCode, requestNo: requestNo)))
+            let result = try await DKKaraoke.default.request(DkDamSendServletQuery(params: .init(requestNo: requestNo)))
             XCTAssertEqual(result.requestNo, requestNo)
             XCTAssertEqual(result.qrCode, qrCode)
         }

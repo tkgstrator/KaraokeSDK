@@ -11,27 +11,20 @@ import Foundation
 import KeychainAccess
 
 public final class DKKaraoke: Authenticator {
-    public typealias Credential = DKCredential
+    public typealias Credential = DkCredential
     
-    public func apply(_ credential: DKCredential, to urlRequest: inout URLRequest) {
+    public func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
         if let httpBody = urlRequest.httpBody {
             if let parameters = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any] {
                 Logger.debug("HTTP Body Parameters: \(parameters)")
-                urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
-                    "authKey": credential.compAuthKey,
-                    "compId": credential.compId,
-                    "QRcode": credential.qrCode,
-                    "cdmNo": credential.cdmNo,
-                    "deviceId": credential.deviceId,
-                ], uniquingKeysWith: { $1 }))
+                urlRequest.merging(credential)
             }
-            
             Logger.debug("HTTP Body: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
         }
         urlRequest.headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
     }
     
-    public func refresh(_ credential: DKCredential, for session: Alamofire.Session, completion: @escaping @Sendable (Swift.Result<DKCredential, any Error>) -> Void) {
+    public func refresh(_ credential: DkCredential, for session: Alamofire.Session, completion: @escaping @Sendable (Swift.Result<DkCredential, any Error>) -> Void) {
         Task(priority: .high, operation: {
             do {
                 let result = try await request(LoginByDamtomoMemberIdQuery(credential: credential))
@@ -44,7 +37,7 @@ public final class DKKaraoke: Authenticator {
         })
     }
     
-    public func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DKCredential) -> Bool {
+    public func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DkCredential) -> Bool {
         return urlRequest.value(forHTTPHeaderField: "dmk-access-key") == credential.dmkAccessKey && urlRequest.value(forHTTPHeaderField: "compAuthKey") == credential.compAuthKey
     }
     
@@ -58,9 +51,9 @@ public final class DKKaraoke: Authenticator {
     private let encoder: JSONEncoder = .init()
     private let keychain: Keychain = .init(server: "https://denmokuapp.clubdam.com", protocolType: .https)
     private var interceptor: AuthenticationInterceptor<DKKaraoke>? {
-        guard let credential = try? keychain.get(DKCredential.self, forKey: "dmk-credential") else {
+        guard let credential = try? keychain.get(DkCredential.self, forKey: "dmk-credential") else {
             Logger.debug("No credential found in keychain, returning unauthenticated interceptor.")
-            let credential: DKCredential = .init()
+            let credential: DkCredential = .init()
             try? keychain.set(credential, forKey: "dmk-credential")
             return .init(authenticator: self, credential: credential)
         }
@@ -75,15 +68,20 @@ public final class DKKaraoke: Authenticator {
         //        decoder.keyDecodingStrategy = .convertFromSnakeCase
         //        encoder.keyEncodingStrategy = .convertToSnakeCase
     }
-
+    
     @discardableResult
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
-        return try await session.request(convertible, interceptor: interceptor)
-            .cURLDescription(calling: { request in
-                Logger.debug("cURL Request: \(request)")
-            })
-            .validate(statusCode: 200 ..< 300)
-            .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
-            .value
+        do {
+            return try await session.request(convertible, interceptor: interceptor)
+                .cURLDescription(calling: { request in
+                    Logger.debug("cURL Request: \(request)")
+                })
+                .validate(statusCode: 200 ..< 300)
+                .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
+                .value
+        } catch {
+            Logger.error("Request failed with error: \(error)")
+            throw error
+        }
     }
 }

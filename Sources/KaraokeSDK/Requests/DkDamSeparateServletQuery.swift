@@ -10,8 +10,6 @@ import Alamofire
 import BetterCodable
 import Foundation
 
-public typealias DkDamSeparateServletRequest = DkDamConnectServletRequest
-
 public final class DkDamSeparateServletQuery: RequestType {
     public typealias ResponseType = DkDamSeparateServletResponse
 
@@ -21,10 +19,16 @@ public final class DkDamSeparateServletQuery: RequestType {
 
     public init(params: DkDamSeparateServletRequest) {
         parameters = [
-            "QRcode": params.qrCode,
-            "deviceId": params.deviceId,
             "cdmNo": params.cdmNo,
         ]
+    }
+}
+
+public struct DkDamSeparateServletRequest {
+    let cdmNo: String
+    
+    init(cdmNo: String = "") {
+        self.cdmNo = cdmNo
     }
 }
 
