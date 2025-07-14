@@ -35,7 +35,7 @@ public final class LoginByDamtomoMemberIdQuery: RequestType {
     }
 }
 
-public struct LoginByDamtomoMemberIdRequest {
+public struct LoginByDamtomoMemberIdRequest: Decodable {
     let loginId: String
     let password: String
 
