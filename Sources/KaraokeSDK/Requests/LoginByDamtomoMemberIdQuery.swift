@@ -25,12 +25,12 @@ public final class LoginByDamtomoMemberIdQuery: RequestType {
             "password": params.password,
         ]
     }
-    
+
     public init(credential: DkCredential) {
         parameters = [
             "format": "json",
             "loginId": credential.loginId,
-            "password": credential.password
+            "password": credential.password,
         ]
     }
 }

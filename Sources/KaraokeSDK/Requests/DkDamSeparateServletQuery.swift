@@ -26,7 +26,7 @@ public final class DkDamSeparateServletQuery: RequestType {
 
 public struct DkDamSeparateServletRequest {
     let cdmNo: String
-    
+
     init(cdmNo: String = "") {
         self.cdmNo = cdmNo
     }
@@ -49,7 +49,7 @@ public struct DkDamSeparateServletResponse: Decodable, Sendable {
     //    public let nickname: String
     //    public let password: String
     //    public let serialNo: String
-    
+
     public enum CodingKeys: String, CodingKey {
         case qrCode = "QRcode"
         case cdmNo

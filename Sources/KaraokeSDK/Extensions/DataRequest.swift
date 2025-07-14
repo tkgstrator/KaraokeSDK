@@ -5,15 +5,15 @@
 //  Created by devonly on 2025/07/15.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 extension DataRequest {
     @discardableResult
     func validateWith() -> Self {
         let decoder: JSONDecoder = .init()
-        
-        return validate({ request, response, data in
+
+        return validate { _, _, data in
             ValidationResult(catching: {
                 if let data: Data = data {
                     if let result = try? decoder.decode(DkResult.DkDenmoku.self, from: data) {
@@ -28,6 +28,6 @@ extension DataRequest {
                     }
                 }
             })
-        })
+        }
     }
 }

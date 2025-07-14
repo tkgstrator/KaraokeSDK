@@ -30,7 +30,7 @@ public struct DkDamSendServletRequest {
     let requestNo: String
     let interrupt: Bool
     let myKey: Int
-    
+
     init(requestNo: String, interrupt: Bool = false, myKey: Int = 0) {
         self.requestNo = requestNo
         self.interrupt = interrupt
@@ -53,7 +53,7 @@ public struct DkDamSendServletResponse: Decodable, Sendable {
     public let sendDate: String
     public let requestNo: String
     public let entryNo: String
-    
+
     public enum CodingKeys: String, CodingKey {
         case qrCode = "QRcode"
         case cdmNo

@@ -16,7 +16,7 @@ public final class DkDamConnectServletQuery: RequestType {
     public let path: String = "dkdenmoku/DkDamConnectServlet"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
-    
+
     public init(params: DkDamConnectServletRequest) {
         parameters = [
             "QRcode": params.qrCode,
@@ -39,7 +39,7 @@ public struct DkDamConnectServletResponse: Decodable, Sendable {
 //    @LosslessValue
 //    public private(set) var remoconFlg: Int
     public let result: DkDamResult
-    
+
     public enum CodingKeys: String, CodingKey {
         case qrCode = "QRcode"
         case cdmNo

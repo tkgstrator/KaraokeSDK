@@ -12,7 +12,7 @@ import KeychainAccess
 
 public final class DKKaraoke: Authenticator {
     public typealias Credential = DkCredential
-    
+
     public func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
         if let httpBody = urlRequest.httpBody {
             if let parameters = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any] {
@@ -23,7 +23,7 @@ public final class DKKaraoke: Authenticator {
         }
         urlRequest.headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
     }
-    
+
     public func refresh(_ credential: DkCredential, for session: Alamofire.Session, completion: @escaping @Sendable (Swift.Result<DkCredential, any Error>) -> Void) {
         Task(priority: .high, operation: {
             do {
@@ -31,21 +31,21 @@ public final class DKKaraoke: Authenticator {
                 let newValue = credential.update(result)
                 try keychain.set(newValue, forKey: "dmk-credential")
                 completion(.success(newValue))
-            } catch (let error) {
+            } catch {
                 Logger.error("Failed to refresh credential: \(error)")
                 completion(.failure(error))
             }
         })
     }
-    
+
     public func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DkCredential) -> Bool {
-        return urlRequest.value(forHTTPHeaderField: "dmk-access-key") == credential.dmkAccessKey && urlRequest.value(forHTTPHeaderField: "compAuthKey") == credential.compAuthKey
+        urlRequest.value(forHTTPHeaderField: "dmk-access-key") == credential.dmkAccessKey && urlRequest.value(forHTTPHeaderField: "compAuthKey") == credential.compAuthKey
     }
-    
+
     public func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: any Error) -> Bool {
-        return response.statusCode == 401
+        response.statusCode == 401
     }
-    
+
     public static let `default`: DKKaraoke = .init()
     private let session: Session = .default
     private let decoder: JSONDecoder = .init()
@@ -60,11 +60,11 @@ public final class DKKaraoke: Authenticator {
         }
         return credential
     }
+
     private var interceptor: AuthenticationInterceptor<DKKaraoke>? {
         AuthenticationInterceptor(authenticator: DKKaraoke.default, credential: credential)
     }
-    
-    
+
     private init() {
         Logger.configure()
         session.sessionConfiguration.timeoutIntervalForRequest = 10
@@ -72,7 +72,7 @@ public final class DKKaraoke: Authenticator {
         //        decoder.keyDecodingStrategy = .convertFromSnakeCase
         //        encoder.keyEncodingStrategy = .convertToSnakeCase
     }
-    
+
     @discardableResult
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {

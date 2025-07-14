@@ -15,7 +15,8 @@ extension URLRequest {
         }
         // Assuming DkCredential has properties that can be added to the URLRequest
         if let body = httpBody,
-           let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any] {
+           let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any]
+        {
             Logger.debug("Merging credential with existing parameters: \(parameters)")
             if targetUrl.path.hasPrefix("/dkwebsys") {
                 Logger.debug("URL path starts with 'dkwebsys', merging credential into parameters.")
@@ -42,6 +43,5 @@ extension URLRequest {
             }
             return
         }
-        return
     }
 }

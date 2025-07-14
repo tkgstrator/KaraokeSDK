@@ -39,7 +39,7 @@ public struct DkDamRemoconSendServletResponse: Decodable, Sendable {
 //    @LosslessValue
 //    public private(set) var remoconFlg: Int
     public let result: DkDamResult
-    
+
     public enum CodingKeys: String, CodingKey {
         case qrCode = "QRcode"
         case cdmNo
