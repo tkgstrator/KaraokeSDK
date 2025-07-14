@@ -32,6 +32,7 @@ public final class DKKaraoke: Authenticator {
                 try keychain.set(newValue, forKey: "dmk-credential")
                 completion(.success(newValue))
             } catch (let error) {
+                Logger.error("Failed to refresh credential: \(error)")
                 completion(.failure(error))
             }
         })
@@ -79,23 +80,24 @@ public final class DKKaraoke: Authenticator {
                 .cURLDescription(calling: { request in
                     Logger.debug("cURL Request: \(request)")
                 })
-                .validate(statusCode: 200 ..< 300)
+//                .validateWith()
                 .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
                 .value
-            if let result = convertible as? LoginByDamtomoMemberIdQuery {
-                Logger.debug("LoginByDamtomoMemberIdQuery: \(result)")
-            }
-            if let result = convertible as? DkDamConnectServletQuery {
-                Logger.debug("DkDamConnectServletQuery: \(result)")
-            }
-            if let result = response as? LoginByDamtomoMemberIdResponse {
-                try? keychain.set(credential.update(result), forKey: "dmk-credential")
-                Logger.debug("LoginByDamtomoMemberIdResponse: \(result)")
-            }
-            if let result = response as? DkDamConnectServletResponse {
-                try? keychain.set(credential.update(result), forKey: "dmk-credential")
-                Logger.debug("DkDamConnectServletResponse: \(result)")
-            }
+//            // 独自のバリデーション処理をここで書く！
+//            if let result = convertible as? LoginByDamtomoMemberIdQuery {
+//                Logger.debug("LoginByDamtomoMemberIdQuery: \(result)")
+//            }
+//            if let result = convertible as? DkDamConnectServletQuery {
+//                Logger.debug("DkDamConnectServletQuery: \(result)")
+//            }
+//            if let result = response as? LoginByDamtomoMemberIdResponse {
+//                try? keychain.set(credential.update(result), forKey: "dmk-credential")
+//                Logger.debug("LoginByDamtomoMemberIdResponse: \(result)")
+//            }
+//            if let result = response as? DkDamConnectServletResponse {
+//                try? keychain.set(credential.update(result), forKey: "dmk-credential")
+//                Logger.debug("DkDamConnectServletResponse: \(result)")
+//            }
             return response
         } catch {
             Logger.error("Request failed with error: \(error)")
