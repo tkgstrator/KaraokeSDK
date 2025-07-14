@@ -7,6 +7,7 @@
 
 import Alamofire
 import Foundation
+import KeychainAccess
 
 @MainActor
 public final class DKKaraoke {
@@ -14,6 +15,7 @@ public final class DKKaraoke {
     private let session: Session = .default
     private let decoder: JSONDecoder = .init()
     private let encoder: JSONEncoder = .init()
+    private let keychain: Keychain = .init(server: "https://denmokuapp.clubdam.com", protocolType: .https)
 
     private init() {
         Logger.configure()
