@@ -1,0 +1,30 @@
+{
+    "QRcode": "0a3203395c38db33ac41015407306b30",
+    "cdmNo": "",
+    "connectionEquip": {
+        "equip1": "",
+        "equip10": "",
+        "equip11": "",
+        "equip12": "",
+        "equip13": "",
+        "equip14": "",
+        "equip15": "",
+        "equip16": "",
+        "equip2": "",
+        "equip3": "",
+        "equip4": "",
+        "equip5": "",
+        "equip6": "",
+        "equip7": "",
+        "equip8": "",
+        "equip9": ""
+    },
+    "deviceId": "m+bhn1hQRklITEzm1I2+fdtNlIKXQORxP9P3CmiqN7o=",
+    "deviceNm": "",
+    "lastSendTerm": "60",
+    "osVer": "",
+    "remoconFlg": "2",
+    "result": "DAM_CONNECT_OK",
+    "songCertification": "",
+    "substituteBoot": ""
+}

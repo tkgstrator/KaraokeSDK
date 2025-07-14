@@ -8,7 +8,8 @@
 import Alamofire
 import Foundation
 
-public final class DKKaraoke: Sendable {
+@MainActor
+public final class DKKaraoke {
     public static let `default`: DKKaraoke = .init()
     private let session: Session = .default
     private let decoder: JSONDecoder = .init()
@@ -18,30 +19,18 @@ public final class DKKaraoke: Sendable {
         Logger.configure()
         session.sessionConfiguration.timeoutIntervalForRequest = 10
         session.sessionConfiguration.httpMaximumConnectionsPerHost = 1
-//        decoder.keyDecodingStrategy = .convertFromSnakeCase
-//        encoder.keyEncodingStrategy = .convertToSnakeCase
+        //        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        //        encoder.keyEncodingStrategy = .convertToSnakeCase
     }
 
     @discardableResult
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
-        let result = await session.request(convertible)
+        try await session.request(convertible)
             .cURLDescription(calling: { request in
                 Logger.debug("cURL Request: \(request)")
             })
-            .serializingData()
-            .result
-        switch result {
-        case let .success(response):
-            do {
-                return try decoder.decode(T.ResponseType.self, from: response)
-            } catch {
-                Logger.error(String(data: response, encoding: .utf8))
-                Logger.error(error)
-                throw error
-            }
-        case let .failure(error):
-            Logger.error(error)
-            throw error
-        }
+            .validate(statusCode: 200 ..< 300)
+            .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
+            .value
     }
 }

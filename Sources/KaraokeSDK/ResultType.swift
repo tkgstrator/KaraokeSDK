@@ -6,6 +6,8 @@
 //
 
 import Foundation
+@preconcurrency
+import BetterCodable
 
 public struct ResultType<T, U>: Decodable, Sendable where T: Decodable, T: Sendable, U: Decodable, U: Sendable {
     public let result: Result
@@ -14,6 +16,7 @@ public struct ResultType<T, U>: Decodable, Sendable where T: Decodable, T: Senda
 }
 
 public struct Result: Decodable, Sendable {
-    public let statusCode: String
+    @LosslessValue
+    private(set) var statusCode: Int
     public let message: String
 }
