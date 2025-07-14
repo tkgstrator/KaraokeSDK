@@ -32,6 +32,8 @@ public struct QRCode: Codable {
         timestamp <= .init()
     }
 
+    // 有効期限がめちゃくちゃ長いQRコードを生成する
+    // NOTE: 通常は一時間だが、六時間くらい確保すれば実用上不都合がないと思われる
     public var code: String {
         let host: [String] = host.split(separator: ".").compactMap { UInt8($0) }.compactMap { String(format: "%02X", $0) }
         let serialNo: [String] = serialNo.chunked(by: 2)
