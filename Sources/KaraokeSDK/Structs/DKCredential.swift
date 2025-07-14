@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-public class DKCredential: AuthenticationCredential, Codable {
+public class DKCredential: AuthenticationCredential, Codable, @unchecked Sendable {
     // 筐体と連携しようとしたら存在するプロパティ
     // 連携はログインされていなくても実行可能
     public var qrCode: String
