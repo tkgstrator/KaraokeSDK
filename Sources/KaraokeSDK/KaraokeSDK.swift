@@ -21,6 +21,7 @@ public final class DKKaraoke: Authenticator {
             }
             Logger.debug("HTTP Body: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
         }
+        Logger.debug("Applying credential to URLRequest: \(urlRequest)")
         urlRequest.headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
     }
 
@@ -30,6 +31,7 @@ public final class DKKaraoke: Authenticator {
                 let result = try await request(LoginByDamtomoMemberIdQuery(credential: credential))
                 let newValue = credential.update(result)
                 try keychain.set(newValue, forKey: "dmk-credential")
+                Logger.debug("Refreshing credential success: \(credential)")
                 completion(.success(newValue))
             } catch {
                 Logger.error("Failed to refresh credential: \(error)")
@@ -61,10 +63,6 @@ public final class DKKaraoke: Authenticator {
         return credential
     }
 
-    private var interceptor: AuthenticationInterceptor<DKKaraoke>? {
-        AuthenticationInterceptor(authenticator: DKKaraoke.default, credential: credential)
-    }
-
     private init() {
         Logger.configure()
         session.sessionConfiguration.timeoutIntervalForRequest = 10
@@ -76,6 +74,8 @@ public final class DKKaraoke: Authenticator {
     @discardableResult
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {
+            // ログイン処理ではInterceptorを利用しない
+            let interceptor: AuthenticationInterceptor<DKKaraoke>? = convertible is LoginByDamtomoMemberIdQuery ? nil : .init(authenticator: self, credential: credential)
             let response = try await session.request(convertible, interceptor: interceptor)
                 .cURLDescription(calling: { request in
                     Logger.debug("cURL Request: \(request)")
@@ -83,21 +83,28 @@ public final class DKKaraoke: Authenticator {
                 .validateWith()
                 .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
                 .value
-//            // 独自のバリデーション処理をここで書く！
-//            if let result = convertible as? LoginByDamtomoMemberIdQuery {
-//                Logger.debug("LoginByDamtomoMemberIdQuery: \(result)")
-//            }
+
 //            if let result = convertible as? DkDamConnectServletQuery {
 //                Logger.debug("DkDamConnectServletQuery: \(result)")
 //            }
-//            if let result = response as? LoginByDamtomoMemberIdResponse {
-//                try? keychain.set(credential.update(result), forKey: "dmk-credential")
-//                Logger.debug("LoginByDamtomoMemberIdResponse: \(result)")
-//            }
-//            if let result = response as? DkDamConnectServletResponse {
-//                try? keychain.set(credential.update(result), forKey: "dmk-credential")
-//                Logger.debug("DkDamConnectServletResponse: \(result)")
-//            }
+            // ログイン成功時にトークンとIDを更新
+            // NOTE: Interceptor内で上書きされるので不要な可能性がある
+            if let result = response as? LoginByDamtomoMemberIdResponse {
+                if let _ = convertible as? LoginByDamtomoMemberIdQuery,
+                   let httpBody = convertible.urlRequest?.httpBody,
+                   let parameters = try? decoder.decode(LoginByDamtomoMemberIdRequest.self, from: httpBody)
+                {
+                    Logger.debug("LoginByDamtomoMemberIdQuery: \(parameters)")
+                    try? keychain.set(credential.update(parameters), forKey: "dmk-credential")
+                }
+                try? keychain.set(credential.update(result), forKey: "dmk-credential")
+                Logger.debug("LoginByDamtomoMemberIdResponse: \(result)")
+            }
+            // 筐体との連携成功時にQRコードを更新
+            if let result = response as? DkDamConnectServletResponse {
+                try? keychain.set(credential.update(result), forKey: "dmk-credential")
+                Logger.debug("DkDamConnectServletResponse: \(result)")
+            }
             return response
         } catch {
             Logger.error("Request failed with error: \(error)")
