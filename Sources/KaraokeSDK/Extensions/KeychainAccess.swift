@@ -5,8 +5,8 @@
 //  Created by devonly on 2025/07/14.
 //
 
-import KeychainAccess
 import Foundation
+import KeychainAccess
 
 extension Keychain {
     func get<T: Codable>(_ type: T.Type, forKey key: String) throws -> T? {
@@ -16,8 +16,8 @@ extension Keychain {
         let decoder: JSONDecoder = .init()
         return try decoder.decode(T.self, from: data)
     }
-    
-    func set<T: Codable>(_ value: T, forKey key: String) throws {
+
+    func set(_ value: some Codable, forKey key: String) throws {
         let encoder: JSONEncoder = .init()
         let data = try encoder.encode(value)
         try set(data, key: key)

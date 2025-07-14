@@ -5,8 +5,8 @@
 //  Created by devonly on 2025/07/14.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendable {
     // 筐体と連携しようとしたら存在するプロパティ
@@ -26,51 +26,51 @@ public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendabl
     public var damtomoId: String
     // プロトコルに準拠するためのプロパティ
     public let expiresIn: Date
-    
+
     public var requiresRefresh: Bool {
         expiresIn <= .init()
     }
-    
+
     init() {
-        self.qrCode = ""
-        self.loginId = ""
-        self.password = ""
-        self.deviceId = DkCredential.deviceId
-        self.compId = 1
-        self.compAuthKey = "2/Qb9R@8s*"
-        self.dmkAccessKey = "3ZpXW3K8anQvonUX7IMj"
-        self.authToken = ""
-        self.cdmNo = ""
-        self.damtomoId = ""
-        self.expiresIn = .init(timeIntervalSinceNow: 60 * 60 * 6)
+        qrCode = ""
+        loginId = ""
+        password = ""
+        deviceId = DkCredential.deviceId
+        compId = 1
+        compAuthKey = "2/Qb9R@8s*"
+        dmkAccessKey = "3ZpXW3K8anQvonUX7IMj"
+        authToken = ""
+        cdmNo = ""
+        damtomoId = ""
+        expiresIn = .init(timeIntervalSinceNow: 60 * 60 * 6)
     }
-    
+
     @discardableResult
     func update(_ response: LoginByDamtomoMemberIdResponse) -> DkCredential {
-        self.authToken = response.data.authToken
-        self.damtomoId = response.data.damtomoId
+        authToken = response.data.authToken
+        damtomoId = response.data.damtomoId
         return self
     }
-    
+
     @discardableResult
     func update(_ request: LoginByDamtomoMemberIdRequest) -> DkCredential {
-        self.loginId = request.loginId
-        self.password = request.password
+        loginId = request.loginId
+        password = request.password
         return self
     }
-    
+
     @discardableResult
     func update(_ response: DkDamConnectServletResponse) -> DkCredential {
-        self.qrCode = response.qrCode
+        qrCode = response.qrCode
         return self
     }
 
     public static var deviceId: String {
-#if os(iOS)
+        #if os(iOS)
         let uuid = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
-#elseif os(macOS)
+        #elseif os(macOS)
         let uuid = UUID().uuidString
-#endif
+        #endif
         return uuid.data(using: .utf8)!.base64EncodedString()
     }
 }
