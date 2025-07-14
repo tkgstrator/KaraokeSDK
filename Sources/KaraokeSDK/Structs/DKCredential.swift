@@ -59,6 +59,12 @@ public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendabl
         return self
     }
     
+    @discardableResult
+    func update(_ response: DkDamConnectServletResponse) -> DkCredential {
+        self.qrCode = response.qrCode
+        return self
+    }
+
     public static var deviceId: String {
 #if os(iOS)
         let uuid = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString

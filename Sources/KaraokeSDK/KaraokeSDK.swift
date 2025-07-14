@@ -50,14 +50,17 @@ public final class DKKaraoke: Authenticator {
     private let decoder: JSONDecoder = .init()
     private let encoder: JSONEncoder = .init()
     private let keychain: Keychain = .init(server: "https://denmokuapp.clubdam.com", protocolType: .https)
-    private var interceptor: AuthenticationInterceptor<DKKaraoke>? {
+    private var credential: DkCredential {
         guard let credential = try? keychain.get(DkCredential.self, forKey: "dmk-credential") else {
-            Logger.debug("No credential found in keychain, returning unauthenticated interceptor.")
+            Logger.debug("No credential found in keychain, returning default credential.")
             let credential: DkCredential = .init()
             try? keychain.set(credential, forKey: "dmk-credential")
-            return .init(authenticator: self, credential: credential)
+            return credential
         }
-        return AuthenticationInterceptor(authenticator: DKKaraoke.default, credential: credential)
+        return credential
+    }
+    private var interceptor: AuthenticationInterceptor<DKKaraoke>? {
+        AuthenticationInterceptor(authenticator: DKKaraoke.default, credential: credential)
     }
     
     
@@ -72,13 +75,28 @@ public final class DKKaraoke: Authenticator {
     @discardableResult
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {
-            return try await session.request(convertible, interceptor: interceptor)
+            let response = try await session.request(convertible, interceptor: interceptor)
                 .cURLDescription(calling: { request in
                     Logger.debug("cURL Request: \(request)")
                 })
                 .validate(statusCode: 200 ..< 300)
                 .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
                 .value
+            if let result = convertible as? LoginByDamtomoMemberIdQuery {
+                Logger.debug("LoginByDamtomoMemberIdQuery: \(result)")
+            }
+            if let result = convertible as? DkDamConnectServletQuery {
+                Logger.debug("DkDamConnectServletQuery: \(result)")
+            }
+            if let result = response as? LoginByDamtomoMemberIdResponse {
+                try? keychain.set(credential.update(result), forKey: "dmk-credential")
+                Logger.debug("LoginByDamtomoMemberIdResponse: \(result)")
+            }
+            if let result = response as? DkDamConnectServletResponse {
+                try? keychain.set(credential.update(result), forKey: "dmk-credential")
+                Logger.debug("DkDamConnectServletResponse: \(result)")
+            }
+            return response
         } catch {
             Logger.error("Request failed with error: \(error)")
             throw error
