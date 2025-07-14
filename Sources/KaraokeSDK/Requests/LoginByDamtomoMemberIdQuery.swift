@@ -25,6 +25,14 @@ public final class LoginByDamtomoMemberIdQuery: RequestType {
             "password": params.password,
         ]
     }
+    
+    public init(credential: DKCredential) {
+        parameters = [
+            "format": "json",
+            "loginId": credential.loginId,
+            "password": credential.password
+        ]
+    }
 }
 
 public struct LoginByDamtomoMemberIdRequest {

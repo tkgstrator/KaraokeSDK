@@ -50,10 +50,7 @@ public extension RequestType {
         let url: URL = baseURL.appendingPathComponent(path)
         let request: URLRequest = try .init(url: url, method: method, headers: headers)
         if let parameters {
-            return try encoding.encode(request, with: parameters.merging([
-                "authKey": "2/Qb9R@8s*",
-                "compId": "1",
-            ], uniquingKeysWith: { $1 }))
+            return try encoding.encode(request, with: parameters)
         }
         return request
     }
