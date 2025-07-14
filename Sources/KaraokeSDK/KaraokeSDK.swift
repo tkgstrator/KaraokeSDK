@@ -84,9 +84,6 @@ public final class DKKaraoke: Authenticator {
                 .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
                 .value
 
-//            if let result = convertible as? DkDamConnectServletQuery {
-//                Logger.debug("DkDamConnectServletQuery: \(result)")
-//            }
             // ログイン成功時にトークンとIDを更新
             // NOTE: Interceptor内で上書きされるので不要な可能性がある
             if let result = response as? LoginByDamtomoMemberIdResponse {
