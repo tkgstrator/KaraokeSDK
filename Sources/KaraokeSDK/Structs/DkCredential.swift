@@ -28,6 +28,7 @@ public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendabl
     public var expiresIn: Date
 
     // 未設定の場合にはログイン状態ではないので有効期限を無視してリフレッシュが不要とする
+    // NOTE: QRCodeの有効期限も必要だった......
     public var requiresRefresh: Bool {
         loginId.isEmpty && password.isEmpty && authToken.isEmpty ? false : expiresIn <= .init()
     }
