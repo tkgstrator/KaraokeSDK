@@ -80,7 +80,7 @@ public final class DKKaraoke: Authenticator {
                 .cURLDescription(calling: { request in
                     Logger.debug("cURL Request: \(request)")
                 })
-//                .validateWith()
+                .validateWith()
                 .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
                 .value
 //            // 独自のバリデーション処理をここで書く！

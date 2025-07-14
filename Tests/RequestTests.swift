@@ -12,6 +12,7 @@ import XCTest
 
 final class RequestTests: XCTestCase {
     private let decoder: JSONDecoder = .init()
+    private let qrCode = "0a3203395c38db33ac41015407306b30"
 
     override func setUp() async throws {}
 
@@ -79,33 +80,34 @@ final class RequestTests: XCTestCase {
     }
 
     func testDkDamConnectServlet() async throws {
-        let qrCode = "0a3203395c38db33ac41015407306b30"
         let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode)))
         XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamConnectServletWithDeviceId() async throws {
-        let qrCode = "0a3203395c38db33ac41015407306b30"
         let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode)))
         XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamSeparateServlet() async throws {
-        let qrCode = "0a3203395c38db33ac41015407306b30"
         let result = try await DKKaraoke.default.request(DkDamSeparateServletQuery(params: .init()))
         XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamRemoconSendServlet() async throws {
-        let qrCode = "0a3203395c38db33ac41015407306b30"
         for remoconCode in DkDamRemoconCode.allCases {
-            let result = try await DKKaraoke.default.request(DkDamRemoconSendServletQuery(params: .init(remoconCode: remoconCode)))
-            XCTAssertEqual(result.qrCode, qrCode)
+            do {
+                try await DKKaraoke.default.request(DkDamRemoconSendServletQuery(params: .init(remoconCode: remoconCode)))
+                XCTFail("Expected to throw an error for remocon code: \(remoconCode.rawValue)")
+            } catch {
+                if let error = error.asAFError?.underlyingError as? DkError {
+                    XCTAssertEqual(error.result, .damConnectErrorR)
+                }
+            }
         }
     }
 
     func testDkDamSendServlet() async throws {
-        let qrCode = "0a3203395c38db33ac41015407306b30"
         let requestNoList: [String] = [
             "3408-80",
             "3408-81",
@@ -119,9 +121,14 @@ final class RequestTests: XCTestCase {
             "3408-89",
         ]
         for requestNo in requestNoList {
-            let result = try await DKKaraoke.default.request(DkDamSendServletQuery(params: .init(requestNo: requestNo)))
-            XCTAssertEqual(result.requestNo, requestNo)
-            XCTAssertEqual(result.qrCode, qrCode)
+            do {
+                try await DKKaraoke.default.request(DkDamSendServletQuery(params: .init(requestNo: requestNo)))
+                XCTFail("Expected to throw an error for remocon code: \(requestNo)")
+            } catch {
+                if let error = error.asAFError?.underlyingError as? DkError {
+                    XCTAssertEqual(error.result, .damSendError)
+                }
+            }
         }
     }
 
