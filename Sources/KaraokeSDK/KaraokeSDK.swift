@@ -86,7 +86,9 @@ public final class DKKaraoke: Authenticator {
 
             // ログイン成功時にトークンとIDを更新
             // NOTE: Interceptor内で上書きされるので不要な可能性がある
+            // NOTE: はじめてログインしようとしたときに必要だった
             if let result = response as? LoginByDamtomoMemberIdResponse {
+                // ログインリクエストのパラメータをデコードしてログインIDとパスワードを更新
                 if let _ = convertible as? LoginByDamtomoMemberIdQuery,
                    let httpBody = convertible.urlRequest?.httpBody,
                    let parameters = try? decoder.decode(LoginByDamtomoMemberIdRequest.self, from: httpBody)
