@@ -25,10 +25,11 @@ public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendabl
     public var cdmNo: String
     public var damtomoId: String
     // プロトコルに準拠するためのプロパティ
-    public let expiresIn: Date
+    public var expiresIn: Date
 
+    // 未設定の場合にはログイン状態ではないので有効期限を無視してリフレッシュが不要とする
     public var requiresRefresh: Bool {
-        expiresIn <= .init()
+        loginId.isEmpty && password.isEmpty && authToken.isEmpty ? false : expiresIn <= .init()
     }
 
     init() {
