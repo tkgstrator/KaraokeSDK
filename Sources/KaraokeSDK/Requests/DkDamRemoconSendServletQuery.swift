@@ -19,7 +19,7 @@ public final class DkDamRemoconSendServletQuery: RequestType {
 
     public init(params: DkDamRemoconSendServletRequest) {
         parameters = [
-            "QRcode": params.QRcode,
+            "QRcode": params.qrCode,
             "deviceId": params.deviceId,
             "cdmNo": params.cdmNo,
             "remoconCode": params.remoconCode.rawValue,
@@ -28,17 +28,17 @@ public final class DkDamRemoconSendServletQuery: RequestType {
 }
 
 public struct DkDamRemoconSendServletRequest {
-    let QRcode: String
+    let qrCode: String
     let deviceId: String
     let cdmNo: String
     let remoconCode: DkDamRemoconCode
 
-    init(QRcode: String, remoconCode: DkDamRemoconCode) {
-        self.init(QRcode: QRcode, deviceId: "", cdmNo: "", remoconCode: remoconCode)
+    init(qrCode: String, remoconCode: DkDamRemoconCode) {
+        self.init(qrCode: qrCode, deviceId: "", cdmNo: "", remoconCode: remoconCode)
     }
 
-    init(QRcode: String, deviceId: String, cdmNo: String, remoconCode: DkDamRemoconCode) {
-        self.QRcode = QRcode
+    init(qrCode: String, deviceId: String, cdmNo: String, remoconCode: DkDamRemoconCode) {
+        self.qrCode = qrCode
         self.deviceId = deviceId
         self.cdmNo = cdmNo
         self.remoconCode = remoconCode
@@ -46,7 +46,7 @@ public struct DkDamRemoconSendServletRequest {
 }
 
 public struct DkDamRemoconSendServletResponse: Decodable, Sendable {
-    public let QRcode: String
+    public let qrCode: String
     public let cdmNo: String
     public let deviceId: String
     public let deviceNm: String
@@ -56,4 +56,13 @@ public struct DkDamRemoconSendServletResponse: Decodable, Sendable {
 //    @LosslessValue
 //    public private(set) var remoconFlg: Int
     public let result: DkDamResult
+    
+    public enum CodingKeys: String, CodingKey {
+        case qrCode = "QRcode"
+        case cdmNo
+        case deviceId
+        case deviceNm
+        case osVer
+        case result
+    }
 }

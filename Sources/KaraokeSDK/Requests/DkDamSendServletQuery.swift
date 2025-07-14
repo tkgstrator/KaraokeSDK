@@ -19,7 +19,7 @@ public final class DkDamSendServletQuery: RequestType {
 
     public init(params: DkDamSendServletRequest) {
         parameters = [
-            "QRcode": params.QRcode,
+            "QRcode": params.qrCode,
             "deviceId": params.deviceId,
             "cdmNo": params.cdmNo,
             "reqNo": params.requestNo,
@@ -30,15 +30,15 @@ public final class DkDamSendServletQuery: RequestType {
 }
 
 public struct DkDamSendServletRequest {
-    let QRcode: String
+    let qrCode: String
     let deviceId: String
     let cdmNo: String
     let requestNo: String
     let interrupt: Bool
     let myKey: Int
 
-    init(QRcode: String, requestNo: String, deviceId: String = "", cdmNo: String = "", interrupt: Bool = false, myKey: Int = 0) {
-        self.QRcode = QRcode
+    init(qrCode: String, requestNo: String, deviceId: String = "", cdmNo: String = "", interrupt: Bool = false, myKey: Int = 0) {
+        self.qrCode = qrCode
         self.deviceId = deviceId
         self.cdmNo = cdmNo
         self.requestNo = requestNo
@@ -48,7 +48,7 @@ public struct DkDamSendServletRequest {
 }
 
 public struct DkDamSendServletResponse: Decodable, Sendable {
-    public let QRcode: String
+    public let qrCode: String
     public let cdmNo: String
     public let deviceId: String
     public let deviceNm: String
@@ -60,6 +60,18 @@ public struct DkDamSendServletResponse: Decodable, Sendable {
     public let result: DkDamResult
     // 追加項目
     public let sendDate: String
-    public let reqNo: String
+    public let requestNo: String
     public let entryNo: String
+    
+    public enum CodingKeys: String, CodingKey {
+        case qrCode = "QRcode"
+        case cdmNo
+        case deviceId
+        case deviceNm
+        case osVer
+        case result
+        case sendDate
+        case requestNo = "reqNo"
+        case entryNo
+    }
 }

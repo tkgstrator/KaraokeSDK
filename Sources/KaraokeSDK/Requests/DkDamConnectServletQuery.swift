@@ -19,7 +19,7 @@ public final class DkDamConnectServletQuery: RequestType {
 
     public init(params: DkDamConnectServletRequest) {
         parameters = [
-            "QRcode": params.QRcode,
+            "QRcode": params.qrCode,
             "deviceId": params.deviceId,
             "cdmNo": params.cdmNo,
         ]
@@ -27,23 +27,23 @@ public final class DkDamConnectServletQuery: RequestType {
 }
 
 public struct DkDamConnectServletRequest {
-    let QRcode: String
+    let qrCode: String
     let deviceId: String
     let cdmNo: String
 
-    init(QRcode: String) {
-        self.init(QRcode: QRcode, deviceId: "", cdmNo: "")
+    init(qrCode: String) {
+        self.init(qrCode: qrCode, deviceId: "", cdmNo: "")
     }
 
-    init(QRcode: String, deviceId: String, cdmNo: String) {
-        self.QRcode = QRcode
+    init(qrCode: String, deviceId: String, cdmNo: String) {
+        self.qrCode = qrCode
         self.deviceId = deviceId
         self.cdmNo = cdmNo
     }
 }
 
 public struct DkDamConnectServletResponse: Decodable, Sendable {
-    public let QRcode: String
+    public let qrCode: String
     public let cdmNo: String
     public let deviceId: String
     public let deviceNm: String
@@ -53,4 +53,13 @@ public struct DkDamConnectServletResponse: Decodable, Sendable {
 //    @LosslessValue
 //    public private(set) var remoconFlg: Int
     public let result: DkDamResult
+    
+    public enum CodingKeys: String, CodingKey {
+        case qrCode = "QRcode"
+        case cdmNo
+        case deviceId
+        case deviceNm
+        case osVer
+        case result
+    }
 }

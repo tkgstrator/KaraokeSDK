@@ -21,7 +21,7 @@ public final class DkDamSeparateServletQuery: RequestType {
 
     public init(params: DkDamSeparateServletRequest) {
         parameters = [
-            "QRcode": params.QRcode,
+            "QRcode": params.qrCode,
             "deviceId": params.deviceId,
             "cdmNo": params.cdmNo,
         ]
@@ -29,20 +29,29 @@ public final class DkDamSeparateServletQuery: RequestType {
 }
 
 public struct DkDamSeparateServletResponse: Decodable, Sendable {
-    public let QRcode: String
+    public let qrCode: String
     public let cdmNo: String
     public let deviceId: String
     public let deviceNm: String
-//    @LosslessValue
-//    public private(set) var lastSendTerm: Int
+    //    @LosslessValue
+    //    public private(set) var lastSendTerm: Int
     public let osVer: String
-//    @LosslessValue
-//    public private(set) var remoconFlg: Int
+    //    @LosslessValue
+    //    public private(set) var remoconFlg: Int
     public let result: DkDamResult
     // 追加項目
-//    public let ipAdr: String
-//    public let damtomoId: String
-//    public let nickname: String
-//    public let password: String
-//    public let serialNo: String
+    //    public let ipAdr: String
+    //    public let damtomoId: String
+    //    public let nickname: String
+    //    public let password: String
+    //    public let serialNo: String
+    
+    public enum CodingKeys: String, CodingKey {
+        case qrCode = "QRcode"
+        case cdmNo
+        case deviceId
+        case deviceNm
+        case osVer
+        case result
+    }
 }

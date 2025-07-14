@@ -79,37 +79,37 @@ final class RequestTests: XCTestCase {
     }
 
     func testDkDamConnectServlet() async throws {
-        let QRcode = "0a3203395c38db33ac41015407306b30"
-        let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(QRcode: QRcode)))
-        XCTAssertEqual(result.QRcode, QRcode)
+        let qrCode = "0a3203395c38db33ac41015407306b30"
+        let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode)))
+        XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamConnectServletWithDeviceId() async throws {
-        let QRcode = "0a3203395c38db33ac41015407306b30"
+        let qrCode = "0a3203395c38db33ac41015407306b30"
         let deviceId = "m+bhn1hQRklITEzm1I2+fdtNlIKXQORxP9P3CmiqN7o="
         let cdmNo = "0060000003019182"
-        let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(QRcode: QRcode, deviceId: deviceId, cdmNo: cdmNo)))
-        XCTAssertEqual(result.QRcode, QRcode)
+        let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode, deviceId: deviceId, cdmNo: cdmNo)))
+        XCTAssertEqual(result.qrCode, qrCode)
         XCTAssertEqual(result.deviceId, deviceId)
         XCTAssertEqual(result.cdmNo, cdmNo)
     }
 
     func testDkDamSeparateServlet() async throws {
-        let QRcode = "0a3203395c38db33ac41015407306b30"
-        let result = try await DKKaraoke.default.request(DkDamSeparateServletQuery(params: .init(QRcode: QRcode)))
-        XCTAssertEqual(result.QRcode, QRcode)
+        let qrCode = "0a3203395c38db33ac41015407306b30"
+        let result = try await DKKaraoke.default.request(DkDamSeparateServletQuery(params: .init(qrCode: qrCode)))
+        XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamRemoconSendServlet() async throws {
-        let QRcode = "0a3203395c38db33ac41015407306b30"
+        let qrCode = "0a3203395c38db33ac41015407306b30"
         for remoconCode in DkDamRemoconCode.allCases {
-            let result = try await DKKaraoke.default.request(DkDamRemoconSendServletQuery(params: .init(QRcode: QRcode, remoconCode: remoconCode)))
-            XCTAssertEqual(result.QRcode, QRcode)
+            let result = try await DKKaraoke.default.request(DkDamRemoconSendServletQuery(params: .init(qrCode: qrCode, remoconCode: remoconCode)))
+            XCTAssertEqual(result.qrCode, qrCode)
         }
     }
 
     func testDkDamSendServlet() async throws {
-        let QRcode = "0a3203395c38db33ac41015407306b30"
+        let qrCode = "0a3203395c38db33ac41015407306b30"
         let requestNoList: [String] = [
             "3408-80",
             "3408-81",
@@ -123,9 +123,9 @@ final class RequestTests: XCTestCase {
             "3408-89",
         ]
         for requestNo in requestNoList {
-            let result = try await DKKaraoke.default.request(DkDamSendServletQuery(params: .init(QRcode: QRcode, requestNo: requestNo)))
-            XCTAssertEqual(result.reqNo, requestNo)
-            XCTAssertEqual(result.QRcode, QRcode)
+            let result = try await DKKaraoke.default.request(DkDamSendServletQuery(params: .init(qrCode: qrCode, requestNo: requestNo)))
+            XCTAssertEqual(result.requestNo, requestNo)
+            XCTAssertEqual(result.qrCode, qrCode)
         }
     }
 
