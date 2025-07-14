@@ -17,24 +17,28 @@ extension URLRequest {
         if let body = httpBody,
            let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any] {
             Logger.debug("Merging credential with existing parameters: \(parameters)")
+            if targetUrl.path.hasPrefix("/dkwebsys") {
+                Logger.debug("URL path starts with 'dkwebsys', merging credential into parameters.")
+                headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
+                httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
+                    "authKey": credential.compAuthKey,
+                    "compId": credential.compId,
+                ], uniquingKeysWith: { $1 }))
+            }
             if targetUrl.path.hasPrefix("/dkdenmoku") {
                 Logger.debug("URL path starts with 'dkdenmoku', merging credential into parameters.")
-            }
-            if credential.qrCode.isEmpty {
-                httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
-                    "compAuthKey": credential.compAuthKey,
-                    "compId": credential.compId,
-                    "deviceId": credential.deviceId,
-                    "cdmNo": credential.cdmNo,
-                ], uniquingKeysWith: { $1 }))
-            } else {
-                httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
-                    "QRcode": credential.qrCode,
-                    "compAuthKey": credential.compAuthKey,
-                    "compId": credential.compId,
-                    "deviceId": credential.deviceId,
-                    "cdmNo": credential.cdmNo,
-                ], uniquingKeysWith: { $1 }))
+                if credential.qrCode.isEmpty {
+                    httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
+                        "deviceId": credential.deviceId,
+                        "cdmNo": credential.cdmNo,
+                    ], uniquingKeysWith: { $1 }))
+                } else {
+                    httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
+                        "QRcode": credential.qrCode,
+                        "deviceId": credential.deviceId,
+                        "cdmNo": credential.cdmNo,
+                    ], uniquingKeysWith: { $1 }))
+                }
             }
             return
         }
