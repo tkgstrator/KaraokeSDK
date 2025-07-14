@@ -26,7 +26,7 @@ public final class LoginByDamtomoMemberIdQuery: RequestType {
         ]
     }
     
-    public init(credential: DKCredential) {
+    public init(credential: DkCredential) {
         parameters = [
             "format": "json",
             "loginId": credential.loginId,

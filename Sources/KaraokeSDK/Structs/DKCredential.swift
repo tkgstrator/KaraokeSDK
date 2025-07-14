@@ -1,5 +1,5 @@
 //
-//  DKCredential.swift
+//  DkCredential.swift
 //  KaraokeSDK
 //
 //  Created by devonly on 2025/07/14.
@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-public class DKCredential: AuthenticationCredential, Codable, @unchecked Sendable {
+public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendable {
     // 筐体と連携しようとしたら存在するプロパティ
     // 連携はログインされていなくても実行可能
     public var qrCode: String
@@ -35,7 +35,7 @@ public class DKCredential: AuthenticationCredential, Codable, @unchecked Sendabl
         self.qrCode = ""
         self.loginId = ""
         self.password = ""
-        self.deviceId = DKCredential.deviceId
+        self.deviceId = DkCredential.deviceId
         self.compId = 1
         self.compAuthKey = "2/Qb9R@8s*"
         self.dmkAccessKey = "3ZpXW3K8anQvonUX7IMj"
@@ -46,22 +46,16 @@ public class DKCredential: AuthenticationCredential, Codable, @unchecked Sendabl
     }
     
     @discardableResult
-    func update(_ response: LoginByDamtomoMemberIdResponse) -> DKCredential {
+    func update(_ response: LoginByDamtomoMemberIdResponse) -> DkCredential {
         self.authToken = response.data.authToken
         self.damtomoId = response.data.damtomoId
         return self
     }
     
     @discardableResult
-    func update(_ request: LoginByDamtomoMemberIdRequest) -> DKCredential {
+    func update(_ request: LoginByDamtomoMemberIdRequest) -> DkCredential {
         self.loginId = request.loginId
         self.password = request.password
-        return self
-    }
-    
-    @discardableResult
-    func update(_ request: DkDamConnectServletRequest) -> DKCredential {
-        self.qrCode = request.qrCode
         return self
     }
     

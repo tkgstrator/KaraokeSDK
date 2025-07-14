@@ -19,9 +19,6 @@ public final class DkDamSendServletQuery: RequestType {
 
     public init(params: DkDamSendServletRequest) {
         parameters = [
-            "QRcode": params.qrCode,
-            "deviceId": params.deviceId,
-            "cdmNo": params.cdmNo,
             "reqNo": params.requestNo,
             "myKey": params.myKey,
             "interrupt": params.interrupt,
@@ -30,17 +27,11 @@ public final class DkDamSendServletQuery: RequestType {
 }
 
 public struct DkDamSendServletRequest {
-    let qrCode: String
-    let deviceId: String
-    let cdmNo: String
     let requestNo: String
     let interrupt: Bool
     let myKey: Int
-
-    init(qrCode: String, requestNo: String, deviceId: String = "", cdmNo: String = "", interrupt: Bool = false, myKey: Int = 0) {
-        self.qrCode = qrCode
-        self.deviceId = deviceId
-        self.cdmNo = cdmNo
+    
+    init(requestNo: String, interrupt: Bool = false, myKey: Int = 0) {
         self.requestNo = requestNo
         self.interrupt = interrupt
         self.myKey = myKey
