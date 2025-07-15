@@ -11,58 +11,16 @@ import Foundation
 import KeychainAccess
 import SwiftUI
 
-public final class DKKaraoke: Authenticator {
-    public typealias Credential = DkCredential
-
-    public func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
-        if let httpBody = urlRequest.httpBody {
-            if let parameters = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any] {
-                Logger.debug("HTTP Body Parameters: \(parameters)")
-                urlRequest.merging(credential)
-            }
-            Logger.debug("HTTP Body: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
-        }
-        Logger.debug("Applying credential to URLRequest: \(urlRequest)")
-        urlRequest.headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
-    }
-
-    public func refresh(_ credential: DkCredential, for session: Alamofire.Session, completion: @escaping @Sendable (Swift.Result<DkCredential, any Error>) -> Void) {
-        Task(priority: .high, operation: {
-            do {
-                let result = try await request(LoginByDamtomoMemberIdQuery(credential: credential))
-                let newValue = credential.update(result)
-                try keychain.set(newValue, forKey: "dmk-credential")
-                Logger.debug("Refreshing credential success: \(credential)")
-                completion(.success(newValue))
-            } catch {
-                Logger.error("Failed to refresh credential: \(error)")
-                completion(.failure(error))
-            }
-        })
-    }
-
-    public func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DkCredential) -> Bool {
-        urlRequest.value(forHTTPHeaderField: "dmk-access-key") == credential.dmkAccessKey && urlRequest.value(forHTTPHeaderField: "compAuthKey") == credential.compAuthKey
-    }
-
-    public func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: any Error) -> Bool {
-        response.statusCode == 401
-    }
-
+@MainActor
+public final class DKKaraoke: ObservableObject {
     public static let `default`: DKKaraoke = .init()
     private let session: Session = .default
     private let decoder: JSONDecoder = .init()
     private let encoder: JSONEncoder = .init()
     private let keychain: Keychain = .init(server: "https://denmokuapp.clubdam.com", protocolType: .https)
-    private var credential: DkCredential {
-        guard let credential = try? keychain.get(DkCredential.self, forKey: "dmk-credential") else {
-            Logger.debug("No credential found in keychain, returning default credential.")
-            let credential: DkCredential = .init()
-            try? keychain.set(credential, forKey: "dmk-credential")
-            return credential
-        }
-        return credential
-    }
+    
+    @Published
+    public private(set) var credential: DkCredential = .init()
 
     public var isDisabled: Bool {
         credential.qrCode.isEmpty
@@ -72,8 +30,10 @@ public final class DKKaraoke: Authenticator {
         Logger.configure()
         session.sessionConfiguration.timeoutIntervalForRequest = 10
         session.sessionConfiguration.httpMaximumConnectionsPerHost = 1
-        //        decoder.keyDecodingStrategy = .convertFromSnakeCase
-        //        encoder.keyEncodingStrategy = .convertToSnakeCase
+        if let credential: DkCredential = try? keychain.get(DkCredential.self, forKey: "dmk-credential") {
+            self.credential = credential
+            Logger.debug("Loaded credential from keychain: \(credential)")
+        }
     }
 
     @discardableResult
@@ -111,9 +71,50 @@ public final class DKKaraoke: Authenticator {
             }
             return response
         } catch {
-            NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
+            }
             Logger.error("Request failed with error: \(error)")
             throw error
         }
+    }
+}
+
+extension DKKaraoke: @preconcurrency Authenticator {
+    public typealias Credential = DkCredential
+
+    public func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
+        if let httpBody = urlRequest.httpBody {
+            if let parameters = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any] {
+                Logger.debug("HTTP Body Parameters: \(parameters)")
+                urlRequest.merging(credential)
+            }
+            Logger.debug("HTTP Body: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
+        }
+        Logger.debug("Applying credential to URLRequest: \(urlRequest)")
+        urlRequest.headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
+    }
+
+    public func refresh(_ credential: DkCredential, for session: Alamofire.Session, completion: @escaping @Sendable (Swift.Result<DkCredential, any Error>) -> Void) {
+        Task(priority: .high, operation: {
+            do {
+                let result = try await request(LoginByDamtomoMemberIdQuery(credential: credential))
+                let newValue = credential.update(result)
+                try keychain.set(newValue, forKey: "dmk-credential")
+                Logger.debug("Refreshing credential success: \(credential)")
+                completion(.success(newValue))
+            } catch {
+                Logger.error("Failed to refresh credential: \(error)")
+                completion(.failure(error))
+            }
+        })
+    }
+
+    public func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DkCredential) -> Bool {
+        urlRequest.value(forHTTPHeaderField: "dmk-access-key") == credential.dmkAccessKey && urlRequest.value(forHTTPHeaderField: "compAuthKey") == credential.compAuthKey
+    }
+
+    public func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: any Error) -> Bool {
+        response.statusCode == 401
     }
 }
