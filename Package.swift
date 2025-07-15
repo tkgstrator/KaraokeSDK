@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "KaraokeSDK",
-    platforms: [.iOS(.v13), .macOS(.v12), .tvOS(.v13)],
+    platforms: [.iOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
