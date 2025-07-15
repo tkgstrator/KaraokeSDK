@@ -54,7 +54,8 @@ public final class DKClient: ObservableObject {
             .validateWith()
             .serializingDecodable(LoginByDamtomoMemberIdResponse.self, automaticallyCancelling: true, decoder: decoder)
             .value
-        try? keychain.set(credential.update(params: try await (a, b)))
+        // 認証情報を設定
+        try? keychain.set(credential.update(params: try await (a, b)), forKey: "dmk-credential")
     }
 
     @discardableResult
