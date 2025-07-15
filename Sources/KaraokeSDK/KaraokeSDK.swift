@@ -37,6 +37,26 @@ public final class DKClient: ObservableObject {
         }
     }
 
+    /// ログイン処理
+    /// NOTE: - ログイン処理だけはややこしいので専用のメソッドを用意
+    public func login(params: DkDamDAMTomoLoginServletRequest) async throws {
+        async let a = session.request(DkDamDAMTomoLoginServletQuery(params: params))
+            .cURLDescription(calling: { request in
+                Logger.debug("cURL Request: \(request)")
+            })
+            .validateWith()
+            .serializingDecodable(DkDamDAMTomoLoginServletResponse.self, automaticallyCancelling: true, decoder: decoder)
+            .value
+        async let b = session.request(LoginByDamtomoMemberIdQuery(params: .init(loginId: params.damtomoId, password: params.password)))
+            .cURLDescription(calling: { request in
+                Logger.debug("cURL Request: \(request)")
+            })
+            .validateWith()
+            .serializingDecodable(LoginByDamtomoMemberIdResponse.self, automaticallyCancelling: true, decoder: decoder)
+            .value
+        try? keychain.set(credential.update(params: try await (a, b)))
+    }
+
     @discardableResult
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {
@@ -103,10 +123,12 @@ extension DKClient: Authenticator {
         Task(priority: .high, operation: {
             do {
                 let result = try await request(LoginByDamtomoMemberIdQuery(credential: credential))
-                let newValue = credential.update(result)
-                try await keychain.set(newValue, forKey: "dmk-credential")
-                Logger.debug("Refreshing credential success: \(credential)")
-                completion(.success(newValue))
+//                await MainActor.run {
+//                    let newValue = self.credential.update(result)
+//                    try? await keychain.set(newValue, forKey: "dmk-credential")
+//                    Logger.debug("Refreshing credential success: \(credential)")
+//                    completion(.success(newValue))
+//                }
             } catch {
                 Logger.error("Failed to refresh credential: \(error)")
                 completion(.failure(error))
