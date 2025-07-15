@@ -32,7 +32,7 @@ final class RequestTests: XCTestCase {
             "3408-89",
         ]
         for requestNo in requestNoList {
-            let result = try await DKKaraoke.default.request(GetMusicInfoDetailQuery(requestNo: requestNo))
+            let result = try await DKClient.default.request(GetMusicInfoDetailQuery(requestNo: requestNo))
             XCTAssertEqual(result.result.statusCode, 0)
         }
     }
@@ -46,7 +46,7 @@ final class RequestTests: XCTestCase {
             "星",
         ]
         for keyword in keywords {
-            let result = try await DKKaraoke.default.request(SearchMusicByKeywordQuery(keyword: keyword))
+            let result = try await DKClient.default.request(SearchMusicByKeywordQuery(keyword: keyword))
             XCTAssertEqual(result.result.statusCode, 0)
         }
     }
@@ -60,7 +60,7 @@ final class RequestTests: XCTestCase {
             "星",
         ]
         for keyword in keywords {
-            let result = try await DKKaraoke.default.request(SearchArtistByKeywordQuery(keyword: keyword))
+            let result = try await DKClient.default.request(SearchArtistByKeywordQuery(keyword: keyword))
             XCTAssertEqual(result.result.statusCode, 0)
         }
     }
@@ -74,30 +74,30 @@ final class RequestTests: XCTestCase {
             "星",
         ]
         for keyword in keywords {
-            let result = try await DKKaraoke.default.request(SearchVariousByKeywordQuery(keyword: keyword))
+            let result = try await DKClient.default.request(SearchVariousByKeywordQuery(keyword: keyword))
             XCTAssertEqual(result.result.statusCode, 0)
         }
     }
 
     func testDkDamConnectServlet() async throws {
-        let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode)))
+        let result = try await DKClient.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode)))
         XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamConnectServletWithDeviceId() async throws {
-        let result = try await DKKaraoke.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode)))
+        let result = try await DKClient.default.request(DkDamConnectServletQuery(params: .init(qrCode: qrCode)))
         XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamSeparateServlet() async throws {
-        let result = try await DKKaraoke.default.request(DkDamSeparateServletQuery(params: .init()))
+        let result = try await DKClient.default.request(DkDamSeparateServletQuery(params: .init()))
         XCTAssertEqual(result.qrCode, qrCode)
     }
 
     func testDkDamRemoconSendServlet() async throws {
         for remoconCode in DkDamRemoconCode.allCases {
             do {
-                try await DKKaraoke.default.request(DkDamRemoconSendServletQuery(params: .init(remoconCode: remoconCode)))
+                try await DKClient.default.request(DkDamRemoconSendServletQuery(params: .init(remoconCode: remoconCode)))
                 XCTFail("Expected to throw an error for remocon code: \(remoconCode.rawValue)")
             } catch {
                 if let error = error.asAFError?.underlyingError as? DkError {
@@ -122,7 +122,7 @@ final class RequestTests: XCTestCase {
         ]
         for requestNo in requestNoList {
             do {
-                try await DKKaraoke.default.request(DkDamSendServletQuery(params: .init(requestNo: requestNo)))
+                try await DKClient.default.request(DkDamSendServletQuery(params: .init(requestNo: requestNo)))
                 XCTFail("Expected to throw an error for remocon code: \(requestNo)")
             } catch {
                 if let error = error.asAFError?.underlyingError as? DkError {
@@ -135,6 +135,6 @@ final class RequestTests: XCTestCase {
 //    func testLoginByDamtomoMemberId() async throws {
 //        let loginId: String = ""
 //        let password: String = ""
-//        let result = try await DKKaraoke.default.request(LoginByDamtomoMemberIdQuery(params: .init(loginId: loginId, password: password)))
+//        let result = try await DKClient.default.request(LoginByDamtomoMemberIdQuery(params: .init(loginId: loginId, password: password)))
 //    }
 }

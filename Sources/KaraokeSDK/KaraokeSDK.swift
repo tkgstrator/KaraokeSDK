@@ -12,8 +12,8 @@ import KeychainAccess
 import SwiftUI
 
 @MainActor
-public final class DKKaraoke: ObservableObject {
-    public static let `default`: DKKaraoke = .init()
+public final class DKClient: ObservableObject {
+    public static let `default`: DKClient = .init()
     private let session: Session = .default
     private let decoder: JSONDecoder = .init()
     private let encoder: JSONEncoder = .init()
@@ -40,7 +40,7 @@ public final class DKKaraoke: ObservableObject {
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {
             // ログイン処理ではInterceptorを利用しない
-            let interceptor: AuthenticationInterceptor<DKKaraoke>? = convertible is LoginByDamtomoMemberIdQuery ? nil : .init(authenticator: self, credential: credential)
+            let interceptor: AuthenticationInterceptor<DKClient>? = convertible is LoginByDamtomoMemberIdQuery ? nil : .init(authenticator: self, credential: credential)
             let response = try await session.request(convertible, interceptor: interceptor)
                 .cURLDescription(calling: { request in
                     Logger.debug("cURL Request: \(request)")
@@ -80,7 +80,7 @@ public final class DKKaraoke: ObservableObject {
     }
 }
 
-extension DKKaraoke: @preconcurrency Authenticator {
+extension DKClient: @preconcurrency Authenticator {
     public typealias Credential = DkCredential
 
     public func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
