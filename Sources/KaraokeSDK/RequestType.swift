@@ -41,7 +41,7 @@ public extension RequestType {
 
     var headers: HTTPHeaders? {
         [
-            "User-Agent": "DenmokuMini/4.12.0 (jp.co.dkkaraoke.DENMOKULite01; build:49; iOS 17.6.0) Alamofire/5.9.1",
+            "User-Agent": "DenmokuMini/4.12.0 (jp.co.DKClient.DENMOKULite01; build:49; iOS 17.6.0) Alamofire/5.9.1",
         ]
     }
 
