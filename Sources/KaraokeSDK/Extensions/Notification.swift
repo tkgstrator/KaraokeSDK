@@ -7,6 +7,6 @@
 
 import Foundation
 
-extension Notification.Name {
-    public static let DKRequestFailedWithError = Notification.Name("DKRequestFailedWithError")
+public extension Notification.Name {
+    static let DKRequestFailedWithError = Notification.Name("DKRequestFailedWithError")
 }

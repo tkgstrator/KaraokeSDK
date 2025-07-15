@@ -26,11 +26,11 @@ public final class DkDamConnectServletQuery: RequestType {
 
 public struct DkDamConnectServletRequest {
     public let qrCode: String
-    
+
     public init(qrCode: String) {
         self.qrCode = qrCode
     }
-    
+
     public init(qrCode: QRCode) {
         self.qrCode = qrCode.code
     }
