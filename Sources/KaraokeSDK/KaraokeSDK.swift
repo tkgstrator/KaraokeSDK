@@ -39,30 +39,38 @@ public final class DKClient: ObservableObject {
 
     /// ログイン処理
     /// NOTE: - ログイン処理だけはややこしいので専用のメソッドを用意
-    public func login(params: DkDamDAMTomoLoginServletRequest) async throws {
-        async let a = session.request(DkDamDAMTomoLoginServletQuery(params: params))
-            .cURLDescription(calling: { request in
-                Logger.debug("cURL Request: \(request)")
-            })
-            .validateWith()
-            .serializingDecodable(DkDamDAMTomoLoginServletResponse.self, automaticallyCancelling: true, decoder: decoder)
-            .value
-        async let b = session.request(LoginByDamtomoMemberIdQuery(params: .init(loginId: params.damtomoId, password: params.password)))
-            .cURLDescription(calling: { request in
-                Logger.debug("cURL Request: \(request)")
-            })
-            .validateWith()
-            .serializingDecodable(LoginByDamtomoMemberIdResponse.self, automaticallyCancelling: true, decoder: decoder)
-            .value
-        // 認証情報を設定
-        try? keychain.set(credential.update(params: try await (a, b)), forKey: "dmk-credential")
+    public func login(_ params: sending DkDamDAMTomoLoginServletRequest) async throws {
+        do {
+            let params = try await (
+                session.request(DkDamDAMTomoLoginServletQuery(params: params))
+                    .cURLDescription(calling: { request in
+                        Logger.debug("cURL Request: \(request)")
+                    })
+                    .validateWith()
+                    .serializingDecodable(DkDamDAMTomoLoginServletResponse.self, automaticallyCancelling: true, decoder: decoder)
+                    .value,
+                session.request(LoginByDamtomoMemberIdQuery(params: params))
+                    .cURLDescription(calling: { request in
+                        Logger.debug("cURL Request: \(request)")
+                    })
+                    .validateWith()
+                    .serializingDecodable(LoginByDamtomoMemberIdResponse.self, automaticallyCancelling: true, decoder: decoder)
+                    .value
+            )
+            // 認証情報を設定
+            try keychain.set(credential.update(params: params), forKey: "dmk-credential")
+        } catch {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
+            }
+            Logger.error("Request failed with error: \(error)")
+            throw error
+        }
     }
 
     @discardableResult
-    public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
+    public func request<T: RequestType>(_ convertible: sending T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {
-            // ログイン処理ではInterceptorを利用しない
-//            let interceptor: AuthenticationInterceptor<DKClient>? = convertible is LoginByDamtomoMemberIdQuery ? nil : .init(authenticator: self, credential: credential)
             let interceptor: AuthenticationInterceptor<DKClient> = .init(authenticator: self, credential: credential)
             let response = try await session.request(convertible, interceptor: interceptor)
                 .cURLDescription(calling: { request in
@@ -71,27 +79,9 @@ public final class DKClient: ObservableObject {
                 .validateWith()
                 .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: decoder)
                 .value
-
-            // ログイン成功時にトークンとIDを更新
-            // NOTE: Interceptor内で上書きされるので不要な可能性がある
-            // NOTE: はじめてログインしようとしたときに必要だった
-            if let result = response as? LoginByDamtomoMemberIdResponse {
-                // ログインリクエストのパラメータをデコードしてログインIDとパスワードを更新
-                if let _ = convertible as? LoginByDamtomoMemberIdQuery,
-                   let httpBody = convertible.urlRequest?.httpBody,
-                   let query = String(data: httpBody, encoding: .utf8),
-                   let data: Data = .init(query: query),
-                   let parameters = try? decoder.decode(LoginByDamtomoMemberIdRequest.self, from: data)
-                {
-                    Logger.debug("LoginByDamtomoMemberIdQuery: \(parameters)")
-                    try? keychain.set(credential.update(parameters), forKey: "dmk-credential")
-                }
-                try? keychain.set(credential.update(result), forKey: "dmk-credential")
-                Logger.debug("LoginByDamtomoMemberIdResponse: \(result)")
-            }
             // 筐体との連携成功時にQRコードを更新
             if let result = response as? DkDamConnectServletResponse {
-                try? keychain.set(credential.update(result), forKey: "dmk-credential")
+//                try? keychain.set(credential.update(result), forKey: "dmk-credential")
                 Logger.debug("DkDamConnectServletResponse: \(result)")
             }
             return response

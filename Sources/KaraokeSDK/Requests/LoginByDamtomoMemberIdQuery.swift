@@ -10,6 +10,8 @@ import Alamofire
 import BetterCodable
 import Foundation
 
+public typealias LoginByDamtomoMemberIdRequest = DkDamDAMTomoLoginServletRequest
+
 public final class LoginByDamtomoMemberIdQuery: RequestType {
     public typealias ResponseType = LoginByDamtomoMemberIdResponse
 
@@ -21,7 +23,7 @@ public final class LoginByDamtomoMemberIdQuery: RequestType {
     public init(params: LoginByDamtomoMemberIdRequest) {
         parameters = [
             "format": "json",
-            "loginId": params.loginId,
+            "loginId": params.damtomoId,
             "password": params.password,
         ]
     }
@@ -32,16 +34,6 @@ public final class LoginByDamtomoMemberIdQuery: RequestType {
             "loginId": credential.loginId,
             "password": credential.password,
         ]
-    }
-}
-
-public struct LoginByDamtomoMemberIdRequest: Decodable {
-    let loginId: String
-    let password: String
-
-    public init(loginId: String, password: String) {
-        self.loginId = loginId
-        self.password = password
     }
 }
 
