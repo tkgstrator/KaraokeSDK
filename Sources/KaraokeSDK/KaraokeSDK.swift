@@ -18,12 +18,13 @@ public final class DKClient: ObservableObject {
     private let decoder: JSONDecoder = .init()
     private let encoder: JSONEncoder = .init()
     private let keychain: Keychain = .init(server: "https://denmokuapp.clubdam.com", protocolType: .https)
-    
+
     @Published
     public private(set) var credential: DkCredential = .init()
 
     public var isDisabled: Bool {
-        credential.qrCode.isEmpty
+        false
+//        credential.qrCode.isEmpty
     }
 
     private init() {
@@ -40,7 +41,8 @@ public final class DKClient: ObservableObject {
     public func request<T: RequestType>(_ convertible: T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {
             // ログイン処理ではInterceptorを利用しない
-            let interceptor: AuthenticationInterceptor<DKClient>? = convertible is LoginByDamtomoMemberIdQuery ? nil : .init(authenticator: self, credential: credential)
+//            let interceptor: AuthenticationInterceptor<DKClient>? = convertible is LoginByDamtomoMemberIdQuery ? nil : .init(authenticator: self, credential: credential)
+            let interceptor: AuthenticationInterceptor<DKClient> = .init(authenticator: self, credential: credential)
             let response = try await session.request(convertible, interceptor: interceptor)
                 .cURLDescription(calling: { request in
                     Logger.debug("cURL Request: \(request)")
@@ -56,9 +58,11 @@ public final class DKClient: ObservableObject {
                 // ログインリクエストのパラメータをデコードしてログインIDとパスワードを更新
                 if let _ = convertible as? LoginByDamtomoMemberIdQuery,
                    let httpBody = convertible.urlRequest?.httpBody,
-                   let parameters = try? decoder.decode(LoginByDamtomoMemberIdRequest.self, from: httpBody)
+                   let query = String(data: httpBody, encoding: .utf8),
+                   let data: Data = .init(query: query),
+                   let parameters = try? decoder.decode(LoginByDamtomoMemberIdRequest.self, from: data)
                 {
-                    Logger.debug("LoginByDamtomoMemberIdQuery: \(parameters)")
+                    Logger.debug("LoginByDamtomoMemberIdQuery: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
                     try? keychain.set(credential.update(parameters), forKey: "dmk-credential")
                 }
                 try? keychain.set(credential.update(result), forKey: "dmk-credential")
@@ -80,14 +84,14 @@ public final class DKClient: ObservableObject {
     }
 }
 
-extension DKClient: @preconcurrency Authenticator {
+extension DKClient: Authenticator {
     public typealias Credential = DkCredential
 
-    public func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
+    public nonisolated func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
         if let httpBody = urlRequest.httpBody {
             if let parameters = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any] {
                 Logger.debug("HTTP Body Parameters: \(parameters)")
-                urlRequest.merging(credential)
+//                urlRequest.merging(credential)
             }
             Logger.debug("HTTP Body: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
         }
@@ -95,12 +99,12 @@ extension DKClient: @preconcurrency Authenticator {
         urlRequest.headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
     }
 
-    public func refresh(_ credential: DkCredential, for session: Alamofire.Session, completion: @escaping @Sendable (Swift.Result<DkCredential, any Error>) -> Void) {
+    public nonisolated func refresh(_ credential: DkCredential, for session: Alamofire.Session, completion: @escaping @Sendable (Swift.Result<DkCredential, any Error>) -> Void) {
         Task(priority: .high, operation: {
             do {
                 let result = try await request(LoginByDamtomoMemberIdQuery(credential: credential))
                 let newValue = credential.update(result)
-                try keychain.set(newValue, forKey: "dmk-credential")
+                try await keychain.set(newValue, forKey: "dmk-credential")
                 Logger.debug("Refreshing credential success: \(credential)")
                 completion(.success(newValue))
             } catch {
@@ -110,11 +114,11 @@ extension DKClient: @preconcurrency Authenticator {
         })
     }
 
-    public func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DkCredential) -> Bool {
+    public nonisolated func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DkCredential) -> Bool {
         urlRequest.value(forHTTPHeaderField: "dmk-access-key") == credential.dmkAccessKey && urlRequest.value(forHTTPHeaderField: "compAuthKey") == credential.compAuthKey
     }
 
-    public func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: any Error) -> Bool {
+    public nonisolated func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: any Error) -> Bool {
         response.statusCode == 401
     }
 }

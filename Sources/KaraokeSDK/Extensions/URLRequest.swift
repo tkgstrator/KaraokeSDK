@@ -18,6 +18,9 @@ extension URLRequest {
            let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any]
         {
             Logger.debug("Merging credential with existing parameters: \(parameters)")
+            if targetUrl.path.hasPrefix("/minsei") {
+                headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
+            }
             if targetUrl.path.hasPrefix("/dkwebsys") {
                 Logger.debug("URL path starts with 'dkwebsys', merging credential into parameters.")
                 headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
@@ -28,18 +31,18 @@ extension URLRequest {
             }
             if targetUrl.path.hasPrefix("/dkdenmoku") {
                 Logger.debug("URL path starts with 'dkdenmoku', merging credential into parameters.")
-                if credential.qrCode.isEmpty {
-                    httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
-                        "deviceId": credential.deviceId,
-                        "cdmNo": credential.cdmNo,
-                    ], uniquingKeysWith: { $1 }))
-                } else {
-                    httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
-                        "QRcode": credential.qrCode,
-                        "deviceId": credential.deviceId,
-                        "cdmNo": credential.cdmNo,
-                    ], uniquingKeysWith: { $1 }))
-                }
+//                if credential.qrCode.isEmpty {
+//                    httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
+//                        "deviceId": credential.deviceId,
+//                        "cdmNo": credential.cdmNo,
+//                    ], uniquingKeysWith: { $1 }))
+//                } else {
+//                    httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
+//                        "QRcode": credential.qrCode,
+//                        "deviceId": credential.deviceId,
+//                        "cdmNo": credential.cdmNo,
+//                    ], uniquingKeysWith: { $1 }))
+//                }
             }
             return
         }
