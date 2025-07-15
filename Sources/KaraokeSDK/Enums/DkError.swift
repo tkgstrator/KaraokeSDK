@@ -7,7 +7,8 @@
 
 import Foundation
 
-public struct DkError: Error, Sendable {
+public struct DkError: Error, Sendable, Identifiable {
+    public var id: String { result.rawValue }
     public let result: DkDamResult
 }
 

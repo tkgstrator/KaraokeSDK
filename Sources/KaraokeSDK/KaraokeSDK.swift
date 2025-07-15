@@ -9,6 +9,7 @@ import Alamofire
 import Foundation
 @preconcurrency
 import KeychainAccess
+import SwiftUI
 
 public final class DKKaraoke: Authenticator {
     public typealias Credential = DkCredential
@@ -110,6 +111,7 @@ public final class DKKaraoke: Authenticator {
             }
             return response
         } catch {
+            NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
             Logger.error("Request failed with error: \(error)")
             throw error
         }
