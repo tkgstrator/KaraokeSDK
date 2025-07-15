@@ -28,6 +28,11 @@ public final class DkDamDAMTomoLoginServletQuery: RequestType {
 public struct DkDamDAMTomoLoginServletRequest {
     let damtomoId: String
     let password: String
+
+    public init(damtomoId: String, password: String) {
+        self.damtomoId = damtomoId
+        self.password = password
+    }
 }
 
 public struct DkDamDAMTomoLoginServletResponse: Decodable, Sendable {
