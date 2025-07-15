@@ -7,6 +7,9 @@
 
 import Alamofire
 import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
 
 public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendable {
     // 筐体と連携しようとしたら存在するプロパティ
@@ -68,11 +71,11 @@ public class DkCredential: AuthenticationCredential, Codable, @unchecked Sendabl
     }
 
     public static var deviceId: String {
-        #if os(iOS)
-        let uuid = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
-        #elseif os(macOS)
-        let uuid = UUID().uuidString
-        #endif
-        return uuid.data(using: .utf8)!.base64EncodedString()
+//        #if os(iOS)
+//        let uuid = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
+//        #elseif os(macOS)
+//        let uuid = UUID().uuidString
+//        #endif
+        UUID().uuidString.data(using: .utf8)!.base64EncodedString()
     }
 }

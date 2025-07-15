@@ -63,6 +63,10 @@ public final class DKKaraoke: Authenticator {
         return credential
     }
 
+    public var isDisabled: Bool {
+        credential.qrCode.isEmpty
+    }
+
     private init() {
         Logger.configure()
         session.sessionConfiguration.timeoutIntervalForRequest = 10

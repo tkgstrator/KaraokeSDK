@@ -1,26 +1,27 @@
 //
-//  SearchArtistByKeywordQuery.swift
+//  GetMusicListByArtistQuery.swift
 //  KaraokeSDK
 //
 //  Created by devonly on 2025/07/13.
 //
 
 import Alamofire
+@preconcurrency
 import BetterCodable
 import Foundation
 
-public typealias SearchArtistByKeywordResponse = ResultType<SearchArtistByKeyword.Data, SearchArtistByKeyword.ListItem>
+public typealias GetMusicListByArtistResponse = ResultType<GetMusicListByArtist.Data, GetMusicListByArtist.ListItem>
 
-public final class SearchArtistByKeywordQuery: RequestType {
-    public typealias ResponseType = SearchArtistByKeywordResponse
+public final class GetMusicListByArtistQuery: RequestType {
+    public typealias ResponseType = GetMusicListByArtistResponse
 
-    public let path: String = "dkwebsys/search-api/SearchArtistByKeywordApi"
+    public let path: String = "dkwebsys/search-api/GetMusicListByArtistApi"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
 
-    public init(keyword: String) {
+    public init(artistCode: Int) {
         parameters = [
-            "keyword": keyword,
+            "artistCode": artistCode,
             "dispCount": 100,
             "modelPatternCode": 0,
             "modelTypeCode": 3,
@@ -31,7 +32,8 @@ public final class SearchArtistByKeywordQuery: RequestType {
     }
 }
 
-public enum SearchArtistByKeyword {
+public enum GetMusicListByArtist {
+    public typealias ListItem = SearchMusicByKeyword.ListItem
     public struct Data: Decodable, Sendable {
         public let pageCount: Int
         @LossyBoolValue
@@ -41,15 +43,8 @@ public enum SearchArtistByKeyword {
         public let pageNo: Int
         @LossyBoolValue
         public private(set) var hasNext: Bool
-        public let keyword: String
+        @LosslessValue
+        public private(set) var artistCode: Int
         public let totalCount: Int
-    }
-
-    public struct ListItem: Decodable, Sendable, Identifiable {
-        public var id: Int { artistCode }
-        public let artistCode: Int
-        public let artist: String
-        public let artistYomi: String
-        public let holdMusicCount: Int
     }
 }

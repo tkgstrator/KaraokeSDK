@@ -1,5 +1,5 @@
 //
-//  MusicDetailInfoQuery.swift
+//  GetMusicDetailInfoQuery.swift
 //  KaraokeSDK
 //
 //  Created by devonly on 2025/07/13.
@@ -10,10 +10,10 @@ import Alamofire
 import BetterCodable
 import Foundation
 
-public typealias MusicDetailInfoResponse = ResultType<MusicDetailInfo.Data, MusicDetailInfo.ListItem>
+public typealias GetMusicInfoDetailResponse = ResultType<GetMusicInfoDetail.Data, GetMusicInfoDetail.ListItem>
 
-public final class MusicDetailInfoQuery: RequestType {
-    public typealias ResponseType = MusicDetailInfoResponse
+public final class GetMusicInfoDetailQuery: RequestType {
+    public typealias ResponseType = GetMusicInfoDetailResponse
 
     public let path: String = "dkwebsys/search-api/GetMusicDetailInfoApi"
     public let method: HTTPMethod = .post
@@ -26,7 +26,7 @@ public final class MusicDetailInfoQuery: RequestType {
     }
 }
 
-public enum MusicDetailInfo {
+public enum GetMusicInfoDetail {
     public struct Data: Decodable, Sendable {
         public let artistCode: Int
         public let artist: String

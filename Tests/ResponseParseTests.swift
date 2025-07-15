@@ -16,11 +16,11 @@ final class ResponseParseTests: XCTestCase {
 
     override func tearDown() async throws {}
 
-    func testMusicDetailInfo() async throws {
-        let urls: [URL] = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: "Resources/MusicDetailInfo") ?? []
+    func testGetMusicInfoDetail() async throws {
+        let urls: [URL] = Bundle.module.urls(forResourcesWithExtension: "json", subdirectory: "Resources/GetMusicInfoDetail") ?? []
         XCTAssertNotEqual(urls.count, 0)
         for url in urls {
-            try decoder.decode(MusicDetailInfoQuery.ResponseType.self, from: .init(contentsOf: url))
+            try decoder.decode(GetMusicInfoDetailQuery.ResponseType.self, from: .init(contentsOf: url))
         }
     }
 
