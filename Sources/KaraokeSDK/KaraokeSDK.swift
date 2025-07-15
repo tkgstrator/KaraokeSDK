@@ -62,7 +62,7 @@ public final class DKClient: ObservableObject {
                    let data: Data = .init(query: query),
                    let parameters = try? decoder.decode(LoginByDamtomoMemberIdRequest.self, from: data)
                 {
-                    Logger.debug("LoginByDamtomoMemberIdQuery: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
+                    Logger.debug("LoginByDamtomoMemberIdQuery: \(parameters)")
                     try? keychain.set(credential.update(parameters), forKey: "dmk-credential")
                 }
                 try? keychain.set(credential.update(result), forKey: "dmk-credential")
