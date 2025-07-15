@@ -31,18 +31,10 @@ extension URLRequest {
             }
             if targetUrl.path.hasPrefix("/dkdenmoku") {
                 Logger.debug("URL path starts with 'dkdenmoku', merging credential into parameters.")
-//                if credential.qrCode.isEmpty {
-//                    httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
-//                        "deviceId": credential.deviceId,
-//                        "cdmNo": credential.cdmNo,
-//                    ], uniquingKeysWith: { $1 }))
-//                } else {
-//                    httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
-//                        "QRcode": credential.qrCode,
-//                        "deviceId": credential.deviceId,
-//                        "cdmNo": credential.cdmNo,
-//                    ], uniquingKeysWith: { $1 }))
-//                }
+                httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
+                    "deviceId": credential.deviceId,
+                    "cdmNo": credential.cdmNo,
+                ], uniquingKeysWith: { $1 }))
             }
             return
         }

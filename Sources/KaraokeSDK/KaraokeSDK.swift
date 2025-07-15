@@ -41,15 +41,16 @@ public final class DKClient: ObservableObject {
     /// NOTE: - ログイン処理だけはややこしいので専用のメソッドを用意
     public func login(_ params: sending DkDamDAMTomoLoginServletRequest) async throws {
         do {
+            let interceptor: AuthenticationInterceptor<DKClient> = .init(authenticator: self, credential: credential)
             let params = try await (
-                session.request(DkDamDAMTomoLoginServletQuery(params: params))
+                session.request(DkDamDAMTomoLoginServletQuery(params: params), interceptor: interceptor)
                     .cURLDescription(calling: { request in
                         Logger.debug("cURL Request: \(request)")
                     })
                     .validateWith()
                     .serializingDecodable(DkDamDAMTomoLoginServletResponse.self, automaticallyCancelling: true, decoder: decoder)
                     .value,
-                session.request(LoginByDamtomoMemberIdQuery(params: params))
+                session.request(LoginByDamtomoMemberIdQuery(params: params), interceptor: interceptor)
                     .cURLDescription(calling: { request in
                         Logger.debug("cURL Request: \(request)")
                     })
@@ -102,7 +103,7 @@ extension DKClient: Authenticator {
         if let httpBody = urlRequest.httpBody {
             if let parameters = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any] {
                 Logger.debug("HTTP Body Parameters: \(parameters)")
-//                urlRequest.merging(credential)
+                urlRequest.merging(credential)
             }
             Logger.debug("HTTP Body: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
         }
