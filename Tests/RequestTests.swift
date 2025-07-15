@@ -18,7 +18,7 @@ final class RequestTests: XCTestCase {
 
     override func tearDown() async throws {}
 
-    func testMusicDetailInfo() async throws {
+    func testGetMusicInfoDetail() async throws {
         let requestNoList: [String] = [
             "3408-80",
             "3408-81",
@@ -32,7 +32,7 @@ final class RequestTests: XCTestCase {
             "3408-89",
         ]
         for requestNo in requestNoList {
-            let result = try await DKKaraoke.default.request(MusicDetailInfoQuery(requestNo: requestNo))
+            let result = try await DKKaraoke.default.request(GetMusicInfoDetailQuery(requestNo: requestNo))
             XCTAssertEqual(result.result.statusCode, 0)
         }
     }

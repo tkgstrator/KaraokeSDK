@@ -45,7 +45,8 @@ public enum SearchArtistByKeyword {
         public let totalCount: Int
     }
 
-    public struct ListItem: Decodable, Sendable {
+    public struct ListItem: Decodable, Sendable, Identifiable {
+        public var id: Int { artistCode }
         public let artistCode: Int
         public let artist: String
         public let artistYomi: String

@@ -21,7 +21,7 @@ public final class DkDamSendServletQuery: RequestType {
         parameters = [
             "reqNo": params.requestNo,
             "myKey": params.myKey,
-            "interrupt": params.interrupt,
+            "interrupt": params.interrupt ? 1 : 0,
         ]
     }
 }
@@ -31,7 +31,7 @@ public struct DkDamSendServletRequest {
     let interrupt: Bool
     let myKey: Int
 
-    init(requestNo: String, interrupt: Bool = false, myKey: Int = 0) {
+    public init(requestNo: String, interrupt: Bool = false, myKey: Int = 0) {
         self.requestNo = requestNo
         self.interrupt = interrupt
         self.myKey = myKey

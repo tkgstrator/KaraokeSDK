@@ -46,13 +46,15 @@ public enum SearchMusicByKeyword {
         public let totalCount: Int
     }
 
-    public struct ListItem: Decodable, Sendable {
+    public struct ListItem: Decodable, Sendable, Identifiable {
+        public var id: String { requestNo }
         public let requestNo: String
         public let title: String
         public let titleYomi: String
-        public let artistCode: Int
+        public let artistCode: Int?
         public let artist: String
         public let artistYomi: String
+        public let highlightTieUp: String?
         @DateValue<YearMonthDayStrategy>
         public private(set) var releaseDate: Date
         @LossyBoolValue
