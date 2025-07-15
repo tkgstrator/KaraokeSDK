@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 #endif
 
-public struct DkCredential: AuthenticationCredential, Codable {
+public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     // ユーザー情報
     public var loginId: String
     public var password: String
