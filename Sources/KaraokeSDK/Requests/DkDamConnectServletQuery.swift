@@ -31,7 +31,7 @@ public struct DkDamConnectServletRequest {
         self.qrCode = qrCode
     }
 
-    public init(qrCode: QRCode) {
+    public init(qrCode: DkCode) {
         self.qrCode = qrCode.code
     }
 }
