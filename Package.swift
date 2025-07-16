@@ -19,6 +19,7 @@ let package = Package(
         .package(url: "https://github.com/SwiftyBeaver/SwiftyBeaver.git", .upToNextMajor(from: "2.0.0")),
         .package(url: "https://github.com/SimplyDanny/SwiftLintPlugins.git", from: "0.59.1"),
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess.git", from: "4.2.2"),
+        .package(url: "https://github.com/CoreOffice/XMLCoder.git", from: "0.17.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -30,6 +31,7 @@ let package = Package(
                 .product(name: "BetterCodable", package: "BetterCodable"),
                 .product(name: "SwiftyBeaver", package: "SwiftyBeaver"),
                 .product(name: "KeychainAccess", package: "KeychainAccess"),
+                .product(name: "XMLCoder", package: "XMLCoder"),
             ],
             plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
         ),
