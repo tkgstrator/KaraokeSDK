@@ -9,6 +9,7 @@ import Alamofire
 @preconcurrency
 import BetterCodable
 import Foundation
+import XMLCoder
 
 public typealias LoginXMLRequest = DkDamDAMTomoLoginServletRequest
 
@@ -19,6 +20,7 @@ public final class LoginXMLQuery: RequestType {
     public let path: String = "app/damtomo/auth/LoginXML.do"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
+    public let decoder: DataDecoder = XMLDecoder()
 
     public init(params: LoginXMLRequest) {
         parameters = [
@@ -30,4 +32,6 @@ public final class LoginXMLQuery: RequestType {
 }
 
 public struct LoginXMLResponse: Decodable, Sendable {
+    public let cdmNo: String
+    public let damtomoId: String
 }

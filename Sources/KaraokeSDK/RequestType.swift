@@ -35,7 +35,7 @@ public extension RequestType {
                 URLEncoding.default
         }
     }
-    
+
     var decoder: DataDecoder {
         JSONDecoder()
     }

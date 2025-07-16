@@ -25,9 +25,9 @@ public final class DKClient: ObservableObject {
     public private(set) var credential: DkCredential = .init()
 
     public var isLogin: Bool {
-        return !credential.loginId.isEmpty || !credential.password.isEmpty
+        !credential.loginId.isEmpty || !credential.password.isEmpty
     }
-    
+
     public var isDisabled: Bool {
         credential.loginId.isEmpty && credential.password.isEmpty
     }
@@ -41,24 +41,53 @@ public final class DKClient: ObservableObject {
             Logger.debug("Loaded credential from keychain: \(credential)")
         }
     }
-    
+
     public func logout() {
         try? keychain.set(DkCredential(), forKey: "dmk-credential")
-        self.credential = .init()
+        credential = .init()
     }
-    
+
+    func loginXML(params: DkDamDAMTomoLoginServletRequest) async throws -> LoginXMLResponse {
+        let url: URL = .init(string: "https://www.clubdam.com/app/damtomo/auth/LoginXML.do")!
+        let parameters: [String: String] = [
+            "procKbn": "1",
+            "loginId": params.damtomoId,
+            "password": params.password,
+        ]
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/x-www-form-urlencoded",
+        ]
+        let request: URLRequest = try URLEncoding.default.encode(URLRequest(url: url, method: HTTPMethod.post, headers: headers), with: parameters)
+        let (_, response) = try await URLSession.shared.data(for: request)
+        guard let response: HTTPURLResponse = response as? HTTPURLResponse,
+              let headers: [String: String] = response.allHeaderFields as? [String: String]
+        else {
+            throw AFError.responseValidationFailed(reason: .dataFileNil)
+        }
+        if response.statusCode != 200 {
+            throw AFError.responseValidationFailed(reason: .unacceptableStatusCode(code: response.statusCode))
+        }
+        let cookies: [HTTPCookie] = HTTPCookie.cookies(withResponseHeaderFields: headers, for: url).filter { ["scr_cdm", "scr_dt"].contains($0.name) }
+        guard let cdmNo: String = cookies.first(where: { $0.name == "scr_cdm" })?.value.base64DecodedString,
+              let damtomoId: String = cookies.first(where: { $0.name == "scr_dt" })?.value.base64DecodedString
+        else {
+            throw AFError.responseValidationFailed(reason: .dataFileNil)
+        }
+        return .init(cdmNo: cdmNo, damtomoId: damtomoId)
+    }
+
     /// ログイン処理
     /// NOTE: - ログイン処理だけはややこしいので専用のメソッドを用意
-    public func login(_ params: sending DkDamDAMTomoLoginServletRequest) async throws {
+    public func login(_ params: DkDamDAMTomoLoginServletRequest) async throws {
         do {
             let interceptor: AuthenticationInterceptor<DKClient> = .init(authenticator: self, credential: credential)
             let params = try await (
                 request(DkDamDAMTomoLoginServletQuery(params: params)),
                 request(LoginByDamtomoMemberIdQuery(params: params)),
-                request(LoginXMLQuery(params: params))
+                loginXML(params: params)
             )
+            try? keychain.set(credential.update(params: params), forKey: "dmk-credential")
             // 認証情報を設定
-            try keychain.set(credential.update(params: params), forKey: "dmk-credential")
         } catch {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
@@ -72,19 +101,13 @@ public final class DKClient: ObservableObject {
     public func request<T: RequestType>(_ convertible: sending T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {
             let interceptor: AuthenticationInterceptor<DKClient> = .init(authenticator: self, credential: credential)
-            let response = try await session.request(convertible, interceptor: interceptor)
+            return try await session.request(convertible, interceptor: interceptor)
                 .cURLDescription(calling: { request in
                     Logger.debug("cURL Request: \(request)")
                 })
                 .validateWith()
                 .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: convertible.decoder)
                 .value
-            // 筐体との連携成功時にQRコードを更新
-            if let result = response as? DkDamConnectServletResponse {
-//                try? keychain.set(credential.update(result), forKey: "dmk-credential")
-                Logger.debug("DkDamConnectServletResponse: \(result)")
-            }
-            return response
         } catch {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
