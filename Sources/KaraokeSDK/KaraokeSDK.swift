@@ -23,6 +23,9 @@ public final class DKClient: ObservableObject {
 
     @Published
     public private(set) var credential: DkCredential = .init()
+    
+    @AppStorage("DK_CONNECTION_QR_CODE")
+    public private(set) var code: DkCode = .init()
 
     public var isLogin: Bool {
         !credential.loginId.isEmpty || !credential.password.isEmpty
@@ -45,6 +48,11 @@ public final class DKClient: ObservableObject {
     public func logout() {
         try? keychain.set(DkCredential(), forKey: "dmk-credential")
         credential = .init()
+    }
+    
+    func connect(query: DkDamConnectServletQuery) async throws -> DkDamConnectServletResponse {
+        let response = try await request(query)
+        return response
     }
 
     func loginXML(params: DkDamDAMTomoLoginServletRequest) async throws -> LoginXMLResponse {

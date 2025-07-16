@@ -25,7 +25,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     var expiresIn: Date
 
     /// リフレッシュが必要かどうか
-    /// ログインID,パスワード,認証トークなが未設定の場合にはリフレッシュは不要とする
+    /// ログインID,パスワード,認証トークが未設定の場合にはリフレッシュは不要とする
     public var requiresRefresh: Bool {
         mns.authToken.isEmpty && mns.damtomoId.isEmpty ? false : expiresIn <= Date()
     }

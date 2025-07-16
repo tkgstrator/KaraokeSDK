@@ -7,12 +7,20 @@
 
 import Foundation
 
-public struct QRCode: Codable {
+public struct DkCode: Codable {
     public let host: String
     public let serialNo: String
     public let timestamp: Date
+    
+    public init() {
+        self.host = ""
+        self.serialNo = ""
+        self.timestamp = .init(timeIntervalSince1970: 0)
+    }
 
+    // 読み取ったときはエラーなどを発生させて無効なQRコードであることを示す
     public init?(code: String) {
+        let expiresIn: TimeInterval = 60 * 60 * 6
         let formatter: DateFormatter = .init()
         formatter.timeZone = .current
         formatter.dateFormat = "HH:mm:ss"
@@ -25,7 +33,7 @@ public struct QRCode: Codable {
             .compactMap { UInt8($0, radix: 16) }.map { String(format: "%03d", $0) }.joined(separator: ".")
         serialNo = [bytes[9], bytes[11], bytes[13], bytes[15], bytes[1], bytes[3], bytes[5], bytes[7]]
             .joined()
-        timestamp = .init(timeIntervalSince1970: TimeInterval(Int([bytes[14], bytes[10], bytes[6], bytes[2]].joined(), radix: 16)!) + 60 * 60)
+        timestamp = .init(timeIntervalSinceNow: expiresIn)
     }
 
     public var requiresRefresh: Bool {
@@ -34,10 +42,16 @@ public struct QRCode: Codable {
 
     // 有効期限がめちゃくちゃ長いQRコードを生成する
     // NOTE: 通常は一時間だが、六時間くらい確保すれば実用上不都合がないと思われる
+    // - 未連携時は空っぽのコードを発行する
+    // - APIが空っぽでも受け付けるのでこれでいいと思う
     public var code: String {
+        if host.isEmpty || serialNo.isEmpty {
+            return ""
+        }
+        let expiresIn: TimeInterval = 60 * 60 * 6
         let host: [String] = host.split(separator: ".").compactMap { UInt8($0) }.compactMap { String(format: "%02X", $0) }
         let serialNo: [String] = serialNo.chunked(by: 2)
-        let timestamp: [String] = String(format: "%08X", Int(Date(timeIntervalSinceNow: 60 * 60).timeIntervalSinceNow)).chunked(by: 2)
+        let timestamp: [String] = String(format: "%08X", Int(Date(timeIntervalSinceNow: expiresIn).timeIntervalSinceNow)).chunked(by: 2)
         return [
             host[0],
             serialNo[4],
