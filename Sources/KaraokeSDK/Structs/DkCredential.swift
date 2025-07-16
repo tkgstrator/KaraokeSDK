@@ -34,6 +34,18 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         loginId.isEmpty && password.isEmpty && authToken.isEmpty ? false : expiresIn <= Date()
     }
 
+    struct Minsei: Codable {
+        let authToken: String
+        let damtomoId: String
+    }
+    
+    struct DAMTomo: Codable {
+        let damtomoId: String
+        let cdmNo: String
+        let deviceId: String
+        let password: String
+    }
+    
     /// 初期化
     @MainActor
     init() {
@@ -50,7 +62,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
     }
 
-    typealias DkCredentialUpdateParams = (DkDamDAMTomoLoginServletResponse, LoginByDamtomoMemberIdResponse)
+    typealias DkCredentialUpdateParams = (DkDamDAMTomoLoginServletResponse, LoginByDamtomoMemberIdResponse, LoginXMLResponse)
 
     @MainActor
     mutating func update(params: DkCredentialUpdateParams) -> DkCredential {

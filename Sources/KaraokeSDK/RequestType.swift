@@ -17,6 +17,7 @@ public protocol RequestType: URLRequestConvertible {
     var method: HTTPMethod { get }
     var parameters: Parameters? { get }
     var encoding: ParameterEncoding { get }
+    var decoder: DataDecoder { get }
 }
 
 public extension RequestType {
@@ -33,6 +34,10 @@ public extension RequestType {
             default:
                 URLEncoding.default
         }
+    }
+    
+    var decoder: DataDecoder {
+        JSONDecoder()
     }
 
     var parameters: Parameters? {

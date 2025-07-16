@@ -1,0 +1,33 @@
+//
+//  LoginXMLQuery.swift
+//  KaraokeSDK
+//
+//  Created by devonly on 2025/07/16.
+//
+
+import Alamofire
+@preconcurrency
+import BetterCodable
+import Foundation
+
+public typealias LoginXMLRequest = DkDamDAMTomoLoginServletRequest
+
+public final class LoginXMLQuery: RequestType {
+    public typealias ResponseType = LoginXMLResponse
+
+    public let baseURL: URL = .init(string: "https://www.clubdam.com")!
+    public let path: String = "app/damtomo/auth/LoginXML.do"
+    public let method: HTTPMethod = .post
+    public let parameters: Parameters?
+
+    public init(params: LoginXMLRequest) {
+        parameters = [
+            "procKbn": 1,
+            "loginId": params.damtomoId,
+            "password": params.password,
+        ]
+    }
+}
+
+public struct LoginXMLResponse: Decodable, Sendable {
+}
