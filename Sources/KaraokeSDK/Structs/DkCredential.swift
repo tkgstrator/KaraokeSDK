@@ -15,13 +15,9 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     // ユーザー情報
     public var loginId: String
     public var password: String
-    // 現在取ってこれる値ではないが、一応保存
-    public var cdmNo: String
-    public var damtomoId: String
-    // 変動する値だが、ユーザーに見せる情報ではない
-    var authToken: String
-    // 固定値
-    var deviceId: String
+    public var scr: SCR
+    public var dtm: DTM
+    public var mns: MNS
     let compId: Int
     let compAuthKey: String
     let dmkAccessKey: String
@@ -31,30 +27,53 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     /// リフレッシュが必要かどうか
     /// ログインID,パスワード,認証トークなが未設定の場合にはリフレッシュは不要とする
     public var requiresRefresh: Bool {
-        loginId.isEmpty && password.isEmpty && authToken.isEmpty ? false : expiresIn <= Date()
+        mns.authToken.isEmpty && mns.damtomoId.isEmpty ? false : expiresIn <= Date()
     }
 
-    struct Minsei: Codable {
+    public struct MNS: Codable, Sendable {
         let authToken: String
-        let damtomoId: String
+        public let damtomoId: String
+
+        init(authToken: String = "", damtomoId: String = "") {
+            self.authToken = authToken
+            self.damtomoId = damtomoId
+        }
     }
-    
-    struct DAMTomo: Codable {
-        let damtomoId: String
-        let cdmNo: String
+
+    ///
+    public struct SCR: Codable, Sendable {
+        public let damtomoId: String
+        public let cdmNo: String
+
+        init(damtomoId: String = "", cdmNo: String = "") {
+            self.damtomoId = damtomoId
+            self.cdmNo = cdmNo
+        }
+    }
+
+    ///
+    public struct DTM: Codable, Sendable {
+        public let damtomoId: String
+        public let cdmNo: String
         let deviceId: String
         let password: String
+
+        init(damtomoId: String = "", cdmNo: String = "", deviceId: String = "", password: String = "") {
+            self.damtomoId = damtomoId
+            self.cdmNo = cdmNo
+            self.deviceId = deviceId
+            self.password = password
+        }
     }
-    
+
     /// 初期化
     @MainActor
     init() {
         loginId = ""
         password = ""
-        deviceId = UIDevice.current.identifierForVendor!.uuidString.data(using: .utf8)!.base64EncodedString()
-        cdmNo = ""
-        damtomoId = ""
-        authToken = ""
+        scr = .init()
+        dtm = .init()
+        mns = .init()
         compId = 1
         compAuthKey = "2/Qb9R@8s*"
         dmkAccessKey = "3ZpXW3K8anQvonUX7IMj"
@@ -68,10 +87,9 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     mutating func update(params: DkCredentialUpdateParams) -> DkCredential {
         loginId = params.0.damtomoId
         password = params.0.password
-        deviceId = params.0.deviceId
-        authToken = params.1.data.authToken
-        damtomoId = params.1.data.damtomoId
-        cdmNo = params.0.cdmNo
+        scr = .init(damtomoId: params.2.damtomoId, cdmNo: params.2.cdmNo)
+        mns = .init(authToken: params.1.data.authToken, damtomoId: params.0.damtomoId)
+        dtm = .init(damtomoId: params.0.damtomoId, cdmNo: params.0.cdmNo, deviceId: params.0.deviceId, password: params.0.password)
         // 有効期限を延長
         expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
         return self

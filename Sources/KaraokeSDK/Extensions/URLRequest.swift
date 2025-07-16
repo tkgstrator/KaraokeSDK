@@ -32,8 +32,8 @@ extension URLRequest {
             if targetUrl.path.hasPrefix("/dkdenmoku") {
                 Logger.debug("URL path starts with 'dkdenmoku', merging credential into parameters.")
                 httpBody = try? JSONSerialization.data(withJSONObject: parameters.merging([
-                    "deviceId": credential.deviceId,
-                    "cdmNo": credential.cdmNo,
+                    "deviceId": credential.dtm.deviceId,
+                    "cdmNo": credential.dtm.cdmNo,
                 ], uniquingKeysWith: { $1 }))
             }
             return
