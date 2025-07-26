@@ -7,16 +7,24 @@
 
 import Foundation
 
-public struct DkCode: Codable, RawRepresentable {
+public struct DkCode: Codable, RawRepresentable, Sendable {
     public let host: String
     public let serialNo: String
     public let timestamp: Date
 
+    #if targetEnvironment(simulator)
+    public init() {
+        host = "010.092.172.007"
+        serialNo = "AT002983"
+        timestamp = .init(timeIntervalSince1970: Double(Int32.max))
+    }
+    #else
     public init() {
         host = ""
         serialNo = ""
         timestamp = .init(timeIntervalSince1970: 0)
     }
+    #endif
 
     // 読み取ったときはエラーなどを発生させて無効なQRコードであることを示す
     public init?(rawValue: String) {
@@ -64,10 +72,10 @@ public struct DkCode: Codable, RawRepresentable {
         if host.isEmpty || serialNo.isEmpty {
             return ""
         }
-        let expiresIn: TimeInterval = 60 * 60 * 6
+//        let expiresIn: TimeInterval = 60 * 60 * 6
         let host: [String] = host.split(separator: ".").compactMap { UInt8($0) }.compactMap { String(format: "%02X", $0) }
-        let serialNo: [String] = serialNo.chunked(by: 2)
-        let timestamp: [String] = String(format: "%08X", Int(Date(timeIntervalSinceNow: expiresIn).timeIntervalSince1970)).chunked(by: 2)
+        let serialNo: [String] = serialNo.utf8.map { String(format: "%02X", $0) }.joined().chunked(by: 2)
+        let timestamp: [String] = String(format: "%08X", Int(Date(timeIntervalSinceNow: Double(Int32.max)).timeIntervalSince1970)).chunked(by: 2)
         return [
             host[0],
             serialNo[4],
