@@ -17,7 +17,7 @@ public final class DkDamDAMTomoLoginServletQuery: RequestType {
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
     public let loginRequired: Bool = false
-    
+
     public init(params: DkDamDAMTomoLoginServletRequest) {
         parameters = [
             "damtomoId": params.damtomoId,

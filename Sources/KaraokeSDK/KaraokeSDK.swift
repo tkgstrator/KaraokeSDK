@@ -23,7 +23,7 @@ public final class DKClient: ObservableObject {
 
     @Published
     public private(set) var credential: DkCredential = .init()
-   
+
     @Published
     public private(set) var code: DkCode = .init()
 
@@ -48,15 +48,14 @@ public final class DKClient: ObservableObject {
             Logger.debug("Loaded code from keychain: \(code)")
         }
     }
-    
+
     /// ログアウト処理
     /// クレデンシャルを削除し、初期化する
     public func logout() {
         try? keychain.set(DkCredential(), forKey: "dmk-credential")
         credential = .init()
     }
-   
-    
+
     /// DAMと連携するメソッド
     /// クレデンシャルは不要
     /// - Parameter code: QRコード
@@ -67,7 +66,7 @@ public final class DKClient: ObservableObject {
         try keychain.set(DkCode(rawValue: response.qrCode), forKey: "dmk-code")
         return response
     }
-   
+
     /// ログイン処理
     /// クレデンシャルは不要
     /// 未ログイン状態ではクレデンシャルは常に切れていない、判定なのでリフレッシュが走ることがない
@@ -101,14 +100,14 @@ public final class DKClient: ObservableObject {
         }
         return .init(cdmNo: cdmNo, damtomoId: damtomoId)
     }
-    
+
     /// ログイン処理
     /// クレデンシャルは不要
     /// 未ログイン状態ではクレデンシャルは常に切れていない、判定なのでリフレッシュが走ることがない
     /// - Parameter params: IDとパスワード
     /// - Returns: ログイン結果
     @discardableResult
-    public func login(_ params: DkDamDAMTomoLoginServletRequest) async throws -> Void {
+    public func login(_ params: DkDamDAMTomoLoginServletRequest) async throws {
         do {
             let params = try await (
                 request(DkDamDAMTomoLoginServletQuery(params: params)),
@@ -139,7 +138,7 @@ public final class DKClient: ObservableObject {
                 .value
             do {
                 return try decoder.decode(T.ResponseType.self, from: data)
-            } catch (let error) {
+            } catch {
                 if let parameters = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
                     Logger.error("Decoding error occurred with parameters: \(parameters) with \(error)")
                 }
@@ -157,7 +156,7 @@ public final class DKClient: ObservableObject {
 
 extension DKClient: Authenticator {
     public typealias Credential = DkCredential
-    
+
     /// 認証情報（DkCredential）をURLRequestに適用します。主にリクエストヘッダーにアクセストークンなどを追加します
     /// - Parameters:
     ///   - credential: <#credential description#>
@@ -165,7 +164,7 @@ extension DKClient: Authenticator {
     public nonisolated func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
         urlRequest.merging(credential)
     }
-    
+
     /// 認証情報が期限切れなどで無効になった場合に、新しい認証情報を取得して更新します。非同期で新しいクレデンシャルを取得し、コールバックで返します
     /// - Parameters:
     ///   - credential: <#credential description#>
@@ -185,7 +184,7 @@ extension DKClient: Authenticator {
             }
         })
     }
-    
+
     /// 指定したリクエストが、与えられた認証情報で認証済みかどうかを判定します。ヘッダーの値が一致しているかを確認します
     /// - Parameters:
     ///   - urlRequest: <#urlRequest description#>
@@ -194,7 +193,7 @@ extension DKClient: Authenticator {
     public nonisolated func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DkCredential) -> Bool {
         urlRequest.value(forHTTPHeaderField: "dmk-access-key") == credential.dmkAccessKey && urlRequest.value(forHTTPHeaderField: "compAuthKey") == credential.compAuthKey
     }
-    
+
     /// リクエストが認証エラー（例: 401 Unauthorized）で失敗したかどうかを判定します。主にリフレッシュ処理のトリガーとして使います
     /// - Parameters:
     ///   - urlRequest: <#urlRequest description#>

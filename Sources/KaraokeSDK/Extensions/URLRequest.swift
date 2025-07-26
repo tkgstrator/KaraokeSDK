@@ -5,8 +5,8 @@
 //  Created by devonly on 2025/07/14.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
 extension URLRequest {
     mutating func merging(_ credential: DkCredential) {
@@ -24,7 +24,7 @@ extension URLRequest {
             Logger.debug("No HTTP body to merge with credential.")
             return
         }
-        
+
         if targetUrl.path.hasPrefix("/cwa") {
             Logger.debug("URL path starts with 'cwa', merging credential into parameters.")
             if type.contains("application/json"),
@@ -32,7 +32,7 @@ extension URLRequest {
             {
                 fatalError("URL-encoded parameters are not supported in this context.")
             }
-            
+
             if type.contains("application/x-www-form-urlencoded") {
                 Logger.debug("Merging credential with existing URL-encoded parameters.")
                 let parameters: Parameters = URLEncoding.httpBody.decode(self)
@@ -44,7 +44,7 @@ extension URLRequest {
                 ]))
             }
         }
-        
+
         if targetUrl.path.hasPrefix("/minsei") {
             Logger.debug("URL path starts with 'minsei', merging credential into parameters.")
             if type.contains("application/json"),
@@ -52,7 +52,7 @@ extension URLRequest {
             {
                 fatalError("URL-encoded parameters are not supported in this context.")
             }
-            
+
             if type.contains("application/x-www-form-urlencoded") {
                 Logger.debug("Merging credential with existing URL-encoded parameters.")
                 let parameters: Parameters = URLEncoding.httpBody.decode(self)
@@ -64,7 +64,7 @@ extension URLRequest {
                 ]))
             }
         }
-        
+
         if targetUrl.path.hasPrefix("/dkwebsys") {
             Logger.debug("URL path starts with 'dkwebsys', merging credential into parameters.")
             if type.contains("application/json"),
@@ -76,17 +76,17 @@ extension URLRequest {
                     "compId": credential.compId,
                 ]))
             }
-            
+
             if type.contains("application/x-www-form-urlencoded") {
                 fatalError("URL-encoded parameters are not supported in this context.")
 //                Logger.debug("Merging credential with existing URL-encoded parameters.")
             }
         }
-        
+
         if targetUrl.path.hasPrefix("/dkdenmoku") {
             Logger.debug("URL path starts with 'dkdenmoku', merging credential into parameters.")
             if type.contains("application/json"),
-                let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any & Sendable]
+               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any & Sendable]
             {
                 Logger.debug("Merging credential with existing JSON parameters.")
                 httpBody = JSONEncoding.default.encode(parameters.merging([
@@ -94,15 +94,15 @@ extension URLRequest {
                     "cdmNo": credential.dtm.cdmNo,
                 ]))
             }
-            
+
             if type.contains("application/x-www-form-urlencoded") {
                 fatalError("URL-encoded parameters are not supported in this context.")
 //                Logger.debug("Merging credential with existing URL-encoded parameters.")
             }
         }
-        
+
         // Parameters
-        
+
         // Assuming DkCredential has properties that can be added to the URLRequest
 //        if let body = httpBody,
 //           let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any]
