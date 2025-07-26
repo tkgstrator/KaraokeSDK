@@ -21,6 +21,7 @@ public final class LoginXMLQuery: RequestType {
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
     public let decoder: DataDecoder = XMLDecoder()
+    public let loginRequired: Bool = false
 
     public init(params: LoginXMLRequest) {
         parameters = [

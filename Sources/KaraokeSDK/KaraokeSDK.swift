@@ -23,8 +23,8 @@ public final class DKClient: ObservableObject {
 
     @Published
     public private(set) var credential: DkCredential = .init()
-    
-    @AppStorage("DK_CONNECTION_QR_CODE")
+   
+    @Published
     public private(set) var code: DkCode = .init()
 
     public var isLogin: Bool {
@@ -43,18 +43,36 @@ public final class DKClient: ObservableObject {
             self.credential = credential
             Logger.debug("Loaded credential from keychain: \(credential)")
         }
+        if let code: DkCode = try? keychain.get(DkCode.self, forKey: "dmk-code") {
+            self.code = code
+            Logger.debug("Loaded code from keychain: \(code)")
+        }
     }
-
+    
+    /// ログアウト処理
+    /// クレデンシャルを削除し、初期化する
     public func logout() {
         try? keychain.set(DkCredential(), forKey: "dmk-credential")
         credential = .init()
     }
+   
     
-    func connect(query: DkDamConnectServletQuery) async throws -> DkDamConnectServletResponse {
-        let response = try await request(query)
+    /// DAMと連携するメソッド
+    /// クレデンシャルは不要
+    /// - Parameter code: QRコード
+    /// - Returns: 連携結果
+    @discardableResult
+    public func connect(code: DkCode) async throws -> DkDamConnectServletResponse {
+        let response = try await request(DkDamConnectServletQuery(params: .init(code: code)))
+        try keychain.set(DkCode(rawValue: response.qrCode), forKey: "dmk-code")
         return response
     }
-
+   
+    /// ログイン処理
+    /// クレデンシャルは不要
+    /// 未ログイン状態ではクレデンシャルは常に切れていない、判定なのでリフレッシュが走ることがない
+    /// - Parameter params: IDとパスワード
+    /// - Returns: ログイン結果
     func loginXML(params: DkDamDAMTomoLoginServletRequest) async throws -> LoginXMLResponse {
         let url: URL = .init(string: "https://www.clubdam.com/app/damtomo/auth/LoginXML.do")!
         let parameters: [String: String] = [
@@ -83,19 +101,22 @@ public final class DKClient: ObservableObject {
         }
         return .init(cdmNo: cdmNo, damtomoId: damtomoId)
     }
-
+    
     /// ログイン処理
-    /// NOTE: - ログイン処理だけはややこしいので専用のメソッドを用意
-    public func login(_ params: DkDamDAMTomoLoginServletRequest) async throws {
+    /// クレデンシャルは不要
+    /// 未ログイン状態ではクレデンシャルは常に切れていない、判定なのでリフレッシュが走ることがない
+    /// - Parameter params: IDとパスワード
+    /// - Returns: ログイン結果
+    @discardableResult
+    public func login(_ params: DkDamDAMTomoLoginServletRequest) async throws -> Void {
         do {
-            let interceptor: AuthenticationInterceptor<DKClient> = .init(authenticator: self, credential: credential)
             let params = try await (
                 request(DkDamDAMTomoLoginServletQuery(params: params)),
                 request(LoginByDamtomoMemberIdQuery(params: params)),
                 loginXML(params: params)
             )
-            try? keychain.set(credential.update(params: params), forKey: "dmk-credential")
             // 認証情報を設定
+            try keychain.set(credential.update(params: params), forKey: "dmk-credential")
         } catch {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
@@ -108,19 +129,27 @@ public final class DKClient: ObservableObject {
     @discardableResult
     public func request<T: RequestType>(_ convertible: sending T) async throws -> T.ResponseType where T.ResponseType: Decodable, T.ResponseType: Sendable {
         do {
-            let interceptor: AuthenticationInterceptor<DKClient> = .init(authenticator: self, credential: credential)
-            return try await session.request(convertible, interceptor: interceptor)
+            let interceptor: AuthenticationInterceptor<DKClient> = .init(authenticator: self, credential: convertible.loginRequired ? credential : .init())
+            let data: Data = try await session.request(convertible, interceptor: interceptor)
                 .cURLDescription(calling: { request in
                     Logger.debug("cURL Request: \(request)")
                 })
                 .validateWith()
-                .serializingDecodable(T.ResponseType.self, automaticallyCancelling: true, decoder: convertible.decoder)
+                .serializingData(automaticallyCancelling: true)
                 .value
+            do {
+                return try decoder.decode(T.ResponseType.self, from: data)
+            } catch (let error) {
+                if let parameters = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+                    Logger.error("Decoding error occurred with parameters: \(parameters) with \(error)")
+                }
+                throw error
+            }
         } catch {
+            Logger.error("Request failed with error: \(error)")
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
             }
-            Logger.error("Request failed with error: \(error)")
             throw error
         }
     }
@@ -128,40 +157,50 @@ public final class DKClient: ObservableObject {
 
 extension DKClient: Authenticator {
     public typealias Credential = DkCredential
-
+    
+    /// 認証情報（DkCredential）をURLRequestに適用します。主にリクエストヘッダーにアクセストークンなどを追加します
+    /// - Parameters:
+    ///   - credential: <#credential description#>
+    ///   - urlRequest: <#urlRequest description#>
     public nonisolated func apply(_ credential: DkCredential, to urlRequest: inout URLRequest) {
-        if let httpBody = urlRequest.httpBody {
-            if let parameters = try? JSONSerialization.jsonObject(with: httpBody, options: []) as? [String: Any] {
-                Logger.debug("HTTP Body Parameters: \(parameters)")
-                urlRequest.merging(credential)
-            }
-            Logger.debug("HTTP Body: \(String(data: httpBody, encoding: .utf8) ?? "nil")")
-        }
-        Logger.debug("Applying credential to URLRequest: \(urlRequest)")
-        urlRequest.headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
+        urlRequest.merging(credential)
     }
-
+    
+    /// 認証情報が期限切れなどで無効になった場合に、新しい認証情報を取得して更新します。非同期で新しいクレデンシャルを取得し、コールバックで返します
+    /// - Parameters:
+    ///   - credential: <#credential description#>
+    ///   - session: <#session description#>
+    ///   - completion: <#completion description#>
     public nonisolated func refresh(_ credential: DkCredential, for session: Alamofire.Session, completion: @escaping @Sendable (Swift.Result<DkCredential, any Error>) -> Void) {
         Task(priority: .high, operation: {
             do {
-                let result = try await request(LoginByDamtomoMemberIdQuery(credential: credential))
-//                await MainActor.run {
-//                    let newValue = self.credential.update(result)
-//                    try? await keychain.set(newValue, forKey: "dmk-credential")
-//                    Logger.debug("Refreshing credential success: \(credential)")
-//                    completion(.success(newValue))
-//                }
+                try await login(.init(damtomoId: credential.loginId, password: credential.password))
+                if let newValue = try? await keychain.get(DkCredential.self, forKey: "dmk-credential") {
+                    Logger.debug("Refreshed credential: \(newValue)")
+                    completion(.success(newValue))
+                }
             } catch {
                 Logger.error("Failed to refresh credential: \(error)")
                 completion(.failure(error))
             }
         })
     }
-
+    
+    /// 指定したリクエストが、与えられた認証情報で認証済みかどうかを判定します。ヘッダーの値が一致しているかを確認します
+    /// - Parameters:
+    ///   - urlRequest: <#urlRequest description#>
+    ///   - credential: <#credential description#>
+    /// - Returns: <#description#>
     public nonisolated func isRequest(_ urlRequest: URLRequest, authenticatedWith credential: DkCredential) -> Bool {
         urlRequest.value(forHTTPHeaderField: "dmk-access-key") == credential.dmkAccessKey && urlRequest.value(forHTTPHeaderField: "compAuthKey") == credential.compAuthKey
     }
-
+    
+    /// リクエストが認証エラー（例: 401 Unauthorized）で失敗したかどうかを判定します。主にリフレッシュ処理のトリガーとして使います
+    /// - Parameters:
+    ///   - urlRequest: <#urlRequest description#>
+    ///   - response: <#response description#>
+    ///   - error: <#error description#>
+    /// - Returns: <#description#>
     public nonisolated func didRequest(_ urlRequest: URLRequest, with response: HTTPURLResponse, failDueToAuthenticationError error: any Error) -> Bool {
         response.statusCode == 401
     }

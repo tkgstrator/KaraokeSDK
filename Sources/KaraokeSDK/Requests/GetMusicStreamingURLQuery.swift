@@ -20,21 +20,21 @@ public final class GetMusicStreamingURLQuery: RequestType {
 
     public init(params: GetMusicStreamingURLRequest) {
         parameters = [
+            "compId": 1,
+            "contractId": 1,
+            "deviceId": 1,
             "format": "json",
-            "registHistoryFlg": "0",
-            "deviceId": "1",
-            "userCode": params.userCode,
+            "registHistoryFlg": 0,
             "requestNo": params.requestNo,
+            "serviceId": 1
         ]
     }
 }
 
 public struct GetMusicStreamingURLRequest {
-    let userCode: String
     let requestNo: String
 
-    public init(userCode: String, requestNo: String) {
-        self.userCode = userCode
+    public init(requestNo: String) {
         self.requestNo = requestNo
     }
 }
@@ -49,7 +49,8 @@ public struct GetMusicStreamingURLResponse: Decodable, Sendable {
     public let type: String
 }
 
-public struct GetMusicStreamingURL: Decodable, Sendable {
+public struct GetMusicStreamingURL: Decodable, Sendable, Identifiable {
+    public var id: Int { contentsId }
     @LosslessValue
     public private(set) var contentsId: Int
     public let duet: String

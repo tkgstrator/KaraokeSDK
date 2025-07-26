@@ -19,6 +19,7 @@ public final class LoginByDamtomoMemberIdQuery: RequestType {
     public let method: HTTPMethod = .post
     public let encoding: ParameterEncoding = URLEncoding.httpBody
     public let parameters: Parameters?
+    public let loginRequired: Bool = false
 
     public init(params: LoginByDamtomoMemberIdRequest) {
         parameters = [
