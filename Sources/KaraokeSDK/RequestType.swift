@@ -26,7 +26,7 @@ public extension RequestType {
     var baseURL: URL {
         URL(string: "https://denmokuapp.clubdam.com")!
     }
-    
+
     /// デフォルトのエンコーディング方式
     var encoding: ParameterEncoding {
         switch method {
@@ -38,12 +38,12 @@ public extension RequestType {
                 URLEncoding.default
         }
     }
-    
+
     /// デコーダー
     var decoder: DataDecoder {
         JSONDecoder()
     }
-    
+
     /// パラメーター
     var parameters: Parameters? {
         nil
@@ -56,13 +56,13 @@ public extension RequestType {
             "User-Agent": "DenmokuMini/4.13.8 (jp.co.dkkaraoke.DENMOKULite01; build:59; iOS 17.5.1) Alamofire/5.9.1",
         ]
     }
-    
+
     /// ログインが要求されるリクエストかどうか
     /// 普通は要求される
     var loginRequired: Bool {
         true
     }
-    
+
     /// URLRequestへの変換
     /// HTTPMethodとHeadersを設定する
     /// Parametersがある場合はエンコードする

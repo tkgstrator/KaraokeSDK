@@ -25,9 +25,9 @@ extension URLEncoding {
                 return (key, value)
             })
     }
-    
+
     func encode(_ parameters: [String: Any & Sendable]) -> Data {
-        return parameters.map { "\($0.key)=\($0.value)" }
+        parameters.map { "\($0.key)=\($0.value)" }
             .joined(separator: "&")
             .data(using: .utf8)!
     }
@@ -42,10 +42,10 @@ extension JSONEncoding {
         }
         return jsonObject
     }
-    
+
     func encode(_ parameters: [String: Any & Sendable]) -> Data {
         // swiftlint:disable:next force_try
-        return try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        try! JSONSerialization.data(withJSONObject: parameters, options: [])
     }
 }
 
@@ -54,6 +54,6 @@ extension Dictionary {
     /// - Parameter other: 辞書
     /// - Returns: 辞書
     func merging(_ other: [Key: Value]) -> [Key: Value] {
-        return self.merging(other, uniquingKeysWith: { $1 })
+        merging(other, uniquingKeysWith: { $1 })
     }
 }

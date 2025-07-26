@@ -26,7 +26,7 @@ public final class DkDamConnectServletQuery: RequestType {
 
 public struct DkDamConnectServletRequest {
     public let code: DkCode
-    
+
     public init(code: DkCode) {
         self.code = code
     }

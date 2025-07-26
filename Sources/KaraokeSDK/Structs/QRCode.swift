@@ -1,5 +1,5 @@
 //
-//  DkCode.swift
+//  QRCode.swift
 //  KaraokeSDK
 //
 //  Created by devonly on 2025/07/15.
@@ -11,11 +11,11 @@ public struct DkCode: Codable, RawRepresentable {
     public let host: String
     public let serialNo: String
     public let timestamp: Date
-    
+
     public init() {
-        self.host = ""
-        self.serialNo = ""
-        self.timestamp = .init(timeIntervalSince1970: 0)
+        host = ""
+        serialNo = ""
+        timestamp = .init(timeIntervalSince1970: 0)
     }
 
     // 読み取ったときはエラーなどを発生させて無効なQRコードであることを示す
@@ -29,17 +29,17 @@ public struct DkCode: Codable, RawRepresentable {
             Logger.debug("Invalid QR code format: \(rawValue)")
             return nil
         }
-        self.host = [bytes[0], bytes[4], bytes[8], bytes[12]]
+        host = [bytes[0], bytes[4], bytes[8], bytes[12]]
             .compactMap { UInt8($0, radix: 16) }.map { String(format: "%03d", $0) }.joined(separator: ".")
-        let buffer: [UInt8] = [bytes[9], bytes[11], bytes[13], bytes[15], bytes[1], bytes[3], bytes[5], bytes[7]].compactMap({ UInt8($0, radix: 16) })
+        let buffer: [UInt8] = [bytes[9], bytes[11], bytes[13], bytes[15], bytes[1], bytes[3], bytes[5], bytes[7]].compactMap { UInt8($0, radix: 16) }
         guard let serialNo: String = .init(data: .init(bytes: buffer, count: buffer.count), encoding: .ascii) else {
             Logger.debug("Invalid Serial No: \(rawValue)")
             return nil
         }
         self.serialNo = serialNo
-        self.timestamp = .init(timeIntervalSinceNow: expiresIn)
+        timestamp = .init(timeIntervalSinceNow: expiresIn)
     }
-    
+
     /// リフレッシュが必要かどうか
     /// タイムスタンプが現在時刻よりも前ならリフレッシュが必要
     /// どこで使うかはまだわからない
@@ -47,7 +47,7 @@ public struct DkCode: Codable, RawRepresentable {
     public var requiresRefresh: Bool {
         timestamp <= .init()
     }
-    
+
     /// 有効期限を日付で表示する
     /// タイムスタンプが初期値の場合には空文字を返す
     public var expiresIn: String {

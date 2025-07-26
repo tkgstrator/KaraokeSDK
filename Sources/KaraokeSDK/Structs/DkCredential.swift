@@ -31,7 +31,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     }
 
     @MainActor
-    public struct MNS: Codable, Sendable {
+    public struct MNS: Codable {
         let authToken: String
         public let damtomoId: String
 
@@ -43,7 +43,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
 
     ///
     @MainActor
-    public struct SCR: Codable, Sendable {
+    public struct SCR: Codable {
         public let damtomoId: String
         public let cdmNo: String
 
@@ -56,7 +56,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     ///
     /// <#Description#>
     @MainActor
-    public struct DTM: Codable, Sendable {
+    public struct DTM: Codable {
         public let damtomoId: String
         public let cdmNo: String
         let deviceId: String
@@ -68,7 +68,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         ///   - cdmNo: <#cdmNo description#>
         ///   - deviceId: インストールごとに固有の値を利用する
         ///   - password: <#password description#>
-       init(damtomoId: String = "", cdmNo: String = "", deviceId: String = UIDevice.current.identifierForVendor!.uuidString, password: String = "") {
+        init(damtomoId: String = "", cdmNo: String = "", deviceId: String = UIDevice.current.identifierForVendor!.uuidString, password: String = "") {
             self.damtomoId = damtomoId
             self.cdmNo = cdmNo
             self.deviceId = deviceId
@@ -90,19 +90,19 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         // 多分一時間くらい切れないので
         expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
     }
-    
+
     @MainActor
     init(credential: DkCredential, params: LoginByDamtomoMemberIdResponse) {
-        self.loginId = credential.loginId
-        self.password = credential.password
-        self.scr = credential.scr
-        self.dtm = credential.dtm
-        self.mns = .init(authToken: params.data.authToken, damtomoId: params.data.damtomoId)
-        self.compId = credential.compId
-        self.compAuthKey = credential.compAuthKey
-        self.dmkAccessKey = credential.dmkAccessKey
+        loginId = credential.loginId
+        password = credential.password
+        scr = credential.scr
+        dtm = credential.dtm
+        mns = .init(authToken: params.data.authToken, damtomoId: params.data.damtomoId)
+        compId = credential.compId
+        compAuthKey = credential.compAuthKey
+        dmkAccessKey = credential.dmkAccessKey
         // 有効期限を延長
-        self.expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
+        expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
     }
 
     typealias DkCredentialUpdateParams = (DkDamDAMTomoLoginServletResponse, LoginByDamtomoMemberIdResponse, LoginXMLResponse)
@@ -118,7 +118,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
         return self
     }
-    
+
 //    @MainActor
 //    mutating func update(params: LoginByDamtomoMemberIdResponse) -> DkCredential {
 //        mns = .init(authToken: params.data.authToken, damtomoId: params.data.damtomoId)

@@ -26,7 +26,7 @@ public final class GetMusicStreamingURLQuery: RequestType {
             "format": "json",
             "registHistoryFlg": 0,
             "requestNo": params.requestNo,
-            "serviceId": 1
+            "serviceId": 1,
         ]
     }
 }
