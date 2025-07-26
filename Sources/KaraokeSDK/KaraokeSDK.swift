@@ -27,6 +27,9 @@ public final class DKClient: ObservableObject {
     @Published
     public private(set) var code: DkCode = .init()
 
+    @Published
+    public private(set) var error: Error?
+
     public var isLogin: Bool {
         !credential.loginId.isEmpty || !credential.password.isEmpty
     }
@@ -136,14 +139,7 @@ public final class DKClient: ObservableObject {
                 .validateWith()
                 .serializingData(automaticallyCancelling: true)
                 .value
-            do {
-                return try decoder.decode(T.ResponseType.self, from: data)
-            } catch {
-                if let parameters = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
-                    Logger.error("Decoding error occurred with parameters: \(parameters) with \(error)")
-                }
-                throw error
-            }
+            return try decoder.decode(T.ResponseType.self, from: data)
         } catch {
             Logger.error("Request failed with error: \(error)")
             DispatchQueue.main.async {
