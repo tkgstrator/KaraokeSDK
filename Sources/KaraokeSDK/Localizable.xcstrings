@@ -1,0 +1,182 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "AUTHENTICATE_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authentication failed"
+          }
+        }
+      }
+    },
+    "DAM_CONNECT_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to connect to DAM"
+          }
+        }
+      }
+    },
+    "DAM_CONNECT_ERROR_R" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DAM connection error"
+          }
+        }
+      }
+    },
+    "DAM_CONNECT_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Successfully connected to DAM"
+          }
+        }
+      }
+    },
+    "DAM_PAIRING_TIMEOUT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DAM pairing timed out"
+          }
+        }
+      }
+    },
+    "DAM_QR_VALID_TIMEOUT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DAM QR code validation timed out"
+          }
+        }
+      }
+    },
+    "DAM_SEND_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to send to DAM"
+          }
+        }
+      }
+    },
+    "DAM_SEPARATE_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Successfully disconnected from DAM"
+          }
+        }
+      }
+    },
+    "LOGIN_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Login successful"
+          }
+        }
+      }
+    },
+    "MINSEI_FORBIDDEN_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minsei contract is not active"
+          }
+        }
+      }
+    },
+    "PARAM_INJUSTICE_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid parameters"
+          }
+        }
+      }
+    },
+    "PICTURESEND_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to send picture"
+          }
+        }
+      }
+    },
+    "PICTURESEND_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Picture sent successfully"
+          }
+        }
+      }
+    },
+    "REMOCONSEND_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote control command sent successfully"
+          }
+        }
+      }
+    },
+    "REMOCONSEND_TIMEOUT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remote control command timed out"
+          }
+        }
+      }
+    },
+    "TOKEN_EXPIRED_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Token has expired"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
