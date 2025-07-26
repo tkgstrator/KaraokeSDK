@@ -18,13 +18,16 @@ public protocol RequestType: URLRequestConvertible {
     var parameters: Parameters? { get }
     var encoding: ParameterEncoding { get }
     var decoder: DataDecoder { get }
+    var loginRequired: Bool { get }
 }
 
 public extension RequestType {
+    /// デフォルトのURL
     var baseURL: URL {
         URL(string: "https://denmokuapp.clubdam.com")!
     }
-
+    
+    /// デフォルトのエンコーディング方式
     var encoding: ParameterEncoding {
         switch method {
             case .get:
@@ -35,21 +38,35 @@ public extension RequestType {
                 URLEncoding.default
         }
     }
-
+    
+    /// デコーダー
     var decoder: DataDecoder {
         JSONDecoder()
     }
-
+    
+    /// パラメーター
     var parameters: Parameters? {
         nil
     }
 
+    /// 共通のヘッダー
+    /// UAはとりあえず本家に合わせておく
     var headers: HTTPHeaders? {
         [
-            "User-Agent": "DenmokuMini/4.12.0 (jp.co.DKClient.DENMOKULite01; build:49; iOS 17.6.0) Alamofire/5.9.1",
+            "User-Agent": "DenmokuMini/4.13.8 (jp.co.dkkaraoke.DENMOKULite01; build:59; iOS 17.5.1) Alamofire/5.9.1",
         ]
     }
-
+    
+    /// ログインが要求されるリクエストかどうか
+    /// 普通は要求される
+    var loginRequired: Bool {
+        true
+    }
+    
+    /// URLRequestへの変換
+    /// HTTPMethodとHeadersを設定する
+    /// Parametersがある場合はエンコードする
+    /// - Returns: <#description#>
     func asURLRequest() throws -> URLRequest {
         let url: URL = baseURL.appendingPathComponent(path)
         let request: URLRequest = try .init(url: url, method: method, headers: headers)

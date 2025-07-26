@@ -19,20 +19,16 @@ public final class DkDamConnectServletQuery: RequestType {
 
     public init(params: DkDamConnectServletRequest) {
         parameters = [
-            "QRcode": params.qrCode,
+            "QRcode": params.code.rawValue,
         ]
     }
 }
 
 public struct DkDamConnectServletRequest {
-    public let qrCode: String
-
-    public init(qrCode: String) {
-        self.qrCode = qrCode
-    }
-
-    public init(qrCode: DkCode) {
-        self.qrCode = qrCode.code
+    public let code: DkCode
+    
+    public init(code: DkCode) {
+        self.code = code
     }
 }
 
