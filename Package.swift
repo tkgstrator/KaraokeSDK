@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "KaraokeSDK",
+    defaultLocalization: "ja",
     platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -33,6 +34,7 @@ let package = Package(
                 .product(name: "KeychainAccess", package: "KeychainAccess"),
                 .product(name: "XMLCoder", package: "XMLCoder"),
             ],
+            resources: [.process("Localizable.xcstrings")],
             plugins: [.plugin(name: "SwiftLintBuildToolPlugin", package: "SwiftLintPlugins")]
         ),
         .testTarget(

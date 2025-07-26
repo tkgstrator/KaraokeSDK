@@ -28,7 +28,7 @@ public final class DKClient: ObservableObject {
     public private(set) var code: DkCode = .init()
 
     @Published
-    public private(set) var localizedError: DkError?
+    public var localizedError: DkError?
 
     public var isLogin: Bool {
         !credential.loginId.isEmpty || !credential.password.isEmpty

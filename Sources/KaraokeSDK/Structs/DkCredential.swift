@@ -21,6 +21,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     let compId: Int
     let compAuthKey: String
     let dmkAccessKey: String
+    public var code: DkCode
     // 最終更新時間
     var expiresIn: Date
 
@@ -89,6 +90,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         dmkAccessKey = "3ZpXW3K8anQvonUX7IMj"
         // 多分一時間くらい切れないので
         expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
+        code = .init()
     }
 
     @MainActor
@@ -103,6 +105,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         dmkAccessKey = credential.dmkAccessKey
         // 有効期限を延長
         expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
+        code = credential.code
     }
 
     typealias DkCredentialUpdateParams = (DkDamDAMTomoLoginServletResponse, LoginByDamtomoMemberIdResponse, LoginXMLResponse)
@@ -119,80 +122,11 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         return self
     }
 
-//    @MainActor
-//    mutating func update(params: LoginByDamtomoMemberIdResponse) -> DkCredential {
-//        mns = .init(authToken: params.data.authToken, damtomoId: params.data.damtomoId)
-//        // 有効期限を延長
-//        expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
-//        return self
-//    }
+    @MainActor
+    mutating func update(params: DkDamConnectServletResponse) -> DkCredential {
+        if let code: DkCode = .init(rawValue: params.qrCode) {
+            self.code = code
+        }
+        return self
+    }
 }
-
-// public struct DkCredential: AuthenticationCredential, Codable, @unchecked Sendable {
-//    // 筐体と連携しようとしたら存在するプロパティ
-//    // 連携はログインされていなくても実行可能
-//    public var qrCode: QRCode?
-//    // ログインを試みたなら入力されているプロパティ
-//    public var loginId: String
-//    public var password: String
-//    // ある種固定値でも良いプロパティ
-//    public let deviceId: String
-//    public let compId: Int
-//    public let compAuthKey: String
-//    public let dmkAccessKey: String
-//    // ログイン成功したならあるプロパティ
-//    public var authToken: String
-//    public var cdmNo: String
-//    public var damtomoId: String
-//    // プロトコルに準拠するためのプロパティ
-//    public var expiresIn: Date
-//
-//    // 未設定の場合にはログイン状態ではないので有効期限を無視してリフレッシュが不要とする
-//    // NOTE: QRCodeの有効期限も必要だった......
-//    public var requiresRefresh: Bool {
-//        loginId.isEmpty && password.isEmpty && authToken.isEmpty ? false : expiresIn <= .init()
-//    }
-//
-//    init() {
-//        qrCode = nil
-//        loginId = ""
-//        password = ""
-//        deviceId = DkCredential.deviceId
-//        compId = 1
-//        compAuthKey = "2/Qb9R@8s*"
-//        dmkAccessKey = "3ZpXW3K8anQvonUX7IMj"
-//        authToken = ""
-//        cdmNo = ""
-//        damtomoId = ""
-//        expiresIn = .init(timeIntervalSinceNow: 60 * 60 * 6)
-//    }
-//
-//    @discardableResult
-//    mutating func update(_ response: LoginByDamtomoMemberIdResponse) -> DkCredential {
-//        authToken = response.data.authToken
-//        damtomoId = response.data.damtomoId
-//        return self
-//    }
-//
-//    @discardableResult
-//    mutating func update(_ request: LoginByDamtomoMemberIdRequest) -> DkCredential {
-//        loginId = request.loginId
-//        password = request.password
-//        return self
-//    }
-//
-//    @discardableResult
-//    mutating func update(_ response: DkDamConnectServletResponse) -> DkCredential {
-//        qrCode = .init(code: response.qrCode)
-//        return self
-//    }
-//
-//    public static var deviceId: String {
-////        #if os(iOS)
-////        let uuid = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
-////        #elseif os(macOS)
-////        let uuid = UUID().uuidString
-////        #endif
-//        UUID().uuidString.data(using: .utf8)!.base64EncodedString()
-//    }
-// }

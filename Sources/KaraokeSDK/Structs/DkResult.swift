@@ -35,7 +35,7 @@ public enum DkResult {
 }
 
 public enum DkErrorReason: String, CaseIterable {
-    case TOKEN_EXPIRED_ERROR
+    case MINSEI_TOKEN_EXPIRED_ERROR
     case MINSEI_FORBIDDEN_ERROR
 }
 
@@ -54,15 +54,15 @@ public struct DkError: Error, LocalizedError, Sendable, Identifiable {
 
 extension DkResult.DkDenmoku: LocalizedError {
     public var errorDescription: String? {
-        nil
+        result.rawValue
     }
 
     public var failureReason: String? {
-        nil
+        "REASON_\(result.rawValue)"
     }
 
     public var recoverySuggestion: String? {
-        nil
+        "RECOVERY_\(result.rawValue)"
     }
 }
 
@@ -86,14 +86,21 @@ extension DkResult.DkMinsei: LocalizedError {
             case 1_004:
                 DkErrorReason.MINSEI_FORBIDDEN_ERROR.rawValue
             case 1_006:
-                DkErrorReason.TOKEN_EXPIRED_ERROR.rawValue
+                DkErrorReason.MINSEI_TOKEN_EXPIRED_ERROR.rawValue
             default:
                 message
         }
     }
 
     public var failureReason: String? {
-        nil
+        switch statusCode {
+            case 1_004:
+                "REASON_\(DkErrorReason.MINSEI_FORBIDDEN_ERROR.rawValue)"
+            case 1_006:
+                "REASON_\(DkErrorReason.MINSEI_TOKEN_EXPIRED_ERROR.rawValue)"
+            default:
+                message
+        }
     }
 
     public var recoverySuggestion: String? {

@@ -88,8 +88,16 @@ extension URLRequest {
             if type.contains("application/json"),
                let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any & Sendable]
             {
+                if targetUrl.path.hasSuffix("DkDamDAMTomoLoginServlet") {
+                    httpBody = JSONEncoding.default.encode(parameters.merging([
+                        "deviceId": credential.dtm.deviceId,
+                        "cdmNo": credential.dtm.cdmNo,
+                    ]))
+                    return
+                }
                 Logger.debug("Merging credential with existing JSON parameters.")
                 httpBody = JSONEncoding.default.encode(parameters.merging([
+                    "QRcode": credential.code.rawValue,
                     "deviceId": credential.dtm.deviceId,
                     "cdmNo": credential.dtm.cdmNo,
                 ]))
