@@ -54,15 +54,15 @@ public struct DkError: Error, LocalizedError, Sendable, Identifiable {
 
 extension DkResult.DkDenmoku: LocalizedError {
     public var errorDescription: String? {
-        result.rawValue
+        NSLocalizedString(result.rawValue, bundle: .module, comment: "")
     }
 
     public var failureReason: String? {
-        "REASON_\(result.rawValue)"
+        NSLocalizedString("REASON_\(result.rawValue)", bundle: .module, comment: "")
     }
 
     public var recoverySuggestion: String? {
-        "RECOVERY_\(result.rawValue)"
+        NSLocalizedString("RECOVERY_\(result.rawValue)", bundle: .module, comment: "")
     }
 }
 
@@ -84,9 +84,9 @@ extension DkResult.DkMinsei: LocalizedError {
     public var errorDescription: String? {
         switch statusCode {
             case 1_004:
-                DkErrorReason.MINSEI_FORBIDDEN_ERROR.rawValue
+                NSLocalizedString(DkErrorReason.MINSEI_FORBIDDEN_ERROR.rawValue, bundle: .module, comment: "")
             case 1_006:
-                DkErrorReason.MINSEI_TOKEN_EXPIRED_ERROR.rawValue
+                NSLocalizedString(DkErrorReason.MINSEI_TOKEN_EXPIRED_ERROR.rawValue, bundle: .module, comment: "")
             default:
                 message
         }
@@ -95,9 +95,9 @@ extension DkResult.DkMinsei: LocalizedError {
     public var failureReason: String? {
         switch statusCode {
             case 1_004:
-                "REASON_\(DkErrorReason.MINSEI_FORBIDDEN_ERROR.rawValue)"
+                NSLocalizedString("REASON_\(DkErrorReason.MINSEI_FORBIDDEN_ERROR.rawValue)", bundle: .module, comment: "")
             case 1_006:
-                "REASON_\(DkErrorReason.MINSEI_TOKEN_EXPIRED_ERROR.rawValue)"
+                NSLocalizedString("REASON_\(DkErrorReason.MINSEI_TOKEN_EXPIRED_ERROR.rawValue)", bundle: .module, comment: "")
             default:
                 message
         }
