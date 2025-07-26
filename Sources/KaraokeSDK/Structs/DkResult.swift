@@ -44,13 +44,13 @@ public struct DkError: Error, LocalizedError, Sendable, Identifiable {
     public let errorDescription: String?
     public let failureReason: String?
     public let recoverySuggestion: String?
- 
-    init<T: LocalizedError>(_ error: T) {
-        self.errorDescription = error.errorDescription
-        self.failureReason = error.failureReason
-        self.recoverySuggestion = error.recoverySuggestion
+
+    init(_ error: some LocalizedError) {
+        errorDescription = error.errorDescription
+        failureReason = error.failureReason
+        recoverySuggestion = error.recoverySuggestion
     }
- }
+}
 
 extension DkResult.DkDenmoku: LocalizedError {
     public var errorDescription: String? {
@@ -83,12 +83,12 @@ extension DkResult.DkWebSys.Result: LocalizedError {
 extension DkResult.DkMinsei: LocalizedError {
     public var errorDescription: String? {
         switch statusCode {
-        case 1004:
-            return DkErrorReason.MINSEI_FORBIDDEN_ERROR.rawValue
-        case 1006:
-            return DkErrorReason.TOKEN_EXPIRED_ERROR.rawValue
-        default:
-            return message
+            case 1_004:
+                DkErrorReason.MINSEI_FORBIDDEN_ERROR.rawValue
+            case 1_006:
+                DkErrorReason.TOKEN_EXPIRED_ERROR.rawValue
+            default:
+                message
         }
     }
 
