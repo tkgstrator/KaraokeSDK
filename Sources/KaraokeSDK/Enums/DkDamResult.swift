@@ -5,6 +5,9 @@
 //  Created by devonly on 2025/07/14.
 //
 
+import Foundation
+import SwiftUICore
+
 public enum DkDamResult: String, Decodable, Sendable, CaseIterable {
     case paramInjusticeError = "PARAM_INJUSTICE_ERROR"
     case loginOk = "LOGIN_OK"

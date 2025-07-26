@@ -9,6 +9,12 @@
             "state" : "translated",
             "value" : "Authentication failed"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "認証エラー"
+          }
         }
       }
     },
@@ -19,6 +25,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to connect to DAM"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携エラー"
           }
         }
       }
@@ -31,6 +43,12 @@
             "state" : "translated",
             "value" : "DAM connection error"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携エラー"
+          }
         }
       }
     },
@@ -41,6 +59,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Successfully connected to DAM"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携成功"
           }
         }
       }
@@ -53,6 +77,12 @@
             "state" : "translated",
             "value" : "DAM pairing timed out"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タイムアウト"
+          }
         }
       }
     },
@@ -63,6 +93,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DAM QR code validation timed out"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タイムアウト"
           }
         }
       }
@@ -75,6 +111,12 @@
             "state" : "translated",
             "value" : "Failed to send to DAM"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "楽曲予約に失敗しました"
+          }
         }
       }
     },
@@ -85,6 +127,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Successfully disconnected from DAM"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携解除に成功しました"
           }
         }
       }
@@ -97,6 +145,12 @@
             "state" : "translated",
             "value" : "Login successful"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログイン成功しました"
+          }
         }
       }
     },
@@ -107,6 +161,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Minsei contract is not active"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "権限エラー"
           }
         }
       }
@@ -119,6 +179,12 @@
             "state" : "translated",
             "value" : "Invalid parameters"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パラメータエラー"
+          }
         }
       }
     },
@@ -129,6 +195,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Failed to send picture"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像送信エラー"
           }
         }
       }
@@ -141,6 +213,166 @@
             "state" : "translated",
             "value" : "Picture sent successfully"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像送信成功"
+          }
+        }
+      }
+    },
+    "REASON_AUTHENTICATE_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IDかパスワードが間違っています"
+          }
+        }
+      }
+    },
+    "REASON_DAM_CONNECT_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QRコードが誤っています"
+          }
+        }
+      }
+    },
+    "REASON_DAM_CONNECT_ERROR_R" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QRコードが誤っています"
+          }
+        }
+      }
+    },
+    "REASON_DAM_CONNECT_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携に成功しました"
+          }
+        }
+      }
+    },
+    "REASON_DAM_PAIRING_TIMEOUT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "筐体がネットワークに繋がっていません"
+          }
+        }
+      }
+    },
+    "REASON_DAM_QR_VALID_TIMEOUT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "QRコードの有効期限が切れています"
+          }
+        }
+      }
+    },
+    "REASON_DAM_SEND_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "楽曲予約に失敗しました"
+          }
+        }
+      }
+    },
+    "REASON_DAM_SEPARATE_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連携解除に成功しました"
+          }
+        }
+      }
+    },
+    "REASON_LOGIN_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログインに成功しました"
+          }
+        }
+      }
+    },
+    "REASON_MINSEI_FORBIDDEN_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "カラオケ★DAMの契約がありません"
+          }
+        }
+      }
+    },
+    "REASON_PARAM_INJUSTICE_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パラメータが誤っています"
+          }
+        }
+      }
+    },
+    "REASON_PICTURESEND_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像の送信に失敗しました"
+          }
+        }
+      }
+    },
+    "REASON_PICTURESEND_OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像の送信に成功しました"
+          }
+        }
+      }
+    },
+    "REASON_TOKEN_EXPIRED_ERROR" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トークンの有効期限が切れています"
+          }
         }
       }
     },
@@ -151,6 +383,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remote control command sent successfully"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コマンド送信に成功しました"
           }
         }
       }
@@ -163,6 +401,12 @@
             "state" : "translated",
             "value" : "Remote control command timed out"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コマンド送信がタイムアウトしました"
+          }
         }
       }
     },
@@ -173,6 +417,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Token has expired"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トークン期限切れ"
           }
         }
       }
