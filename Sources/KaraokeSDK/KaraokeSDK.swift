@@ -28,7 +28,7 @@ public final class DKClient: ObservableObject {
     public private(set) var code: DkCode = .init()
 
     @Published
-    public private(set) var localizedError: DkError? = nil
+    public private(set) var localizedError: DkError?
 
     public var isLogin: Bool {
         !credential.loginId.isEmpty || !credential.password.isEmpty
@@ -140,7 +140,7 @@ public final class DKClient: ObservableObject {
                 .serializingData(automaticallyCancelling: true)
                 .value
             return try decoder.decode(T.ResponseType.self, from: data)
-        } catch (let error) {
+        } catch {
             Logger.error("Request failed with error: \(error)")
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .DKRequestFailedWithError, object: error)
