@@ -93,6 +93,10 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         code = .init()
     }
 
+    /// ログイン処理で使う初期化
+    /// - Parameters:
+    ///   - credential: <#credential description#>
+    ///   - params: <#params description#>
     @MainActor
     init(credential: DkCredential, params: LoginByDamtomoMemberIdResponse) {
         loginId = credential.loginId
@@ -109,7 +113,10 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     }
 
     typealias DkCredentialUpdateParams = (DkDamDAMTomoLoginServletResponse, LoginByDamtomoMemberIdResponse, LoginXMLResponse)
-
+    
+    /// リフレッシュした場合に更新する処理
+    /// - Parameter params: <#params description#>
+    /// - Returns: <#description#>
     @MainActor
     mutating func update(params: DkCredentialUpdateParams) -> DkCredential {
         loginId = params.0.damtomoId
@@ -121,12 +128,24 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
         return self
     }
-
+    
+    /// 連携してコードを登録
+    /// - Parameter params: <#params description#>
+    /// - Returns: <#description#>
     @MainActor
     mutating func update(params: DkDamConnectServletResponse) -> DkCredential {
         if let code: DkCode = .init(rawValue: params.qrCode) {
             self.code = code
         }
+        return self
+    }
+    
+    /// 連携解除して初期化
+    /// - Parameter params: <#params description#>
+    /// - Returns: <#description#>
+    @MainActor
+    mutating func update(params: DkDamSeparateServletResponse) -> DkCredential {
+        code = .init()
         return self
     }
 }

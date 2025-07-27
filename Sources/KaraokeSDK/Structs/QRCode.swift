@@ -55,6 +55,10 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
     public var requiresRefresh: Bool {
         timestamp <= .init()
     }
+    
+    public var isConnected: Bool {
+        timestamp.timeIntervalSince1970 != 0
+    }
 
     /// 有効期限を日付で表示する
     /// タイムスタンプが初期値の場合には空文字を返す

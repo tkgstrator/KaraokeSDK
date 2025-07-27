@@ -27,8 +27,13 @@ public final class DKClient: ObservableObject {
     @Published
     public var localizedError: DkError?
 
+    // ログインしているかどうか
     public var isLogin: Bool {
         !credential.loginId.isEmpty || !credential.password.isEmpty
+    }
+    
+    public var isConnected: Bool {
+        credential.code.isConnected
     }
 
     public var isDisabled: Bool {
@@ -59,7 +64,14 @@ public final class DKClient: ObservableObject {
     @discardableResult
     public func connect(code: DkCode) async throws -> DkDamConnectServletResponse {
         let response = try await request(DkDamConnectServletQuery(params: .init(code: code)))
-        try keychain.set(DkCode(rawValue: response.qrCode), forKey: "dmk-code")
+        try keychain.set(credential.update(params: response), forKey: "dmk-credential")
+        return response
+    }
+    
+    @discardableResult
+    public func disconnect() async throws -> DkDamSeparateServletResponse {
+        let response = try await request(DkDamSeparateServletQuery())
+        try keychain.set(credential.update(params: response), forKey: "dmk-credential")
         return response
     }
 
