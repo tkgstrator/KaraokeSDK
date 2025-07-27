@@ -25,9 +25,6 @@ public final class DKClient: ObservableObject {
     public private(set) var credential: DkCredential = .init()
 
     @Published
-    public private(set) var code: DkCode = .init()
-
-    @Published
     public var localizedError: DkError?
 
     public var isLogin: Bool {
@@ -45,10 +42,6 @@ public final class DKClient: ObservableObject {
         if let credential: DkCredential = try? keychain.get(DkCredential.self, forKey: "dmk-credential") {
             self.credential = credential
             Logger.debug("Loaded credential from keychain: \(credential)")
-        }
-        if let code: DkCode = try? keychain.get(DkCode.self, forKey: "dmk-code") {
-            self.code = code
-            Logger.debug("Loaded code from keychain: \(code)")
         }
     }
 

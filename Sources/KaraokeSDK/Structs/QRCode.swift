@@ -28,7 +28,7 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
 
     // 読み取ったときはエラーなどを発生させて無効なQRコードであることを示す
     public init?(rawValue: String) {
-        let expiresIn: TimeInterval = 60 * 60 * 6
+        let expiresIn: TimeInterval = .init(Int32.max)
         let formatter: DateFormatter = .init()
         formatter.timeZone = .current
         formatter.dateFormat = "HH:mm:ss"
@@ -45,7 +45,7 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
             return nil
         }
         self.serialNo = serialNo
-        timestamp = .init(timeIntervalSinceNow: expiresIn)
+        timestamp = .init(timeIntervalSince1970: expiresIn)
     }
 
     /// リフレッシュが必要かどうか
@@ -72,10 +72,9 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
         if host.isEmpty || serialNo.isEmpty {
             return ""
         }
-//        let expiresIn: TimeInterval = 60 * 60 * 6
         let host: [String] = host.split(separator: ".").compactMap { UInt8($0) }.compactMap { String(format: "%02X", $0) }
         let serialNo: [String] = serialNo.utf8.map { String(format: "%02X", $0) }.joined().chunked(by: 2)
-        let timestamp: [String] = String(format: "%08X", Int(Date(timeIntervalSinceNow: Double(Int32.max)).timeIntervalSince1970)).chunked(by: 2)
+        let timestamp: [String] = String(format: "%08X", Int(timestamp.timeIntervalSince1970)).chunked(by: 2)
         return [
             host[0],
             serialNo[4],
