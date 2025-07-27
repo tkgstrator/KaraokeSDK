@@ -147,8 +147,7 @@ public final class DKClient: ObservableObject {
             }
             if let afError = error.asAFError,
                let underlyingError: Error = afError.underlyingError,
-               let localizedError: LocalizedError = underlyingError as? LocalizedError
-            {
+               let localizedError: LocalizedError = underlyingError as? LocalizedError {
                 Logger.error("Localized error: \(localizedError)")
                 self.localizedError = .init(localizedError)
             }
