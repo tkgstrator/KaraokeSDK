@@ -15,13 +15,9 @@ public final class DkDamSeparateServletQuery: RequestType {
 
     public let path: String = "dkdenmoku/DkDamSeparateServlet"
     public let method: HTTPMethod = .post
-    public let parameters: Parameters?
+//    public let parameters: Parameters?
 
-    public init(params: DkDamSeparateServletRequest) {
-        parameters = [
-            "cdmNo": params.cdmNo,
-        ]
-    }
+    public init() {}
 }
 
 public struct DkDamSeparateServletRequest {

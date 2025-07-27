@@ -18,6 +18,7 @@ extension Keychain {
     }
 
     func set(_ value: some Codable, forKey key: String) throws {
+        Logger.debug("Update Credential: \(value)")
         let encoder: JSONEncoder = .init()
         let data = try encoder.encode(value)
         try set(data, key: key)
