@@ -7,6 +7,7 @@
 
 import Alamofire
 import Foundation
+import QuantumLeap
 
 extension DataRequest {
     @discardableResult

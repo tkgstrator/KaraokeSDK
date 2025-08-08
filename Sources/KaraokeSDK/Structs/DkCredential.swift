@@ -113,7 +113,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     }
 
     typealias DkCredentialUpdateParams = (DkDamDAMTomoLoginServletResponse, LoginByDamtomoMemberIdResponse, LoginXMLResponse)
-    
+
     /// リフレッシュした場合に更新する処理
     /// - Parameter params: <#params description#>
     /// - Returns: <#description#>
@@ -128,7 +128,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
         return self
     }
-    
+
     /// 連携してコードを登録
     /// - Parameter params: <#params description#>
     /// - Returns: <#description#>
@@ -139,7 +139,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         }
         return self
     }
-    
+
     /// 連携解除して初期化
     /// - Parameter params: <#params description#>
     /// - Returns: <#description#>
