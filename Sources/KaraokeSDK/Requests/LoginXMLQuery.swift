@@ -16,7 +16,8 @@ public typealias LoginXMLRequest = DkDamDAMTomoLoginServletRequest
 public final class LoginXMLQuery: RequestType {
     public typealias ResponseType = LoginXMLResponse
 
-    public let baseURL: URL = .init(string: "https://www.clubdam.com")!
+    public let baseURL = URL(unsafeString: "https://www.clubdam.com") // Use the correct base URL for your API
+//        .init(unsafeString: "https://www.clubdam.com")
     public let path: String = "app/damtomo/auth/LoginXML.do"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?

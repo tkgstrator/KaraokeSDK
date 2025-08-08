@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import QuantumLeap
 
 public struct DkCode: Codable, RawRepresentable, Sendable {
     public let host: String
@@ -55,7 +56,7 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
     public var requiresRefresh: Bool {
         timestamp <= .init()
     }
-    
+
     public var isConnected: Bool {
         timestamp.timeIntervalSince1970 != 0
     }

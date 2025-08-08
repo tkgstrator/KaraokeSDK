@@ -11,6 +11,7 @@ import Foundation
 import KeychainAccess
 import SwiftUI
 @preconcurrency
+import QuantumLeap
 import XMLCoder
 
 @MainActor
@@ -31,7 +32,7 @@ public final class DKClient: ObservableObject {
     public var isLogin: Bool {
         !credential.loginId.isEmpty || !credential.password.isEmpty
     }
-    
+
     public var isConnected: Bool {
         credential.code.isConnected
     }
@@ -67,7 +68,7 @@ public final class DKClient: ObservableObject {
         try keychain.set(credential.update(params: response), forKey: "dmk-credential")
         return response
     }
-    
+
     @discardableResult
     public func disconnect() async throws -> DkDamSeparateServletResponse {
         let response = try await request(DkDamSeparateServletQuery())
@@ -152,7 +153,8 @@ public final class DKClient: ObservableObject {
             }
             if let afError = error.asAFError,
                let underlyingError: Error = afError.underlyingError,
-               let localizedError: LocalizedError = underlyingError as? LocalizedError {
+               let localizedError: LocalizedError = underlyingError as? LocalizedError
+            {
                 Logger.error("Localized error: \(localizedError)")
                 self.localizedError = .init(localizedError)
             }
