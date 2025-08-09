@@ -30,11 +30,13 @@ public struct DkDamSendServletRequest {
     let requestNo: String
     let interrupt: Bool
     let myKey: Int
+    let option: DkDamSendQueryOption
 
-    public init(requestNo: String, interrupt: Bool = false, myKey: Int = 0) {
+    public init(requestNo: String, interrupt: Bool = false, myKey: Int = 0, option: DkDamSendQueryOption = .init()) {
         self.requestNo = requestNo.replacingOccurrences(of: "-", with: "")
         self.interrupt = interrupt
         self.myKey = myKey
+        self.option = option
     }
 }
 
