@@ -15,9 +15,14 @@ public final class DkDamSeparateServletQuery: RequestType {
 
     public let path: String = "dkdenmoku/DkDamSeparateServlet"
     public let method: HTTPMethod = .post
-//    public let parameters: Parameters?
+    public let loginRequired: Bool = false
+    public let parameters: Parameters?
 
-    public init() {}
+    public init() {
+        // ダミーデータを入れておかないとBodyがないとエラーが発生する
+        // 必要なパラメータはマージ時に自動で設定される
+        parameters = [:]
+    }
 }
 
 public struct DkDamSeparateServletRequest {
