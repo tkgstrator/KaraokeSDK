@@ -22,7 +22,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
     let compAuthKey: String
     let dmkAccessKey: String
     public var code: DkCode
-    // 最終更新時間
+    // MNSの有効期限
     var expiresIn: Date
 
     /// リフレッシュが必要かどうか
@@ -88,8 +88,7 @@ public struct DkCredential: AuthenticationCredential, Codable, Sendable {
         compId = 1
         compAuthKey = "2/Qb9R@8s*"
         dmkAccessKey = "3ZpXW3K8anQvonUX7IMj"
-        // 多分一時間くらい切れないので
-        expiresIn = Date(timeIntervalSinceNow: 60 * 60 * 1)
+        expiresIn = Date(timeIntervalSince1970: 0)
         code = .init()
     }
 
