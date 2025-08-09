@@ -5,7 +5,6 @@
 //  Created by devonly on 2025/07/15.
 //
 
-import CodeScanner
 import Foundation
 import QuantumLeap
 
@@ -30,17 +29,6 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
         timestamp = .init(timeIntervalSince1970: 0)
     }
     #endif
-
-    /// スキャンした結果を読み込む
-    /// - Parameter result: <#result description#>
-    public init?(result: ScanResult) {
-        Logger.debug("Scanning QR code: \(result.string)")
-        guard let rawValue: String = result.string.lowercased().capture(pattern: #"code=([\w]{32})"#, group: 1)
-        else {
-            return nil
-        }
-        self.init(rawValue: rawValue)
-    }
 
     // 読み取ったときはエラーなどを発生させて無効なQRコードであることを示す
     public init?(rawValue: String) {
