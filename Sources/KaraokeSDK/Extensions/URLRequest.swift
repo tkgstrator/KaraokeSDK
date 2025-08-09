@@ -10,6 +10,9 @@ import Foundation
 import QuantumLeap
 
 extension URLRequest {
+    /// このメソッドは必ず呼ばれる
+    /// 初期値が入るか、そうでないかの違いだけ
+    /// - Parameter credential: <#credential description#>
     mutating func merging(_ credential: DkCredential) {
         guard let targetUrl: URL = url else {
             Logger.error("URL is nil, cannot merge credential.")
@@ -17,6 +20,7 @@ extension URLRequest {
         }
 
         // Access Key Header
+        // これは常に付ける必要があるため
         headers.add(name: "dmk-access-key", value: credential.dmkAccessKey)
 
         guard let body: Data = httpBody,
@@ -89,7 +93,8 @@ extension URLRequest {
             if type.contains("application/json"),
                let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any & Sendable]
             {
-                if targetUrl.path.hasSuffix("DkDamDAMTomoLoginServlet") {
+                // ログインと連携ではQRコードを上書きしない
+                if targetUrl.path.hasSuffix("DkDamDAMTomoLoginServlet") || targetUrl.path.hasSuffix("DkDamConnectServlet") {
                     httpBody = JSONEncoding.default.encode(parameters.merging([
                         "deviceId": credential.dtm.deviceId,
                         "cdmNo": credential.dtm.cdmNo,
