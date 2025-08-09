@@ -16,9 +16,12 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
 
     #if targetEnvironment(simulator)
     public init() {
-        host = "010.092.172.007"
-        serialNo = "AT002983"
-        timestamp = .init(timeIntervalSince1970: Double(Int32.max))
+//        host = "010.092.172.007"
+//        serialNo = "AT002983"
+//        timestamp = .init(timeIntervalSince1970: Double(Int32.max))
+        host = ""
+        serialNo = ""
+        timestamp = .init(timeIntervalSince1970: 0)
     }
     #else
     public init() {
@@ -31,11 +34,11 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
     /// スキャンした結果を読み込む
     /// - Parameter result: <#result description#>
     public init?(result: ScanResult) {
+        Logger.debug("Scanning QR code: \(result.string)")
         guard let rawValue: String = result.string.lowercased().capture(pattern: #"code=([\w]{32})"#, group: 1)
         else {
             return nil
         }
-        Logger.debug("Scanned QR code: \(rawValue)")
         self.init(rawValue: rawValue)
     }
 
