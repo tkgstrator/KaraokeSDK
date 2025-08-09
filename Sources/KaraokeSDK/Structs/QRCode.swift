@@ -35,6 +35,7 @@ public struct DkCode: Codable, RawRepresentable, Sendable {
         else {
             return nil
         }
+        Logger.debug("Scanned QR code: \(rawValue)")
         self.init(rawValue: rawValue)
     }
 
