@@ -16,6 +16,7 @@ public final class DkDamConnectServletQuery: RequestType {
     public let path: String = "dkdenmoku/DkDamConnectServlet"
     public let method: HTTPMethod = .post
     public let parameters: Parameters?
+    public let loginRequired: Bool = false
 
     public init(params: DkDamConnectServletRequest) {
         parameters = [

@@ -9,6 +9,7 @@ import Foundation
 
 extension URL {
     init(unsafeString: String) {
+        // swiftlint:disable:next force_unwrapping
         self.init(string: unsafeString)!
     }
 }

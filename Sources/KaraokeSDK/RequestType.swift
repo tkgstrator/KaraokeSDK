@@ -24,7 +24,7 @@ public protocol RequestType: URLRequestConvertible {
 public extension RequestType {
     /// デフォルトのURL
     var baseURL: URL {
-        URL(string: "https://denmokuapp.clubdam.com")!
+        URL(unsafeString: "https://denmokuapp.clubdam.com")
     }
 
     /// デフォルトのエンコーディング方式

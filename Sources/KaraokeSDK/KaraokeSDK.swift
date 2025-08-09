@@ -65,6 +65,7 @@ public final class DKClient: ObservableObject {
     @discardableResult
     public func connect(code: DkCode) async throws -> DkDamConnectServletResponse {
         let response = try await request(DkDamConnectServletQuery(params: .init(code: code)))
+        Logger.debug("Connect response: \(response)")
         try keychain.set(credential.update(params: response), forKey: "dmk-credential")
         return response
     }
@@ -72,6 +73,7 @@ public final class DKClient: ObservableObject {
     @discardableResult
     public func disconnect() async throws -> DkDamSeparateServletResponse {
         let response = try await request(DkDamSeparateServletQuery())
+        Logger.debug("Disconnect response: \(response)")
         try keychain.set(credential.update(params: response), forKey: "dmk-credential")
         return response
     }
@@ -82,7 +84,7 @@ public final class DKClient: ObservableObject {
     /// - Parameter params: IDとパスワード
     /// - Returns: ログイン結果
     func loginXML(params: DkDamDAMTomoLoginServletRequest) async throws -> LoginXMLResponse {
-        let url: URL = .init(string: "https://www.clubdam.com/app/damtomo/auth/LoginXML.do")!
+        let url: URL = .init(unsafeString: "https://www.clubdam.com/app/damtomo/auth/LoginXML.do")
         let parameters: [String: String] = [
             "procKbn": "1",
             "loginId": params.damtomoId,

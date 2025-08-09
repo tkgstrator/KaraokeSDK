@@ -32,7 +32,7 @@ public struct DkDamSendServletRequest {
     let myKey: Int
 
     public init(requestNo: String, interrupt: Bool = false, myKey: Int = 0) {
-        self.requestNo = requestNo
+        self.requestNo = requestNo.replacingOccurrences(of: "-", with: "")
         self.interrupt = interrupt
         self.myKey = myKey
     }
