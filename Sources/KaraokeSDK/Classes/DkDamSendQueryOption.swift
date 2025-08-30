@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+@MainActor
 public final class DkDamSendQueryOption: ObservableObject {
     @Published
     public var guideMelody: GuideMelody = .OFF
@@ -56,7 +57,9 @@ public final class DkDamSendQueryOption: ObservableObject {
         case NO_FADEOUT
     }
 
-    public init() {}
+    public static let `default`: DkDamSendQueryOption = .init()
+
+    private init() {}
 }
 
 public protocol ToggleTypeEnum: RawRepresentable, Equatable, CaseIterable where RawValue == Int {
