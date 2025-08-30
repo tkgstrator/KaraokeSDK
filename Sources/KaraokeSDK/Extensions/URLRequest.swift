@@ -33,8 +33,7 @@ extension URLRequest {
         if targetUrl.path.hasPrefix("/cwa") {
             Logger.debug("URL path starts with 'cwa', merging credential into parameters.")
             if type.contains("application/json"),
-               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any]
-            {
+               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any] {
                 fatalError("URL-encoded parameters are not supported in this context.")
             }
 
@@ -53,8 +52,7 @@ extension URLRequest {
         if targetUrl.path.hasPrefix("/minsei") {
             Logger.debug("URL path starts with 'minsei', merging credential into parameters.")
             if type.contains("application/json"),
-               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any]
-            {
+               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any] {
                 fatalError("URL-encoded parameters are not supported in this context.")
             }
 
@@ -73,8 +71,7 @@ extension URLRequest {
         if targetUrl.path.hasPrefix("/dkwebsys") {
             Logger.debug("URL path starts with 'dkwebsys', merging credential into parameters.")
             if type.contains("application/json"),
-               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any & Sendable]
-            {
+               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any & Sendable] {
                 Logger.debug("Merging credential with existing JSON parameters.")
                 httpBody = JSONEncoding.default.encode(parameters.merging([
                     "authKey": credential.compAuthKey,
@@ -91,8 +88,7 @@ extension URLRequest {
         if targetUrl.path.hasPrefix("/dkdenmoku") {
             Logger.debug("URL path starts with 'dkdenmoku', merging credential into parameters.")
             if type.contains("application/json"),
-               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any & Sendable]
-            {
+               let parameters = try? JSONSerialization.jsonObject(with: body) as? [String: Any & Sendable] {
                 // ログインと連携ではQRコードを上書きしない
                 if targetUrl.path.hasSuffix("DkDamDAMTomoLoginServlet") || targetUrl.path.hasSuffix("DkDamConnectServlet") {
                     httpBody = JSONEncoding.default.encode(parameters.merging([
